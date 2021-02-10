@@ -10,10 +10,10 @@ public class DefaultCameraMovement : MonoBehaviour
     [SerializeField] private Transform target;
 
     // Minimal angle the camera is allowed to make whilst rotating around x-axis
-    [SerializeField] private int minAngle = 20;
+    [SerializeField] [Range(0, 90)] private int minAngle = 20;
 
     // Maximum angle the camera is allowed to make whilst rotating around x-axis
-    [SerializeField] private int maxAngle = 90;
+    [SerializeField] [Range(0, 90)] private int maxAngle = 90;
 
     // Distance from target
     // TODO: Scroll to change this distance
