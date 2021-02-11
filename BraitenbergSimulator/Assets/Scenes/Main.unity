@@ -227,7 +227,6 @@ GameObject:
   - component: {fileID: 477077634}
   - component: {fileID: 477077633}
   - component: {fileID: 477077637}
-  - component: {fileID: 477077636}
   m_Layer: 0
   m_Name: Main camera
   m_TagString: MainCamera
@@ -300,18 +299,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 20.314001, y: -90.00001, z: 0}
---- !u!114 &477077636
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 477077632}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 340a00c3edb4a51439a95eb2c4102ec6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &477077637
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -352,6 +339,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 908351387}
+  - component: {fileID: 908351388}
   m_Layer: 0
   m_Name: Input Controller
   m_TagString: Untagged
@@ -373,6 +361,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &908351388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 908351386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 340a00c3edb4a51439a95eb2c4102ec6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 477077634}
+  target: {fileID: 139356396}
+  minAngle: 20
+  maxAngle: 90
+  distanceToTarget: 10
+  zoomSpeed: 8.29
 --- !u!1 &1715555775
 GameObject:
   m_ObjectHideFlags: 0

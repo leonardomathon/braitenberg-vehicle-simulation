@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DefaultCameraMovement : MonoBehaviour
 {
+
     // Default camera 
     [SerializeField] private Camera cam;
     // The target to which to rotate around
@@ -17,14 +18,26 @@ public class DefaultCameraMovement : MonoBehaviour
 
     // Distance from target
     // TODO: Scroll to change this distance
-    [SerializeField] private float distanceToTarget = 20;
+    [SerializeField] [Range(5, 15)] private float distanceToTarget = 20;
 
-    [SerializeField] private float zoomSpeed = 1;
+    [SerializeField] [Range(1, 10)] private float zoomSpeed = 8;
 
     private Vector3 previousPosition;
 
     void Update()
     {
+        if (Input.GetAxis("Mouse ScrollWheel") != 0f)
+        {
+            // Set the camera position to 0.0
+            cam.transform.position = target.position;
+
+            // Change distanceToTarget upon scrolling and keep distance between 5 and 15
+            distanceToTarget = Mathf.Clamp(distanceToTarget - Input.GetAxis("Mouse ScrollWheel") * zoomSpeed, 5, 15);
+
+            // Transform 
+            cam.transform.Translate(new Vector3(0, 0, -distanceToTarget));
+        }
+
         // Get starting position as soon as mouse is pressed
         if (Input.GetMouseButtonDown(1) || Input.GetMouseButtonDown(2))
         {
