@@ -26,6 +26,15 @@ public class DefaultCameraMovement : MonoBehaviour
 
     void Update()
     {
+        // If target moves, move camera with it
+        if (target.transform.hasChanged) {
+            // translate camera to target local origin
+            cam.transform.position = target.position;
+
+            // translate back 
+            cam.transform.Translate(new Vector3(0, 0, -distanceToTarget));
+        }
+
         if (Input.GetAxis("Mouse ScrollWheel") != 0f)
         {
             // Set the camera position to 0.0
