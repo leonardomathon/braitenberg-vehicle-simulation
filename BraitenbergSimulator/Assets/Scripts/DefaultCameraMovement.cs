@@ -17,8 +17,13 @@ public class DefaultCameraMovement : MonoBehaviour
     [SerializeField] [Range(0, 90)] private int maxAngle = 90;
 
     // Distance from target
-    // TODO: Scroll to change this distance
     [SerializeField] [Range(5, 15)] private float distanceToTarget = 20;
+
+    // Minimum zoom distance
+    [SerializeField] [Range(0, 90)] private int minZoomDistance = 5;
+
+    // Maximum zoom distance
+    [SerializeField] [Range(0, 90)] private int maxZoomDistance = 15;
 
     [SerializeField] [Range(1, 10)] private float zoomSpeed = 8;
 
@@ -27,7 +32,8 @@ public class DefaultCameraMovement : MonoBehaviour
     void Update()
     {
         // If target moves, move camera with it
-        if (target.transform.hasChanged) {
+        if (target.transform.hasChanged)
+        {
             // translate camera to target local origin
             cam.transform.position = target.position;
 
@@ -41,7 +47,7 @@ public class DefaultCameraMovement : MonoBehaviour
             cam.transform.position = target.position;
 
             // Change distanceToTarget upon scrolling and keep distance between 5 and 15
-            distanceToTarget = Mathf.Clamp(distanceToTarget - Input.GetAxis("Mouse ScrollWheel") * zoomSpeed, 5, 15);
+            distanceToTarget = Mathf.Clamp(distanceToTarget - Input.GetAxis("Mouse ScrollWheel") * zoomSpeed, minZoomDistance, maxZoomDistance);
 
             // Transform 
             cam.transform.Translate(new Vector3(0, 0, -distanceToTarget));
