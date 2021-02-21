@@ -2,14 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CubeMovement : MonoBehaviour
+public class VehicleDefaultMovement : MonoBehaviour
 {
-    // Target cube
     [SerializeField] private Transform target;
-    // Rigidbody component attached to script
     [SerializeField] private Rigidbody rb;
     // Set time to 0
     private float time = 0f;
+
+    void Start()
+    {
+        target = gameObject.GetComponent<Transform>();
+        rb = gameObject.GetComponent<Rigidbody>();
+    }
+
     void Update()
     {
         // Increase time

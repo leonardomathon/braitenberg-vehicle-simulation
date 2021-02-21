@@ -54,13 +54,13 @@ public class DefaultCameraMovement : MonoBehaviour
         }
 
         // Get starting position as soon as mouse is pressed
-        if (Input.GetMouseButtonDown(1) || Input.GetMouseButtonDown(2))
+        if (Input.GetMouseButtonDown(2))
         {
             // Mouseposition in viewport coordinates (0, 1)
             previousPosition = cam.ScreenToViewportPoint(Input.mousePosition);
 
         }
-        else if (Input.GetMouseButton(1) || Input.GetMouseButton(2))
+        else if (Input.GetMouseButton(2))
         {
             // Mouseposition in viewport coordinates (0, 1)
             Vector3 newPosition = cam.ScreenToViewportPoint(Input.mousePosition);
