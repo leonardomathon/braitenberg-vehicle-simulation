@@ -1,13 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [System.Serializable]
-public class Vehicle
+public class Vehicle : MonoBehaviour
 {
-    private GameObject gameObject;
-    private int vehicleId;
+    [SerializeField]
     private VehicleType type;
+
+    private VehicleType _type;
+
+    [SerializeField]
     private Vector3 position;
     [SerializeField]
     private int leftMotorSpeed;
@@ -15,100 +16,58 @@ public class Vehicle
     [SerializeField]
     private int rightMotorSpeed;
 
-    public Vehicle(GameObject gameObject, Vector3 pos)
+    private void Start()
     {
-        this.gameObject = gameObject;
-        this.vehicleId = Random.Range(1, 2147483647);
-        this.type = VehicleType.Default;
-        this.position = pos;
-        this.leftMotorSpeed = 1;
-        this.rightMotorSpeed = 1;
         AttachMovementScript();
     }
 
-    public Vehicle(GameObject gameObject, VehicleType type)
+    private void Update()
     {
-        this.gameObject = gameObject;
-        this.vehicleId = Random.Range(1, 2147483647);
-        this.type = type;
-        this.position = new Vector3(0, 5, 0);
-        this.leftMotorSpeed = 1;
-        this.rightMotorSpeed = 1;
-        AttachMovementScript();
-    }
-
-    public Vehicle(GameObject gameObject, VehicleType type, Vector3 pos)
-    {
-        this.gameObject = gameObject;
-        this.vehicleId = Random.Range(1, 2147483647);
-        this.type = type;
-        this.position = pos;
-        this.leftMotorSpeed = 1;
-        this.rightMotorSpeed = 1;
-        AttachMovementScript();
-    }
-
-    public int GetVehicleId()
-    {
-        return this.vehicleId;
-    }
-
-    public void SetVehicleId(int vehicleId)
-    {
-        this.vehicleId = vehicleId;
-    }
-
-    public VehicleType GetVehicleType()
-    {
-        return this.type;
-    }
-
-    public void SetVehicleType(VehicleType type)
-    {
-        this.type = type;
         UpdateMovementScript();
-    }
-
-    public Vector3 GetPosition()
-    {
-        return this.position;
-    }
-
-    public void SetPosition(Vector3 position)
-    {
-        this.position = position;
-    }
-
-    public int GetLeftMotorSpeed()
-    {
-        return this.leftMotorSpeed;
-    }
-
-    public void SetLeftMotorSpeed(int leftMotorSpeed)
-    {
-        this.leftMotorSpeed = leftMotorSpeed;
-    }
-
-    public int GetRightMotorSpeed()
-    {
-        return this.rightMotorSpeed;
-    }
-
-    public void SetRightMotorSpeed(int rightMotorSpeed)
-    {
-        this.rightMotorSpeed = rightMotorSpeed;
     }
 
     // Attach the rigt movementscript to the vehicle object based on VehicleType
     private void AttachMovementScript()
     {
-        this.gameObject.AddComponent<VehicleDefaultMovement>();
+        _type = type;
+        if (type == VehicleType.Default) gameObject.AddComponent<VehicleDefaultMovement>();
+        if (type == VehicleType.Agression) gameObject.AddComponent<VehicleMovementAgression>();
+        if (type == VehicleType.Exploration) gameObject.AddComponent<VehicleMovementExploration>();
+        if (type == VehicleType.Fear) gameObject.AddComponent<VehicleMovementFear>();
+        if (type == VehicleType.Love) gameObject.AddComponent<VehicleMovementLove>();
     }
 
     // Update movementscript if VehicleType has changed
     private void UpdateMovementScript()
     {
-
-
+        if (type != _type)
+        {
+            _type = type;
+            if (gameObject.GetComponent<VehicleDefaultMovement>() != null)
+            {
+                Destroy(gameObject.GetComponent<VehicleDefaultMovement>());
+                AttachMovementScript();
+            }
+            if (gameObject.GetComponent<VehicleMovementAgression>() != null)
+            {
+                Destroy(gameObject.GetComponent<VehicleMovementAgression>());
+                AttachMovementScript();
+            }
+            if (gameObject.GetComponent<VehicleMovementExploration>() != null)
+            {
+                Destroy(gameObject.GetComponent<VehicleMovementExploration>());
+                AttachMovementScript();
+            }
+            if (gameObject.GetComponent<VehicleMovementFear>() != null)
+            {
+                Destroy(gameObject.GetComponent<VehicleMovementFear>());
+                AttachMovementScript();
+            }
+            if (gameObject.GetComponent<VehicleMovementLove>() != null)
+            {
+                Destroy(gameObject.GetComponent<VehicleMovementLove>());
+                AttachMovementScript();
+            }
+        }
     }
 }
