@@ -124,6 +124,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
+  materialStandard: {fileID: 2100000, guid: 8d1d5378204cba44a95591a291131f37, type: 2}
+  materialOnSelect: {fileID: 2100000, guid: d883c62a3c8f5b64a87de27ffe0b42a3, type: 2}
   isSelected: 0
   position: {x: 0, y: 0, z: 0}
   leftMotorSpeed: 0

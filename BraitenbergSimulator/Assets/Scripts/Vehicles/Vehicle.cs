@@ -9,7 +9,15 @@ public class Vehicle : MonoBehaviour
     private VehicleType _type;
 
     [SerializeField]
+    private Material materialStandard;
+
+    [SerializeField]
+    private Material materialOnSelect;
+
+    [SerializeField]
     private bool isSelected;
+
+
 
     [SerializeField]
     private Vector3 position;
@@ -30,14 +38,14 @@ public class Vehicle : MonoBehaviour
 
         if (isSelected)
         {
-            // Apply shader
+            // Apply material
+            ApplySelectionMaterial();
 
         }
         else
         {
-            // Check if shader exists
-
-            // Remove shader
+            // Remove selection material
+            RemoveSelectionMaterial();
         }
     }
 
@@ -94,5 +102,22 @@ public class Vehicle : MonoBehaviour
                 AttachMovementScript();
             }
         }
+    }
+
+    private void ApplySelectionMaterial()
+    {
+        // Apply material for object selection
+        gameObject.GetComponent<MeshRenderer>().sharedMaterial = materialOnSelect;
+    }
+
+    private void RemoveSelectionMaterial()
+    {
+        // Only change if necessary
+        if (gameObject.GetComponent<MeshRenderer>().sharedMaterial.name == materialOnSelect.name)
+        {
+            // Apply default material
+            gameObject.GetComponent<MeshRenderer>().sharedMaterial = materialStandard;
+        }
+
     }
 }

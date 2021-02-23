@@ -20,6 +20,9 @@ public class GameManager : MonoBehaviour
     // Mask for the lights
     public LayerMask lightMask;
 
+    // Camera controller
+    private CameraController cameraController;
+
     // Singleton pattern for GameManager
     #region singleton
     private static GameManager _instance;
@@ -40,6 +43,11 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
+    void Start()
+    {
+        cameraController = CameraController.Instance;
+    }
+
     public bool AllowSpawnVehicle()
     {
         return vehicles.Count < maxVehicles;
@@ -52,6 +60,9 @@ public class GameManager : MonoBehaviour
 
     public void ClearScene()
     {
+        // Reset camera
+        cameraController.ResetTarget();
+
         // Remove all vehicles from the scene
         foreach (GameObject vehicle in vehicles)
         {
