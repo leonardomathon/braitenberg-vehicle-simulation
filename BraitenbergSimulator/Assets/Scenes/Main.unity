@@ -823,6 +823,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 477077634}
   target: {fileID: 1877025765}
+  defaultTarget: {fileID: 0}
   minAngle: 20
   maxAngle: 90
   distanceToTarget: 10

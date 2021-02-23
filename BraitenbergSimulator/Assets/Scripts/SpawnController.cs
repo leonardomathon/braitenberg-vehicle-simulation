@@ -10,7 +10,7 @@ public class SpawnController : MonoBehaviour
     [SerializeField]
     private GameObject selectedObjectToSpawn;
 
-    // Singleton pattern for GameManager
+    // Singleton pattern for SpawnController
     #region singleton
     private static SpawnController _instance;
 

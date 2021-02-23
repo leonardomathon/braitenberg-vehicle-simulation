@@ -41,7 +41,6 @@ public class GameManager : MonoBehaviour
             _instance = this;
         }
     }
-
     #endregion
 
     public bool AllowSpawnVehicle()

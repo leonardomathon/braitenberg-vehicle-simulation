@@ -5,13 +5,16 @@ using UnityEngine;
 public class SelectionController : MonoBehaviour
 {
     [SerializeField]
-    public GameObject selectedObject;
+    private GameObject selectedObject;
 
-    public GameManager gameManager;
+    private GameManager gameManager;
+
+    private CameraController cameraController;
 
     void Start()
     {
         gameManager = GameManager.Instance;
+        cameraController = CameraController.Instance;
     }
 
     void Update()
@@ -24,7 +27,7 @@ public class SelectionController : MonoBehaviour
 
     public void ResetSelection()
     {
-
+        cameraController.ResetTarget();
     }
 
     private void SelectObject()
@@ -41,9 +44,7 @@ public class SelectionController : MonoBehaviour
 
             if ((hitObject.GetComponent("Vehicle") as Vehicle) != null)
             {
-                GameObject cameraController = GameObject.Find("Camera Controller");
-                DefaultCameraMovement camera = cameraController.GetComponent<DefaultCameraMovement>();
-                camera.setTarget(hitObject);
+                cameraController.SetTarget(hitObject);
             }
 
 
