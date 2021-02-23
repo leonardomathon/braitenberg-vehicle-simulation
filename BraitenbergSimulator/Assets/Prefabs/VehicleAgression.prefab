@@ -124,6 +124,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
+  isSelected: 0
   position: {x: 0, y: 0, z: 0}
   leftMotorSpeed: 0
   rightMotorSpeed: 0

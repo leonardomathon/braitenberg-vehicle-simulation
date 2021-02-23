@@ -601,7 +601,7 @@ MonoBehaviour:
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
   m_LightDimmer: 1
-  m_VolumetricDimmer: 1
+  m_VolumetricDimmer: 2.07
   m_LightUnit: 0
   m_FadeDistance: 10000
   m_AffectDiffuse: 1
@@ -742,7 +742,7 @@ Light:
   m_LightShadowCasterMode: 2
   m_AreaSize: {x: 0.5, y: 0.5}
   m_BounceIntensity: 1
-  m_ColorTemperature: 6570
+  m_ColorTemperature: 1000
   m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
@@ -822,14 +822,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 477077634}
-  target: {fileID: 1877025765}
-  defaultTarget: {fileID: 0}
+  target: {fileID: 0}
+  defaultTarget: {fileID: 1877025765}
   minAngle: 20
   maxAngle: 90
   distanceToTarget: 10
   minZoomDistance: 5
   maxZoomDistance: 90
   zoomSpeed: 8.29
+  locked: 0
 --- !u!1 &920616679
 GameObject:
   m_ObjectHideFlags: 0
@@ -918,7 +919,6 @@ MonoBehaviour:
   lightMask:
     serializedVersion: 2
     m_Bits: 2048
-  selectedObj: {fileID: 0}
 --- !u!1 &1106923915
 GameObject:
   m_ObjectHideFlags: 0
@@ -1233,7 +1233,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectedObject: {fileID: 0}
-  gameManager: {fileID: 0}
 --- !u!1 &1416863315
 GameObject:
   m_ObjectHideFlags: 0
@@ -1264,7 +1263,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 3
+  m_Intensity: 0.5
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -1347,7 +1346,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 3
+  m_Intensity: 0.5
   m_EnableSpotReflector: 0
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -1444,7 +1443,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh18368
+  m_Name: pb_Mesh18408
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1694,7 +1693,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnableObjects:
-  - {fileID: 7514673926056168380, guid: 8cdef5449890f0f429b1a72fb955f74c, type: 3}
+  - {fileID: 652533365021952239, guid: 4222cda78a7aebc41b39cc18a0add142, type: 3}
   - {fileID: 7514673926056168380, guid: f0084433d299f3a4baf6af87117c30af, type: 3}
   - {fileID: 7514673926056168380, guid: deb3dd97cba993e41bf9ea2d009b3e14, type: 3}
   - {fileID: 7514673926056168380, guid: abe0094f039be1845ace4d6b297dcffa, type: 3}

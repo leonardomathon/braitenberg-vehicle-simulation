@@ -31,6 +31,7 @@ public class Vehicle : MonoBehaviour
         if (isSelected)
         {
             // Apply shader
+
         }
         else
         {

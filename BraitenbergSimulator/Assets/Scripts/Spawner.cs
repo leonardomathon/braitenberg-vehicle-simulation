@@ -72,6 +72,9 @@ public class Spawner : MonoBehaviour
         {
             if (gameManager.AllowSpawnLights())
             {
+                // Avoid clipping of the light by increasing y level
+                pos.y = pos.y + 0.1f;
+
                 // Create gameobject and store it temporarily in a variable
                 GameObject instantiatedObject = Instantiate(selectedObjectToSpawn, pos, Quaternion.identity, parentObject.transform);
 

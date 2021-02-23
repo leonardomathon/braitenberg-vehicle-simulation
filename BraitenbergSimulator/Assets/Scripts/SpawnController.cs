@@ -10,6 +10,8 @@ public class SpawnController : MonoBehaviour
     [SerializeField]
     private GameObject selectedObjectToSpawn;
 
+    private GameManager gameManager;
+
     // Singleton pattern for SpawnController
     #region singleton
     private static SpawnController _instance;
@@ -30,6 +32,11 @@ public class SpawnController : MonoBehaviour
     }
 
     #endregion
+
+    void Start()
+    {
+        gameManager = GameManager.Instance;
+    }
 
     void Update()
     {
@@ -52,6 +59,10 @@ public class SpawnController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha5))
         {
             SelectObjectToSpawn(5);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha6))
+        {
+            gameManager.ClearScene();
         }
     }
 

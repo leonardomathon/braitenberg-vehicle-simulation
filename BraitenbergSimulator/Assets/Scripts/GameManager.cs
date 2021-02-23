@@ -49,4 +49,23 @@ public class GameManager : MonoBehaviour
     {
         return lights.Count < maxLights;
     }
+
+    public void ClearScene()
+    {
+        // Remove all vehicles from the scene
+        foreach (GameObject vehicle in vehicles)
+        {
+            Destroy(vehicle);
+        }
+
+        foreach (GameObject light in lights)
+        {
+            Destroy(light);
+        }
+
+        // Remove all objects from list
+        vehicles.Clear();
+        lights.Clear();
+
+    }
 }
