@@ -1,9 +1,14 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class SelectionController : MonoBehaviour
 {
     [SerializeField]
     private GameObject selectedObject;
+
+    // The layer mask on which we can select objects
+    [SerializeField]
+    private LayerMask selectableAreaMask;
 
     private GameManager gameManager;
 
@@ -32,11 +37,15 @@ public class SelectionController : MonoBehaviour
     {
         RaycastHit hit;
 
+        // First check if mouse is currently over UI, do nothing
+        if (EventSystem.current.IsPointerOverGameObject()) return;
+        if (EventSystem.current.currentSelectedGameObject != null) return;
+
         // Shoot a ray from main camera through screen point
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         // Check if ray hits something with the mask "Vehicle"
-        if (Physics.Raycast(ray, out hit, 100))
+        if (Physics.Raycast(ray, out hit, 100, selectableAreaMask))
         {
             GameObject hitObject = hit.transform.gameObject;
 

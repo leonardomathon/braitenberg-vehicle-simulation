@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1331689666632302626}
   - component: {fileID: 8983276501910707350}
   - component: {fileID: 8989412219399590174}
-  m_Layer: 12
+  m_Layer: 11
   m_Name: SpawnableLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
