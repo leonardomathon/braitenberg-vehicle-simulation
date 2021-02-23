@@ -44,10 +44,18 @@ public class SelectionController : MonoBehaviour
 
             if ((hitObject.GetComponent("Vehicle") as Vehicle) != null)
             {
+                DeselectAllObjects();
+                hitObject.GetComponent<Vehicle>().Select();
                 cameraController.SetTarget(hitObject);
             }
+        }
+    }
 
-
+    private void DeselectAllObjects()
+    {
+        foreach (GameObject vehicle in gameManager.vehicles)
+        {
+            vehicle.GetComponent<Vehicle>().Deselect();
         }
     }
 }

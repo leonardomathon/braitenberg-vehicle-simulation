@@ -20,9 +20,6 @@ public class GameManager : MonoBehaviour
     // Mask for the lights
     public LayerMask lightMask;
 
-    // The gameobject that is currently selected
-    public GameObject selectedObj;
-
     // Singleton pattern for GameManager
     #region singleton
     private static GameManager _instance;

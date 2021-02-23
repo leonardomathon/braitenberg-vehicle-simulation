@@ -9,6 +9,9 @@ public class Vehicle : MonoBehaviour
     private VehicleType _type;
 
     [SerializeField]
+    private bool isSelected;
+
+    [SerializeField]
     private Vector3 position;
     [SerializeField]
     private int leftMotorSpeed;
@@ -16,14 +19,35 @@ public class Vehicle : MonoBehaviour
     [SerializeField]
     private int rightMotorSpeed;
 
-    private void Start()
+    void Start()
     {
         AttachMovementScript();
     }
 
-    private void Update()
+    void Update()
     {
         UpdateMovementScript();
+
+        if (isSelected)
+        {
+            // Apply shader
+        }
+        else
+        {
+            // Check if shader exists
+
+            // Remove shader
+        }
+    }
+
+    public void Select()
+    {
+        isSelected = true;
+    }
+
+    public void Deselect()
+    {
+        isSelected = false;
     }
 
     // Attach the rigt movementscript to the vehicle object based on VehicleType
