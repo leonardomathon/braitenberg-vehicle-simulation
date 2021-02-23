@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
@@ -155,5 +153,10 @@ public class CameraController : MonoBehaviour
     public void UnlockCamera()
     {
         locked = false;
+    }
+
+    public Camera GetCurrentCam()
+    {
+        return cam;
     }
 }

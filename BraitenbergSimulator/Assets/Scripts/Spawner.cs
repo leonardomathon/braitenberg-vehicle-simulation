@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
@@ -64,8 +62,6 @@ public class Spawner : MonoBehaviour
 
                 // Add to list
                 gameManager.vehicles.Add(instantiatedObject);
-
-
             }
         }
         else
