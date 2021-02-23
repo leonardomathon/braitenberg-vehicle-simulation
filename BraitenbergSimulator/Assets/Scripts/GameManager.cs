@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     // Max vehicles and lights inside the scene
-    public int maxVehicles =  5;
+    public int maxVehicles = 5;
     public int maxLights = 10;
 
     // List that holds the Braitenberg vehicles
@@ -13,9 +13,6 @@ public class GameManager : MonoBehaviour
 
     // List that holds the lights that affect the vehicles
     public List<GameObject> lights = new List<GameObject>();
-
-    // The layer mask on which we can spawn objects
-    public LayerMask spawnableAreaMask;
 
     // Mask for the vehicles
     public LayerMask vehicleMask;
@@ -25,39 +22,35 @@ public class GameManager : MonoBehaviour
 
     // The gameobject that is currently selected
     public GameObject selectedObj;
-    
+
+    // Singleton pattern for GameManager
+    #region singleton
+    private static GameManager _instance;
+
+    public static GameManager Instance { get { return _instance; } }
+
+
+    private void Awake()
+    {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
+    }
+
+    #endregion
+
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(1)) {
-            SpawnObject();
-        }
-        if (Input.GetMouseButtonDown(0)) {
-            SelectObject();
-        }
-    }
-    
-    // Shoots a ray cast, checks if it hits and spawns selected object
-    private void SpawnObject() 
-    {
-        RaycastHit hit;
-
-        // Shoot a ray from main camera through screen point
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        // Check if ray hits something with the mask "SpawnableArea"
-        if (Physics.Raycast(ray, out hit, 100, spawnableAreaMask))
+        if (Input.GetMouseButtonDown(0))
         {
-            // Check if the vehicles list is not yet full
-            if (vehicles.Count < maxVehicles) {
-                // Add object to vehicle list
-                vehicles.Add(selectedObj);
-                // Create object
-                Instantiate(selectedObj, hit.point, Quaternion.identity);
-                
-            }
-            
+            SelectObject();
         }
     }
 
@@ -71,9 +64,20 @@ public class GameManager : MonoBehaviour
         // Check if ray hits something with the mask "Vehicle"
         if (Physics.Raycast(ray, out hit, 100))
         {
-            // Find vehicle and destroy it
-            Destroy(hit.transform.gameObject);
-            
+            GameObject hitObject = hit.transform.gameObject;
+            GameObject cameraController = GameObject.Find("Camera Controller");
+            DefaultCameraMovement camera = cameraController.GetComponent<DefaultCameraMovement>();
+            camera.setTarget(hitObject);
         }
+    }
+
+    public bool AllowSpawnVehicle()
+    {
+        return vehicles.Count < maxVehicles;
+    }
+
+    public bool AllowSpawnLights()
+    {
+        return lights.Count < maxLights;
     }
 }

@@ -103,4 +103,9 @@ public class DefaultCameraMovement : MonoBehaviour
             previousPosition = newPosition;
         }
     }
+
+    public void setTarget(GameObject obj)
+    {
+        this.target = obj.transform;
+    }
 }
