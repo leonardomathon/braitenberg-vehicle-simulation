@@ -44,14 +44,22 @@ public class GameManager : MonoBehaviour
 
     #endregion
 
-
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
             SelectObject();
         }
+    }
+
+    public bool AllowSpawnVehicle()
+    {
+        return vehicles.Count < maxVehicles;
+    }
+
+    public bool AllowSpawnLights()
+    {
+        return lights.Count < maxLights;
     }
 
     private void SelectObject()
@@ -69,15 +77,5 @@ public class GameManager : MonoBehaviour
             DefaultCameraMovement camera = cameraController.GetComponent<DefaultCameraMovement>();
             camera.setTarget(hitObject);
         }
-    }
-
-    public bool AllowSpawnVehicle()
-    {
-        return vehicles.Count < maxVehicles;
-    }
-
-    public bool AllowSpawnLights()
-    {
-        return lights.Count < maxLights;
     }
 }

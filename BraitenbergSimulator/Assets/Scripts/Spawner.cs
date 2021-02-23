@@ -8,6 +8,10 @@ public class Spawner : MonoBehaviour
     [SerializeField]
     private LayerMask spawnableAreaMask;
 
+    // The parent object to which the spawned object will be assigned to
+    [SerializeField]
+    private GameObject parentObject;
+
     // Spawn Controller that handles all the spawnable objects
     private SpawnController spawnController;
 
@@ -55,22 +59,26 @@ public class Spawner : MonoBehaviour
         {
             if (gameManager.AllowSpawnVehicle())
             {
-                // Add to list
-                gameManager.vehicles.Add(selectedObjectToSpawn);
-
                 // Create object
-                Instantiate(selectedObjectToSpawn, pos, Quaternion.identity);
+                GameObject instantiatedObject = Instantiate(selectedObjectToSpawn, pos, Quaternion.identity, parentObject.transform);
+
+                // Add to list
+                gameManager.vehicles.Add(instantiatedObject);
+
+
             }
         }
         else
         {
             if (gameManager.AllowSpawnLights())
             {
-                // Add to list
-                gameManager.lights.Add(selectedObjectToSpawn);
+                // Create gameobject and store it temporarily in a variable
+                GameObject instantiatedObject = Instantiate(selectedObjectToSpawn, pos, Quaternion.identity, parentObject.transform);
 
-                // Create object
-                Instantiate(selectedObjectToSpawn, pos, Quaternion.identity);
+                // Add created gameobject to list
+                gameManager.lights.Add(instantiatedObject);
+
+
             }
 
         }
