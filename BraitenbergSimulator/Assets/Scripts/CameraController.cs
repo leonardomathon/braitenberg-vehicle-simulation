@@ -59,7 +59,7 @@ public class CameraController : MonoBehaviour
         target = defaultTarget;
     }
 
-    void Update()
+    void LateUpdate()
     {
         // If target moves, move camera with it
         if (target.transform.hasChanged)

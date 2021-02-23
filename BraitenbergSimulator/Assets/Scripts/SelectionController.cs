@@ -44,9 +44,21 @@ public class SelectionController : MonoBehaviour
 
             if ((hitObject.GetComponent("Vehicle") as Vehicle) != null)
             {
-                DeselectAllObjects();
-                hitObject.GetComponent<Vehicle>().Select();
-                cameraController.SetTarget(hitObject);
+                // Select object only if it is not currently selected
+                if (!hitObject.GetComponent<Vehicle>().IsSelected())
+                {
+                    DeselectAllObjects();
+                    hitObject.GetComponent<Vehicle>().Select();
+                    cameraController.SetTarget(hitObject);
+                }
+                // If it is currently selected, deselect it and reset camera
+                else
+                {
+                    DeselectAllObjects();
+                    cameraController.ResetTarget();
+                }
+
+
             }
         }
     }

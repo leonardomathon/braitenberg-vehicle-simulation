@@ -59,6 +59,11 @@ public class Vehicle : MonoBehaviour
         isSelected = false;
     }
 
+    public bool IsSelected()
+    {
+        return isSelected;
+    }
+
     // Attach the rigt movementscript to the vehicle object based on VehicleType
     private void AttachMovementScript()
     {
