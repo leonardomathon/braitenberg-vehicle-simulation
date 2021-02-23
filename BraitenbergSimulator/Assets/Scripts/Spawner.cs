@@ -27,9 +27,9 @@ public class Spawner : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1) && spawnController.selectedObjectToSpawn != null)
         {
-            ShootRay(spawnController.GetSelectedObjectToSpawn());
+            ShootRay(spawnController.selectedObjectToSpawn);
         }
     }
 
