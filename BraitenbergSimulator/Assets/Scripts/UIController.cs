@@ -7,11 +7,15 @@ public class UIController : MonoBehaviour
 {
     // Button variables
     [SerializeField] private Button[] spawnButtons = new Button[5];
+    [SerializeField] private Button[] sceneButtons = new Button[1];
+
+    private GameManager gameManager;
 
     private SpawnController spawnController;
 
     void Start()
     {
+        gameManager = GameManager.Instance;
         spawnController = SpawnController.Instance;
 
         // Set eventlisteners
@@ -20,6 +24,8 @@ public class UIController : MonoBehaviour
         spawnButtons[2].onClick.AddListener(ClickVehicleExplorationButton);
         spawnButtons[3].onClick.AddListener(ClickVehicleFearButton);
         spawnButtons[4].onClick.AddListener(ClickVehicleLoveButton);
+
+        sceneButtons[0].onClick.AddListener(ClickOnClearScene);
     }
 
     private void ClickLightButton()
@@ -27,12 +33,12 @@ public class UIController : MonoBehaviour
         if (spawnController.selectedObjectToSpawn !=
             spawnController.spawnableObjectToGameObject[SpawnableObject.Light])
         {
-            enableButtonOutline(spawnButtons[0], spawnButtons);
+            EnableButtonOutline(spawnButtons[0], spawnButtons);
             spawnController.SelectObjectToSpawn(SpawnableObject.Light);
         }
         else
         {
-            disableButtonOutline(spawnButtons[0]);
+            DisableButtonOutline(spawnButtons[0]);
             spawnController.DeselectObjectToSpawn();
         }
     }
@@ -42,12 +48,12 @@ public class UIController : MonoBehaviour
         if (spawnController.selectedObjectToSpawn !=
             spawnController.spawnableObjectToGameObject[SpawnableObject.Aggression])
         {
-            enableButtonOutline(spawnButtons[1], spawnButtons);
+            EnableButtonOutline(spawnButtons[1], spawnButtons);
             spawnController.SelectObjectToSpawn(SpawnableObject.Aggression);
         }
         else
         {
-            disableButtonOutline(spawnButtons[1]);
+            DisableButtonOutline(spawnButtons[1]);
             spawnController.DeselectObjectToSpawn();
         }
     }
@@ -57,12 +63,12 @@ public class UIController : MonoBehaviour
         if (spawnController.selectedObjectToSpawn !=
             spawnController.spawnableObjectToGameObject[SpawnableObject.Exploration])
         {
-            enableButtonOutline(spawnButtons[2], spawnButtons);
+            EnableButtonOutline(spawnButtons[2], spawnButtons);
             spawnController.SelectObjectToSpawn(SpawnableObject.Exploration);
         }
         else
         {
-            disableButtonOutline(spawnButtons[2]);
+            DisableButtonOutline(spawnButtons[2]);
             spawnController.DeselectObjectToSpawn();
         }
     }
@@ -71,12 +77,12 @@ public class UIController : MonoBehaviour
         if (spawnController.selectedObjectToSpawn !=
             spawnController.spawnableObjectToGameObject[SpawnableObject.Fear])
         {
-            enableButtonOutline(spawnButtons[3], spawnButtons);
+            EnableButtonOutline(spawnButtons[3], spawnButtons);
             spawnController.SelectObjectToSpawn(SpawnableObject.Fear);
         }
         else
         {
-            disableButtonOutline(spawnButtons[3]);
+            DisableButtonOutline(spawnButtons[3]);
             spawnController.DeselectObjectToSpawn();
         }
     }
@@ -85,17 +91,17 @@ public class UIController : MonoBehaviour
         if (spawnController.selectedObjectToSpawn !=
             spawnController.spawnableObjectToGameObject[SpawnableObject.Love])
         {
-            enableButtonOutline(spawnButtons[4], spawnButtons);
+            EnableButtonOutline(spawnButtons[4], spawnButtons);
             spawnController.SelectObjectToSpawn(SpawnableObject.Love);
         }
         else
         {
-            disableButtonOutline(spawnButtons[4]);
+            DisableButtonOutline(spawnButtons[4]);
             spawnController.DeselectObjectToSpawn();
         }
     }
 
-    private void enableButtonOutline(Button button, Button[] buttons)
+    private void EnableButtonOutline(Button button, Button[] buttons)
     {
         foreach (Button btn in buttons)
         {
@@ -104,10 +110,14 @@ public class UIController : MonoBehaviour
         button.GetComponent<Outline>().enabled = true;
     }
 
-    private void disableButtonOutline(Button button)
+    private void DisableButtonOutline(Button button)
     {
         button.GetComponent<Outline>().enabled = false;
     }
 
+    private void ClickOnClearScene()
+    {
+        gameManager.ClearScene();
+    }
 
 }
