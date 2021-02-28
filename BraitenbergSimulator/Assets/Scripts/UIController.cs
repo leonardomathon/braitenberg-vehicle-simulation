@@ -25,6 +25,7 @@ public class UIController : MonoBehaviour
         spawnButtons[3].onClick.AddListener(ClickVehicleFearButton);
         spawnButtons[4].onClick.AddListener(ClickVehicleLoveButton);
 
+
         sceneButtons[0].onClick.AddListener(ClickOnClearScene);
     }
 
