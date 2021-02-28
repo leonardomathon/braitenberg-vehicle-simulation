@@ -3,28 +3,53 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIController : MonoBehaviour
+public class ButtonController : MonoBehaviour
 {
-    // Button variables
+    // Button variables with tooltip values
     [SerializeField] private Button[] spawnButtons = new Button[5];
+
+    [SerializeField] private string[] spawnButtonTooltips = new string[5];
+
     [SerializeField] private Button[] sceneButtons = new Button[1];
+
+    [SerializeField] private string[] sceneButtonTooltips = new string[1];
 
     private GameManager gameManager;
 
     private SpawnController spawnController;
+
 
     void Start()
     {
         gameManager = GameManager.Instance;
         spawnController = SpawnController.Instance;
 
-        // Set eventlisteners
+        AttachButtonScripts();
+        SetupOnClickListeners();
+    }
+
+    private void AttachButtonScripts()
+    {
+        for (int i = 0; i < spawnButtons.Length; i++)
+        {
+            spawnButtons[i].gameObject.AddComponent<UIButton>();
+            spawnButtons[i].gameObject.GetComponent<UIButton>().SetButtonTooltipText(spawnButtonTooltips[i]);
+        }
+
+        for (int i = 0; i < sceneButtons.Length; i++)
+        {
+            sceneButtons[i].gameObject.AddComponent<UIButton>();
+            sceneButtons[i].gameObject.GetComponent<UIButton>().SetButtonTooltipText(sceneButtonTooltips[i]);
+        }
+    }
+
+    private void SetupOnClickListeners()
+    {
         spawnButtons[0].onClick.AddListener(ClickLightButton);
         spawnButtons[1].onClick.AddListener(ClickVehicleAggressionButton);
         spawnButtons[2].onClick.AddListener(ClickVehicleExplorationButton);
         spawnButtons[3].onClick.AddListener(ClickVehicleFearButton);
         spawnButtons[4].onClick.AddListener(ClickVehicleLoveButton);
-
 
         sceneButtons[0].onClick.AddListener(ClickOnClearScene);
     }

@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class UIButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    [SerializeField] private string tooltipText;
+    private string tooltipText = "Default tooltip text";
 
     private TooltipController tooltipController;
 
@@ -14,8 +14,14 @@ public class UIButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         tooltipController = TooltipController.Instance;
     }
 
+    public void SetButtonTooltipText(string text)
+    {
+        tooltipText = text;
+    }
+
     public void OnPointerEnter(PointerEventData eventData)
     {
+        Debug.Log("Enterd");
         tooltipController.ShowToolTip(tooltipText);
     }
 
