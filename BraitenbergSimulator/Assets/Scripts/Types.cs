@@ -13,5 +13,6 @@ public enum SpawnableObject
     Aggression,
     Exploration,
     Fear,
-    Love
+    Love,
+    Obstacle
 }
