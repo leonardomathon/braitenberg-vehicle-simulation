@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7658984100395944282}
   - component: {fileID: 6430074867743590854}
   - component: {fileID: 8870946884217764157}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: VehicleAgression
   m_TagString: Untagged
   m_Icon: {fileID: 0}

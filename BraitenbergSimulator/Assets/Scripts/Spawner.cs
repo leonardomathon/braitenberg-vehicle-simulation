@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Spawner : MonoBehaviour
 {
@@ -27,9 +28,9 @@ public class Spawner : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1) && spawnController.selectedObjectToSpawn != null)
         {
-            ShootRay(spawnController.GetSelectedObjectToSpawn());
+            ShootRay(spawnController.selectedObjectToSpawn);
         }
     }
 
@@ -37,6 +38,10 @@ public class Spawner : MonoBehaviour
     private void ShootRay(GameObject selectedObjectToSpawn)
     {
         RaycastHit hit;
+
+        // First check if mouse is currently over UI, do nothing
+        if (EventSystem.current.IsPointerOverGameObject()) return;
+        if (EventSystem.current.currentSelectedGameObject != null) return;
 
         // Shoot a ray from main camera through screen point
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);

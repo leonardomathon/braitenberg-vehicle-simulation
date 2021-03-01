@@ -1,12 +1,16 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class SpawnController : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject[] spawnableObjects = new GameObject[5];
+    public GameObject[] spawnableObjects = new GameObject[5];
 
-    [SerializeField]
-    private GameObject selectedObjectToSpawn;
+    public Dictionary<SpawnableObject, GameObject> spawnableObjectToGameObject;
+
+    public Dictionary<GameObject, SpawnableObject> gameObjectToSpawnableObject;
+
+    public GameObject selectedObjectToSpawn;
 
     private GameManager gameManager;
 
@@ -34,29 +38,45 @@ public class SpawnController : MonoBehaviour
     void Start()
     {
         gameManager = GameManager.Instance;
+
+        spawnableObjectToGameObject = new Dictionary<SpawnableObject, GameObject>(){
+            { SpawnableObject.Light, spawnableObjects[0] },
+            { SpawnableObject.Aggression, spawnableObjects[1] },
+            { SpawnableObject.Exploration, spawnableObjects[2] },
+            { SpawnableObject.Fear, spawnableObjects[3] },
+            { SpawnableObject.Love, spawnableObjects[4] }
+        };
+
+        gameObjectToSpawnableObject = new Dictionary<GameObject, SpawnableObject>(){
+            { spawnableObjects[0], SpawnableObject.Light },
+            { spawnableObjects[1], SpawnableObject.Aggression },
+            { spawnableObjects[2], SpawnableObject.Exploration },
+            { spawnableObjects[3], SpawnableObject.Fear },
+            { spawnableObjects[4], SpawnableObject.Love },
+        };
     }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            SelectObjectToSpawn(1);
+            SelectObjectToSpawn(SpawnableObject.Light);
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            SelectObjectToSpawn(2);
+            SelectObjectToSpawn(SpawnableObject.Aggression);
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            SelectObjectToSpawn(3);
+            SelectObjectToSpawn(SpawnableObject.Exploration);
         }
         if (Input.GetKeyDown(KeyCode.Alpha4))
         {
-            SelectObjectToSpawn(4);
+            SelectObjectToSpawn(SpawnableObject.Fear);
         }
         if (Input.GetKeyDown(KeyCode.Alpha5))
         {
-            SelectObjectToSpawn(5);
+            SelectObjectToSpawn(SpawnableObject.Love);
         }
         if (Input.GetKeyDown(KeyCode.Alpha6))
         {
@@ -64,16 +84,19 @@ public class SpawnController : MonoBehaviour
         }
     }
 
-    private void SelectObjectToSpawn(int keyCode)
+    public void SelectObjectToSpawn(SpawnableObject obj)
     {
-        if (spawnableObjects[keyCode - 1] != null)
+        GameObject toSpawn = spawnableObjectToGameObject[obj];
+
+        if (toSpawn != null)
         {
-            selectedObjectToSpawn = spawnableObjects[keyCode - 1];
+            selectedObjectToSpawn = toSpawn;
         }
     }
 
-    public GameObject GetSelectedObjectToSpawn()
+    public void DeselectObjectToSpawn()
     {
-        return this.selectedObjectToSpawn;
+        selectedObjectToSpawn = null;
     }
+
 }
