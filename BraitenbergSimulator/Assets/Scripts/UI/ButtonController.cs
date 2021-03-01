@@ -8,11 +8,20 @@ public class ButtonController : MonoBehaviour
     // Button variables with tooltip values
     [SerializeField] private Button[] spawnButtons = new Button[5];
 
-    [SerializeField] private string[] spawnButtonTooltips = new string[5];
-
     [SerializeField] private Button[] sceneButtons = new Button[1];
 
-    [SerializeField] private string[] sceneButtonTooltips = new string[1];
+    // Create button tooltip texts
+    private string[] spawnButtonTooltips = new string[] {
+        "<#e3e3e3><u>Spawn object</u>\n<color=white>Spawn lightbulb",
+        "<#e3e3e3><u>Spawn object</u>\n<color=white>Spawn aggression vehicle",
+        "<#e3e3e3><u>Spawn object</u>\n<color=white>Spawn exploration vehicle",
+        "<#e3e3e3><u>Spawn object</u>\n<color=white>Spawn fear vehicle",
+        "<#e3e3e3><u>Spawn object</u>\n<color=white>Spawn love vehicle"
+    };
+
+    private string[] sceneButtonTooltips = new string[] {
+        "<#e3e3e3><u>Scene</u>\nClear scene of all objects"
+    };
 
     private GameManager gameManager;
 

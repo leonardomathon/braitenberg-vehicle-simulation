@@ -21,7 +21,6 @@ public class UIButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Debug.Log("Enterd");
         tooltipController.ShowToolTip(tooltipText);
     }
 

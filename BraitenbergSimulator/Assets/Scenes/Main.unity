@@ -313,7 +313,6 @@ GameObject:
   - component: {fileID: 101762562}
   - component: {fileID: 101762561}
   - component: {fileID: 101762564}
-  - component: {fileID: 101762565}
   m_Layer: 5
   m_Name: ButtonSpawnAggression
   m_TagString: Untagged
@@ -436,18 +435,6 @@ MonoBehaviour:
   m_EffectColor: {r: 0.5568628, g: 0.5568628, b: 0.5568628, a: 0.42745098}
   m_EffectDistance: {x: 5, y: 5}
   m_UseGraphicAlpha: 1
---- !u!114 &101762565
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 101762559}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54394c8b33c321b418d0c22179ab8e38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &173599221
 GameObject:
   m_ObjectHideFlags: 0
@@ -702,16 +689,8 @@ MonoBehaviour:
   - {fileID: 1464475797}
   - {fileID: 1848569048}
   - {fileID: 1967073727}
-  spawnButtonTooltips:
-  - 
-  - 
-  - 
-  - 
-  - 
   sceneButtons:
   - {fileID: 702473306}
-  sceneButtonTooltips:
-  - 
 --- !u!114 &215973578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1865,7 +1844,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92993c556a7348c498e2e6234f22e061, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxVehicles: 5
+  maxVehicles: 10
   maxLights: 10
   vehicles: []
   lights: []
@@ -2759,7 +2738,6 @@ GameObject:
   - component: {fileID: 1464475798}
   - component: {fileID: 1464475797}
   - component: {fileID: 1464475800}
-  - component: {fileID: 1464475801}
   m_Layer: 5
   m_Name: ButtonSpawnExploration
   m_TagString: Untagged
@@ -2882,18 +2860,6 @@ MonoBehaviour:
   m_EffectColor: {r: 0.5568628, g: 0.5568628, b: 0.5568628, a: 0.42745098}
   m_EffectDistance: {x: 5, y: 5}
   m_UseGraphicAlpha: 1
---- !u!114 &1464475801
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1464475795}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54394c8b33c321b418d0c22179ab8e38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1562177639
 GameObject:
   m_ObjectHideFlags: 0
@@ -2907,7 +2873,6 @@ GameObject:
   - component: {fileID: 1562177642}
   - component: {fileID: 1562177641}
   - component: {fileID: 1562177644}
-  - component: {fileID: 1562177645}
   m_Layer: 5
   m_Name: ButtonSpawnLight
   m_TagString: Untagged
@@ -3030,18 +2995,6 @@ MonoBehaviour:
   m_EffectColor: {r: 0.5568628, g: 0.5568628, b: 0.5568628, a: 0.42745098}
   m_EffectDistance: {x: 5, y: 5}
   m_UseGraphicAlpha: 1
---- !u!114 &1562177645
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1562177639}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54394c8b33c321b418d0c22179ab8e38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1637574493
 GameObject:
   m_ObjectHideFlags: 0
@@ -3382,7 +3335,6 @@ GameObject:
   - component: {fileID: 1848569049}
   - component: {fileID: 1848569048}
   - component: {fileID: 1848569051}
-  - component: {fileID: 1848569052}
   m_Layer: 5
   m_Name: ButtonSpawnFear
   m_TagString: Untagged
@@ -3505,18 +3457,6 @@ MonoBehaviour:
   m_EffectColor: {r: 0.5568628, g: 0.5568628, b: 0.5568628, a: 0.42745098}
   m_EffectDistance: {x: 5, y: 5}
   m_UseGraphicAlpha: 1
---- !u!114 &1848569052
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1848569046}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54394c8b33c321b418d0c22179ab8e38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1877025760
 GameObject:
   m_ObjectHideFlags: 0
@@ -5305,7 +5245,6 @@ GameObject:
   - component: {fileID: 1967073728}
   - component: {fileID: 1967073727}
   - component: {fileID: 1967073730}
-  - component: {fileID: 1967073731}
   m_Layer: 5
   m_Name: ButtonSpawnLove
   m_TagString: Untagged
@@ -5428,18 +5367,6 @@ MonoBehaviour:
   m_EffectColor: {r: 0.5568628, g: 0.5568628, b: 0.5568628, a: 0.42745098}
   m_EffectDistance: {x: 5, y: 5}
   m_UseGraphicAlpha: 1
---- !u!114 &1967073731
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1967073725}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54394c8b33c321b418d0c22179ab8e38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1978735894
 GameObject:
   m_ObjectHideFlags: 0
