@@ -57,7 +57,7 @@ public class Spawner : MonoBehaviour
     // Spawns the selected object to a certain position
     private void SpawnObject(GameObject selectedObjectToSpawn, Vector3 pos)
     {
-        // Check if selectedObjectToSpawn is a vehicle or a light
+        // Check if selectedObjectToSpawn is a vehicle, else its a light or a various object
         if ((selectedObjectToSpawn.GetComponent("Vehicle") as Vehicle) != null)
         {
             if (gameManager.AllowSpawnVehicle())
@@ -71,19 +71,37 @@ public class Spawner : MonoBehaviour
         }
         else
         {
-            if (gameManager.AllowSpawnLights())
+            if (spawnController.gameObjectToSpawnableObject[selectedObjectToSpawn] == SpawnableObject.Light)
             {
-                // Avoid clipping of the light by increasing y level
-                pos.y = pos.y + 0.1f;
+                if (gameManager.AllowSpawnLights())
+                {
+                    // Avoid clipping of the light by increasing y level
+                    pos.y = pos.y + 0.1f;
 
-                // Create gameobject and store it temporarily in a variable
-                GameObject instantiatedObject = Instantiate(selectedObjectToSpawn, pos, Quaternion.identity, parentObject.transform);
+                    // Create gameobject and store it temporarily in a variable
+                    GameObject instantiatedObject = Instantiate(selectedObjectToSpawn, pos, Quaternion.identity, parentObject.transform);
 
-                // Add created gameobject to list
-                gameManager.lights.Add(instantiatedObject);
+                    // Add created gameobject to list
+                    gameManager.lights.Add(instantiatedObject);
 
 
+                }
             }
+            else
+            {
+                if (gameManager.AllowSpawnVarious())
+                {
+                    // Avoid clipping of the light by increasing y level
+                    pos.y = pos.y + 0.1f;
+
+                    // Create gameobject and store it temporarily in a variable
+                    GameObject instantiatedObject = Instantiate(selectedObjectToSpawn, pos, Quaternion.identity, parentObject.transform);
+
+                    // Add created gameobject to list
+                    gameManager.various.Add(instantiatedObject);
+                }
+            }
+
 
         }
     }
