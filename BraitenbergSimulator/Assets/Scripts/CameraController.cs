@@ -8,6 +8,8 @@ public class CameraController : MonoBehaviour
     // The target to which to rotate around
     [SerializeField] private Transform target;
 
+    private Transform oldTarget;
+
     // The default target
     [SerializeField] private Transform defaultTarget;
 
@@ -28,7 +30,13 @@ public class CameraController : MonoBehaviour
 
     [SerializeField] [Range(1, 10)] private float zoomSpeed = 8;
 
-    [SerializeField] private bool locked = false;
+    [SerializeField] private bool cameraIsMoving;
+
+    private bool resettingIsMoving;
+
+    [SerializeField] private bool inputLocked = false;
+
+    [SerializeField] private bool followTarget = true;
 
     private Vector3 previousPosition;
 
@@ -57,22 +65,30 @@ public class CameraController : MonoBehaviour
         target = defaultTarget;
     }
 
-    void LateUpdate()
+    void Update()
     {
         // If target moves, move camera with it
-        if (target.transform.hasChanged)
+        if (followTarget && target.transform.hasChanged)
         {
+            // Set to true, since we are moving the camera
+            cameraIsMoving = true;
+
             // translate camera to target local origin
             cam.transform.position = target.position;
 
             // translate back 
             cam.transform.Translate(new Vector3(0, 0, -distanceToTarget));
+
+            target.transform.hasChanged = false;
         }
 
-        if (!locked)
+        if (!inputLocked)
         {
             if (Input.GetAxis("Mouse ScrollWheel") != 0f)
             {
+                // Set to true, since we are moving the camera
+                cameraIsMoving = true;
+
                 // Set the camera position to 0.0
                 cam.transform.position = target.position;
 
@@ -92,6 +108,9 @@ public class CameraController : MonoBehaviour
             }
             else if (Input.GetMouseButton(2))
             {
+                // Set to true, since we are moving the camera
+                cameraIsMoving = true;
+
                 // Mouseposition in viewport coordinates (0, 1)
                 Vector3 newPosition = cam.ScreenToViewportPoint(Input.mousePosition);
 
@@ -132,6 +151,14 @@ public class CameraController : MonoBehaviour
                 // Update position
                 previousPosition = newPosition;
             }
+
+
+            // Only reset is moving variable if no invoke is called
+            if (!resettingIsMoving)
+            {
+                Invoke("ResetIsMoving", 2);
+                resettingIsMoving = true;
+            }
         }
     }
 
@@ -147,16 +174,38 @@ public class CameraController : MonoBehaviour
 
     public void LockCamera()
     {
-        locked = true;
+        inputLocked = true;
     }
 
     public void UnlockCamera()
     {
-        locked = false;
+        inputLocked = false;
+    }
+
+    public void FollowTarget()
+    {
+        followTarget = true;
+    }
+
+    public void UnfollowTarget()
+    {
+        followTarget = false;
+    }
+
+    public bool CameraIsMoving()
+    {
+        return cameraIsMoving;
     }
 
     public Camera GetCurrentCam()
     {
         return cam;
+    }
+
+    private void ResetIsMoving()
+    {
+        // Only called every x seconds
+        cameraIsMoving = false;
+        resettingIsMoving = false;
     }
 }

@@ -32,13 +32,12 @@ public class SelectionController : MonoBehaviour
 
         if (selectedObject && Input.GetKeyDown(KeyCode.M))
         {
-            selectedObjectMovable = true;
-            selectedObject.GetComponent<Object>().Move();
+            MoveSelectedObject();
         }
 
         if (selectedObjectMovable)
         {
-            MoveSelectedObject();
+            Move();
         }
 
         if (selectedObjectMovable && Input.GetMouseButtonDown(0))
@@ -130,20 +129,31 @@ public class SelectionController : MonoBehaviour
 
     private void MoveSelectedObject()
     {
-        // Shoot ray
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        selectedObjectMovable = true;
+        selectedObject.GetComponent<Object>().Move();
+        cameraController.UnfollowTarget();
+    }
 
-        RaycastHit hit;
-
-        if (Physics.Raycast(ray, out hit, 100, moveableAreaMask))
+    private void Move()
+    {
+        if (!cameraController.CameraIsMoving())
         {
-            Vector3 newPos = new Vector3(
-                    Mathf.Ceil(hit.point.x),
-                    selectedObject.transform.position.y,
-                    Mathf.Ceil(hit.point.z)
-            );
-            selectedObject.transform.position = newPos;
+            // Shoot ray
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit, 100, moveableAreaMask))
+            {
+                Vector3 newPos = new Vector3(
+                        Mathf.Ceil(hit.point.x),
+                        selectedObject.transform.position.y,
+                        Mathf.Ceil(hit.point.z)
+                );
+                selectedObject.transform.position = newPos;
+            }
         }
+
     }
 
     private void PlaceSelectedObject()
@@ -153,7 +163,8 @@ public class SelectionController : MonoBehaviour
 
         // Set movable boolean to false
         selectedObjectMovable = false;
+
+        // Follow the target again
+        cameraController.FollowTarget();
     }
-
-
 }
