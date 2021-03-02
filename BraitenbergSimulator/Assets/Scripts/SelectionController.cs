@@ -64,8 +64,21 @@ public class SelectionController : MonoBehaviour
                     DeselectAllObjects();
                     cameraController.ResetTarget();
                 }
-
-
+            } else if ((hitObject.GetComponent("Light") as Light) != null) 
+            {
+                // Select lightsource only if it is not currently selected
+                if (!hitObject.GetComponent<Light>().IsSelected())
+                {
+                    DeselectAllObjects();
+                    hitObject.GetComponent<Light>().Select();
+                    cameraController.SetTarget(hitObject);
+                }
+                // If the lightsource is currently selected, deselect it and reset camera
+                else 
+                {
+                    DeselectAllObjects();
+                    cameraController.ResetTarget();
+                }
             }
         }
     }
@@ -75,6 +88,10 @@ public class SelectionController : MonoBehaviour
         foreach (GameObject vehicle in gameManager.vehicles)
         {
             vehicle.GetComponent<Vehicle>().Deselect();
+        }
+        foreach (GameObject light in gameManager.lights)
+        {
+            light.GetComponent<Light>().Deselect();
         }
     }
 }
