@@ -16,7 +16,8 @@ public class ButtonController : MonoBehaviour
         "<#e3e3e3><u>Spawn object</u>\n<color=white>Spawn aggression vehicle",
         "<#e3e3e3><u>Spawn object</u>\n<color=white>Spawn exploration vehicle",
         "<#e3e3e3><u>Spawn object</u>\n<color=white>Spawn fear vehicle",
-        "<#e3e3e3><u>Spawn object</u>\n<color=white>Spawn love vehicle"
+        "<#e3e3e3><u>Spawn object</u>\n<color=white>Spawn love vehicle",
+        "<#e3e3e3><u>Spawn object</u>\n<color=white>Spawn obstacle"
     };
 
     private string[] sceneButtonTooltips = new string[] {
@@ -59,6 +60,7 @@ public class ButtonController : MonoBehaviour
         spawnButtons[2].onClick.AddListener(ClickVehicleExplorationButton);
         spawnButtons[3].onClick.AddListener(ClickVehicleFearButton);
         spawnButtons[4].onClick.AddListener(ClickVehicleLoveButton);
+        spawnButtons[5].onClick.AddListener(ClickObstacleButton);
 
         sceneButtons[0].onClick.AddListener(ClickOnClearScene);
     }
@@ -132,6 +134,21 @@ public class ButtonController : MonoBehaviour
         else
         {
             DisableButtonOutline(spawnButtons[4]);
+            spawnController.DeselectObjectToSpawn();
+        }
+    }
+
+    private void ClickObstacleButton()
+    {
+        if (spawnController.selectedObjectToSpawn !=
+            spawnController.spawnableObjectToGameObject[SpawnableObject.Obstacle])
+        {
+            EnableButtonOutline(spawnButtons[5], spawnButtons);
+            spawnController.SelectObjectToSpawn(SpawnableObject.Obstacle);
+        }
+        else
+        {
+            DisableButtonOutline(spawnButtons[5]);
             spawnController.DeselectObjectToSpawn();
         }
     }

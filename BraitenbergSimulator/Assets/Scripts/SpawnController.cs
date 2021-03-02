@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpawnController : MonoBehaviour
 {
-    public GameObject[] spawnableObjects = new GameObject[5];
+    public GameObject[] spawnableObjects = new GameObject[6];
 
     public Dictionary<SpawnableObject, GameObject> spawnableObjectToGameObject;
 
@@ -44,7 +44,8 @@ public class SpawnController : MonoBehaviour
             { SpawnableObject.Aggression, spawnableObjects[1] },
             { SpawnableObject.Exploration, spawnableObjects[2] },
             { SpawnableObject.Fear, spawnableObjects[3] },
-            { SpawnableObject.Love, spawnableObjects[4] }
+            { SpawnableObject.Love, spawnableObjects[4] },
+            { SpawnableObject.Obstacle, spawnableObjects[5] }
         };
 
         gameObjectToSpawnableObject = new Dictionary<GameObject, SpawnableObject>(){
@@ -53,6 +54,7 @@ public class SpawnController : MonoBehaviour
             { spawnableObjects[2], SpawnableObject.Exploration },
             { spawnableObjects[3], SpawnableObject.Fear },
             { spawnableObjects[4], SpawnableObject.Love },
+            { spawnableObjects[5], SpawnableObject.Obstacle }
         };
     }
 
@@ -79,6 +81,10 @@ public class SpawnController : MonoBehaviour
             SelectObjectToSpawn(SpawnableObject.Love);
         }
         if (Input.GetKeyDown(KeyCode.Alpha6))
+        {
+            SelectObjectToSpawn(SpawnableObject.Obstacle);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha7))
         {
             gameManager.ClearScene();
         }

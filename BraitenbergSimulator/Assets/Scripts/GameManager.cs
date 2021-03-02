@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Max vehicles and lights inside the scene
+    // Max vehicles, lights and other objects inside the scene
     public int maxVehicles = 5;
     public int maxLights = 10;
+    public int maxVarious = 10;
 
     // List that holds the Braitenberg vehicles
     public List<GameObject> vehicles = new List<GameObject>();
@@ -14,11 +15,17 @@ public class GameManager : MonoBehaviour
     // List that holds the lights that affect the vehicles
     public List<GameObject> lights = new List<GameObject>();
 
+    // List that holds all the other objects spawned in scene
+    public List<GameObject> various = new List<GameObject>();
+
     // Mask for the vehicles
     public LayerMask vehicleMask;
 
     // Mask for the lights
     public LayerMask lightMask;
+
+    // Mask for the other objects
+    public LayerMask variousMask;
 
     // Camera controller
     private CameraController cameraController;
@@ -58,25 +65,35 @@ public class GameManager : MonoBehaviour
         return lights.Count < maxLights;
     }
 
+    public bool AllowSpawnVarious()
+    {
+        return various.Count < maxVarious;
+    }
+
     public void ClearScene()
     {
         // Reset camera
         cameraController.ResetTarget();
 
         // Remove all vehicles from the scene
-        foreach (GameObject vehicle in vehicles)
+        foreach (GameObject obj in vehicles)
         {
-            Destroy(vehicle);
+            Destroy(obj);
         }
 
-        foreach (GameObject light in lights)
+        foreach (GameObject obj in lights)
         {
-            Destroy(light);
+            Destroy(obj);
+        }
+
+        foreach (GameObject obj in various)
+        {
+            Destroy(obj);
         }
 
         // Remove all objects from list
         vehicles.Clear();
         lights.Clear();
-
+        various.Clear();
     }
 }
