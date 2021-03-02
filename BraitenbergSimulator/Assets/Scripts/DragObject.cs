@@ -4,21 +4,26 @@ using UnityEngine;
 
 public class DragObject : MonoBehaviour
 {
-    private Vector3 mouseOffset;
-    private float zCoordinate;
+    private Plane plane;
 
-    void OnMouseDown()
-    {  
-        // Compute the Z-coordinate of the object
-        zCoordinate = Camera.main.WorldToScreenPoint(gameObject.transform.position).z;
-        
-        // Compute the mouse offset
-        mouseOffset = gameObject.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, zCoordinate));
+    void Start()
+    {
+        plane = new Plane(Vector3.up, Vector3.up * gameObject.transform.position.y);
     }
 
     void OnMouseDrag()
     {
-        Vector3 newPosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, zCoordinate)) + mouseOffset;
-        transform.position = new Vector3(Mathf.Ceil(newPosition.x), transform.position.y, Mathf.Ceil(newPosition.z));
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        float distance;
+        if (plane.Raycast(ray, out distance))
+        {
+            Vector3 newPos = new Vector3(
+                Mathf.Ceil(ray.GetPoint(distance).x),
+                ray.GetPoint(distance).y,
+                Mathf.Ceil(ray.GetPoint(distance).z)
+            );
+            gameObject.transform.position = newPos;
+        }
     }
 }
