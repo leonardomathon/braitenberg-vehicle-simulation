@@ -3,12 +3,15 @@ using UnityEngine.EventSystems;
 
 public class SelectionController : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject selectedObject;
+    [SerializeField] private GameObject selectedObject;
+
+    [SerializeField] private bool selectedObjectMovable;
 
     // The layer mask on which we can select objects
-    [SerializeField]
-    private LayerMask selectableAreaMasks;
+    [SerializeField] private LayerMask selectableAreaMasks;
+
+    // The layer mask on wich we can move object
+    [SerializeField] private LayerMask moveableAreaMask;
 
     private GameManager gameManager;
 
@@ -22,14 +25,57 @@ public class SelectionController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (!selectedObjectMovable && Input.GetMouseButtonDown(0))
         {
             SelectObject();
+        }
+
+        if (selectedObject && Input.GetKeyDown(KeyCode.M))
+        {
+            selectedObjectMovable = true;
+            selectedObject.GetComponent<Object>().Move();
+        }
+
+        if (selectedObjectMovable)
+        {
+            MoveSelectedObject();
+        }
+
+        if (selectedObjectMovable && Input.GetMouseButtonDown(0))
+        {
+            PlaceSelectedObject();
         }
     }
 
     public void ResetSelection()
     {
+        cameraController.ResetTarget();
+    }
+
+    private void SetSelectedObject(GameObject obj)
+    {
+        // Set the selected object
+        selectedObject = obj;
+
+        // Select all objects to make sure only one object is selected
+        DeselectAllObjects();
+
+        // Select the object
+        obj.GetComponent<Object>().Select();
+
+        // Let camera orbit around selected object
+        cameraController.SetTarget(obj);
+    }
+
+    private void ResetSelectedObject()
+    {
+        // Reset the selected object
+        selectedObject = null;
+
+        // Deselect all objects
+        DeselectAllObjects();
+
+        // Let camera orbit the default target
         cameraController.ResetTarget();
     }
 
@@ -49,61 +95,19 @@ public class SelectionController : MonoBehaviour
         {
             GameObject hitObject = hit.transform.gameObject;
 
-
-            // Check if it is a vehicle
-            if ((hitObject.GetComponent("Vehicle") as Vehicle) != null)
+            // Check if the hitObject is of type object
+            if (hitObject.GetComponent<Object>() != null)
             {
                 // Select object only if it is not currently selected
-                if (!hitObject.GetComponent<Vehicle>().IsSelected())
+                if (!hitObject.GetComponent<Object>().IsSelected())
                 {
-                    DeselectAllObjects();
-                    hitObject.GetComponent<Vehicle>().Select();
-                    cameraController.SetTarget(hitObject);
+                    SetSelectedObject(hitObject);
                 }
                 // If it is currently selected, deselect it and reset camera
                 else
                 {
-                    DeselectAllObjects();
-                    cameraController.ResetTarget();
+                    ResetSelectedObject();
                 }
-            } 
-
-            // Check if it is a lightbulb
-            if ((hitObject.GetComponent("Lightbulb") as Lightbulb) != null) 
-            {
-                // Select lightbulb only if it is not currently selected
-                if (!hitObject.GetComponent<Lightbulb>().IsSelected())
-                {
-                    DeselectAllObjects();
-                    hitObject.GetComponent<Lightbulb>().Select();
-                    cameraController.SetTarget(hitObject);
-                }
-                // If the lightbulb is currently selected, deselect it and reset camera
-                else 
-                {
-                    DeselectAllObjects();
-                    cameraController.ResetTarget();
-                }
-            }
-
-            // Check if it is an obstacle
-            if ((hitObject.GetComponent("Obstacle") as Obstacle) != null)
-            {
-                // Select object only if it is not currently selected
-                if (!hitObject.GetComponent<Obstacle>().IsSelected())
-                {
-                    DeselectAllObjects();
-                    hitObject.GetComponent<Obstacle>().Select();
-                    cameraController.SetTarget(hitObject);
-                }
-                // If it is currently selected, deselect it and reset camera
-                else
-                {
-                    DeselectAllObjects();
-                    cameraController.ResetTarget();
-                }
-
-
             }
         }
     }
@@ -123,4 +127,33 @@ public class SelectionController : MonoBehaviour
             obj.GetComponent<Lightbulb>().Deselect();
         }
     }
+
+    private void MoveSelectedObject()
+    {
+        // Shoot ray
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, 100, moveableAreaMask))
+        {
+            Vector3 newPos = new Vector3(
+                    Mathf.Ceil(hit.point.x),
+                    selectedObject.transform.position.y,
+                    Mathf.Ceil(hit.point.z)
+            );
+            selectedObject.transform.position = newPos;
+        }
+    }
+
+    private void PlaceSelectedObject()
+    {
+        // Set object to unmovable
+        selectedObject.GetComponent<Object>().Place();
+
+        // Set movable boolean to false
+        selectedObjectMovable = false;
+    }
+
+
 }

@@ -55,11 +55,23 @@ public class Object : MonoBehaviour
     public void Move()
     {
         isMovable = true;
+
+        // Temporarily disable gravity for the object
+        gameObject.GetComponent<Rigidbody>().useGravity = false;
+
+        // Disable collisions
+        gameObject.GetComponent<BoxCollider>().enabled = false;
     }
 
     public void Place()
     {
         isMovable = false;
+
+        // Enable gravity for the object
+        gameObject.GetComponent<Rigidbody>().useGravity = true;
+
+        // Enable collisions
+        gameObject.GetComponent<BoxCollider>().enabled = true;
     }
 
 
