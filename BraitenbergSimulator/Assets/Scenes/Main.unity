@@ -2599,9 +2599,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectedObject: {fileID: 0}
-  selectableAreaMask:
+  selectableAreaMasks:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 11264
 --- !u!1 &1416863315
 GameObject:
   m_ObjectHideFlags: 0
@@ -5191,7 +5191,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh25190
+  m_Name: pb_Mesh18644
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2

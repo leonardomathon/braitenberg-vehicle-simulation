@@ -26,6 +26,21 @@ public class Obstacle : MonoBehaviour
         return isSelected;
     }
 
+    void Update()
+    {
+        if (isSelected)
+        {
+            // Apply material
+            ApplySelectionMaterial();
+
+        }
+        else
+        {
+            // Remove selection material
+            RemoveSelectionMaterial();
+        }
+    }
+
     private void ApplySelectionMaterial()
     {
         // Apply material for object selection
