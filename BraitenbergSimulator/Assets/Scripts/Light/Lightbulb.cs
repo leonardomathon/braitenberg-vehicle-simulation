@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Light : MonoBehaviour
+public class Lightbulb : MonoBehaviour
 {
     // Intensity of the lightsource
     [SerializeField]
