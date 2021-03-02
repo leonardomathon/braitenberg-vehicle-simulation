@@ -2,14 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Obstacle : MonoBehaviour
+public class Object : MonoBehaviour
 {
-
     [SerializeField] private Material materialStandard;
 
     [SerializeField] private Material materialOnSelect;
 
     [SerializeField] private bool isSelected;
+
+    protected virtual void Update()
+    {
+        if (isSelected)
+        {
+            ApplySelectionMaterial();
+
+        }
+        else
+        {
+            RemoveSelectionMaterial();
+        }
+    }
 
     public void Select()
     {
@@ -24,21 +36,6 @@ public class Obstacle : MonoBehaviour
     public bool IsSelected()
     {
         return isSelected;
-    }
-
-    void Update()
-    {
-        if (isSelected)
-        {
-            // Apply material
-            ApplySelectionMaterial();
-
-        }
-        else
-        {
-            // Remove selection material
-            RemoveSelectionMaterial();
-        }
     }
 
     private void ApplySelectionMaterial()
