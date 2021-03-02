@@ -7,6 +7,9 @@ public class Object : MonoBehaviour
     // Boolean that stores if object is selected
     [SerializeField] private bool isSelected;
 
+    // Boolean that stores if object is currently movable
+    [SerializeField] private bool isMovable;
+
     // Standard material of object
     [SerializeField] private Material materialStandard;
 
@@ -42,6 +45,23 @@ public class Object : MonoBehaviour
     {
         isSelected = false;
     }
+
+    // Getter and setters for isMovable
+    public bool IsMovable()
+    {
+        return isMovable;
+    }
+
+    public void Move()
+    {
+        isMovable = true;
+    }
+
+    public void Place()
+    {
+        isMovable = false;
+    }
+
 
     // Applies selection material to this object
     private void ApplySelectionMaterial()
