@@ -68,16 +68,17 @@ public class SelectionController : MonoBehaviour
                 }
             } 
 
+            // Check if it is a lightbulb
             if ((hitObject.GetComponent("Lightbulb") as Lightbulb) != null) 
             {
-                // Select lightsource only if it is not currently selected
+                // Select lightbulb only if it is not currently selected
                 if (!hitObject.GetComponent<Lightbulb>().IsSelected())
                 {
                     DeselectAllObjects();
                     hitObject.GetComponent<Lightbulb>().Select();
                     cameraController.SetTarget(hitObject);
                 }
-                // If the lightsource is currently selected, deselect it and reset camera
+                // If the lightbulb is currently selected, deselect it and reset camera
                 else 
                 {
                     DeselectAllObjects();
@@ -117,9 +118,9 @@ public class SelectionController : MonoBehaviour
         {
             obj.GetComponent<Obstacle>().Deselect();
         }
-        foreach (GameObject light in gameManager.lights)
+        foreach (GameObject obj in gameManager.lights)
         {
-            light.GetComponent<Lightbulb>().Deselect();
+            obj.GetComponent<Lightbulb>().Deselect();
         }
     }
 }
