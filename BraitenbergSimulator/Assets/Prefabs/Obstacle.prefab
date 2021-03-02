@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3098897409627345614}
   - component: {fileID: 3098897409627345609}
   - component: {fileID: 3098897409627345608}
+  - component: {fileID: 86896154171041218}
   m_Layer: 13
   m_Name: Obstacle
   m_TagString: Untagged
@@ -110,3 +111,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &86896154171041218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3098897409627345611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bc42fb005ae2154caff3e3a8457c242, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  materialStandard: {fileID: 2100000, guid: 7c9398bb4ac141f4bad7fe476bddb791, type: 2}
+  materialOnSelect: {fileID: 2100000, guid: 2ee36246034aedc4484946a0ab53deaa, type: 2}
+  isSelected: 0
