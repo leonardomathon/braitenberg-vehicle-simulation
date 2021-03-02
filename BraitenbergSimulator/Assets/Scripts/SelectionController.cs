@@ -8,7 +8,7 @@ public class SelectionController : MonoBehaviour
 
     // The layer mask on which we can select objects
     [SerializeField]
-    private LayerMask selectableAreaMask;
+    private LayerMask selectableAreaMasks;
 
     private GameManager gameManager;
 
@@ -45,10 +45,12 @@ public class SelectionController : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         // Check if ray hits something with the mask "Vehicle"
-        if (Physics.Raycast(ray, out hit, 100, selectableAreaMask))
+        if (Physics.Raycast(ray, out hit, 100, selectableAreaMasks))
         {
             GameObject hitObject = hit.transform.gameObject;
 
+
+            // Check if it is a vehicle
             if ((hitObject.GetComponent("Vehicle") as Vehicle) != null)
             {
                 // Select object only if it is not currently selected
@@ -67,14 +69,38 @@ public class SelectionController : MonoBehaviour
 
 
             }
+
+            // Check if it is an obstacle
+            if ((hitObject.GetComponent("Obstacle") as Obstacle) != null)
+            {
+                // Select object only if it is not currently selected
+                if (!hitObject.GetComponent<Obstacle>().IsSelected())
+                {
+                    DeselectAllObjects();
+                    hitObject.GetComponent<Obstacle>().Select();
+                    cameraController.SetTarget(hitObject);
+                }
+                // If it is currently selected, deselect it and reset camera
+                else
+                {
+                    DeselectAllObjects();
+                    cameraController.ResetTarget();
+                }
+
+
+            }
         }
     }
 
     private void DeselectAllObjects()
     {
-        foreach (GameObject vehicle in gameManager.vehicles)
+        foreach (GameObject obj in gameManager.vehicles)
         {
-            vehicle.GetComponent<Vehicle>().Deselect();
+            obj.GetComponent<Vehicle>().Deselect();
+        }
+        foreach (GameObject obj in gameManager.various)
+        {
+            obj.GetComponent<Obstacle>().Deselect();
         }
     }
 }
