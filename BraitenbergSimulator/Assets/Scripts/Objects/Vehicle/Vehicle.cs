@@ -1,23 +1,12 @@
 ﻿using UnityEngine;
 
 [System.Serializable]
-public class Vehicle : MonoBehaviour
+public class Vehicle : Object
 {
     [SerializeField]
     private VehicleType type;
 
     private VehicleType _type;
-
-    [SerializeField]
-    private Material materialStandard;
-
-    [SerializeField]
-    private Material materialOnSelect;
-
-    [SerializeField]
-    private bool isSelected;
-
-
 
     [SerializeField]
     private Vector3 position;
@@ -32,36 +21,10 @@ public class Vehicle : MonoBehaviour
         AttachMovementScript();
     }
 
-    void Update()
+    protected override void Update()
     {
+        base.Update();
         UpdateMovementScript();
-
-        if (isSelected)
-        {
-            // Apply material
-            ApplySelectionMaterial();
-
-        }
-        else
-        {
-            // Remove selection material
-            RemoveSelectionMaterial();
-        }
-    }
-
-    public void Select()
-    {
-        isSelected = true;
-    }
-
-    public void Deselect()
-    {
-        isSelected = false;
-    }
-
-    public bool IsSelected()
-    {
-        return isSelected;
     }
 
     // Attach the rigt movementscript to the vehicle object based on VehicleType
@@ -107,22 +70,5 @@ public class Vehicle : MonoBehaviour
                 AttachMovementScript();
             }
         }
-    }
-
-    private void ApplySelectionMaterial()
-    {
-        // Apply material for object selection
-        gameObject.GetComponent<MeshRenderer>().sharedMaterial = materialOnSelect;
-    }
-
-    private void RemoveSelectionMaterial()
-    {
-        // Only change if necessary
-        if (gameObject.GetComponent<MeshRenderer>().sharedMaterial.name == materialOnSelect.name)
-        {
-            // Apply default material
-            gameObject.GetComponent<MeshRenderer>().sharedMaterial = materialStandard;
-        }
-
     }
 }
