@@ -1,4 +1,5 @@
 ﻿using Objects.Vehicle;
+using Objects.Vehicle.Motors;
 using UnityEngine;
 
 [System.Serializable] public class Vehicle : Object {
@@ -8,16 +9,19 @@ using UnityEngine;
 
 	[SerializeField] private Vector3 position;
 
-	public GameObject axle;
 	public GameObject body;
 
-	public Rigidbody leftWheel;
-	
+	public Wheel leftWheel;
+
+	public Sensor leftSensor;
+	public Sensor rightSensor;
+
 	public int leftMotorSpeed;
 	public int rightMotorSpeed;
 
 	private GameManager gameManager;
 	private VehicleMovement movement;
+	private float time;
 
 	private void Start() {
 		AttachMovementScript();
@@ -25,9 +29,16 @@ using UnityEngine;
 
 	protected override void Update() {
 		// base.Update();
-		UpdateMovementScript();
+		// UpdateMovementScript();
 		UpdateBodyRotation();
-		
+
+		time += Time.deltaTime;
+		if (time > 5f) {
+			Debug.Log(leftSensor.Measure(gameManager.GetLights()));
+			time = 0f;
+		}
+
+
 		float motor = leftMotorSpeed * Input.GetAxis("Vertical");
 
 		// if (axleInfo.steering) {
@@ -35,8 +46,8 @@ using UnityEngine;
 		// 	axleInfo.rightWheel.steerAngle = steering;
 		// }
 		// if (axleInfo.motor) {
-			leftWheel.AddRelativeTorque(motor, 0, 0);
-			// rightWheel.motorTorque = motor;
+		leftWheel.SetForce(motor);
+		// rightWheel.motorTorque = motor;
 		// }
 		// ApplyLocalPositionToVisuals(axleInfo.leftWheel);
 		// ApplyLocalPositionToVisuals(axleInfo.rightWheel);

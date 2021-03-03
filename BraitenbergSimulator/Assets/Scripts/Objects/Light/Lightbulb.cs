@@ -1,12 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Lightbulb : Object
-{
-    // Intensity of the lightsource
-    [SerializeField] private int lightIntensity;
-
-    // Color of the lightsource
-    [SerializeField] private int lightColor;
+namespace Objects.Light {
+	public class Lightbulb : Object {
+		public float intensity;
+		public float color; // TODO: Possibly replace with fancy emission spectrum if we have time
+	}
 }

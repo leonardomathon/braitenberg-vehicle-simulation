@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Objects.Light;
+using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class SelectionController : MonoBehaviour
