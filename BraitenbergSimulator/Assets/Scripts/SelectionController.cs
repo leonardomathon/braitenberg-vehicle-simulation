@@ -118,9 +118,9 @@ public class SelectionController : MonoBehaviour
         {
             obj.GetComponent<Obstacle>().Deselect();
         }
-        foreach (GameObject obj in gameManager.lights)
+        foreach (var light in gameManager.lights)
         {
-            obj.GetComponent<Lightbulb>().Deselect();
+            light.Deselect();
         }
     }
 }

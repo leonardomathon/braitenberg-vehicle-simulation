@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     public List<GameObject> vehicles = new List<GameObject>();
 
     // List that holds the lights that affect the vehicles
-    public List<GameObject> lights = new List<GameObject>();
+    public List<Lightbulb> lights = new List<Lightbulb>();
 
     // List that holds all the other objects spawned in scene
     public List<GameObject> various = new List<GameObject>();
@@ -81,9 +81,9 @@ public class GameManager : MonoBehaviour
             Destroy(obj);
         }
 
-        foreach (GameObject obj in lights)
+        foreach (var light in lights)
         {
-            Destroy(obj);
+            Destroy(light.gameObject);
         }
 
         foreach (GameObject obj in various)
@@ -95,5 +95,10 @@ public class GameManager : MonoBehaviour
         vehicles.Clear();
         lights.Clear();
         various.Clear();
+    }
+
+    public List<Lightbulb> GetLights() {
+        // When we implement cars with lights on them, this function should also return those lights
+        return lights;
     }
 }

@@ -82,7 +82,7 @@ public class Spawner : MonoBehaviour
                     GameObject instantiatedObject = Instantiate(selectedObjectToSpawn, pos, Quaternion.identity, parentObject.transform);
 
                     // Add created gameobject to list
-                    gameManager.lights.Add(instantiatedObject);
+                    gameManager.lights.Add(instantiatedObject.GetComponent<Lightbulb>());
 
 
                 }
