@@ -146,12 +146,13 @@ public class SelectionController : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit, 100, moveableAreaMask))
             {
-                Vector3 newPos = new Vector3(
+                Vector3 destinationPos = new Vector3(
                         Mathf.Ceil(hit.point.x),
                         selectedObject.transform.position.y,
                         Mathf.Ceil(hit.point.z)
                 );
-                selectedObject.transform.position = newPos;
+
+                selectedObject.transform.position = destinationPos;
             }
         }
     }

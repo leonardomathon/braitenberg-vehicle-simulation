@@ -1841,9 +1841,11 @@ MonoBehaviour:
   minZoomDistance: 5
   maxZoomDistance: 90
   zoomSpeed: 8.29
+  interpolationSpeed: 6
   cameraIsMoving: 0
   inputLocked: 0
   followTarget: 1
+  overviewCameraEnabled: 0
 --- !u!1 &920616679
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,8 +8,6 @@ public class CameraController : MonoBehaviour
     // The target to which to rotate around
     [SerializeField] private Transform target;
 
-    private Transform oldTarget;
-
     // The default target
     [SerializeField] private Transform defaultTarget;
 
@@ -28,18 +26,28 @@ public class CameraController : MonoBehaviour
     // Maximum zoom distance
     [SerializeField] [Range(0, 90)] private int maxZoomDistance = 15;
 
+    // Speed to zoom
     [SerializeField] [Range(1, 10)] private float zoomSpeed = 8;
 
+    // Interpolation speed
+    [SerializeField] private float interpolationSpeed = 0.05f;
+
+    // Returns true if the camera is moving
     [SerializeField] private bool cameraIsMoving;
 
+    // Returns true of the cameraIsMoving will be reset
     private bool resettingIsMoving;
 
-    [SerializeField] private bool overviewCameraEnabled;
-
+    // Variables that locks the camera's inputs
     [SerializeField] private bool inputLocked = false;
 
+    // If true, the camera will follow the target
     [SerializeField] private bool followTarget = true;
 
+    // Returns true if the overview camera is enabled
+    [SerializeField] private bool overviewCameraEnabled;
+
+    // Previous position used to update the camera to its new position
     private Vector3 previousPosition;
 
     // Singleton pattern for CameraController
@@ -76,7 +84,7 @@ public class CameraController : MonoBehaviour
             Vector3 destinationPos = new Vector3(target.position.x, 20, target.position.z);
 
             // Interpolate to that destination
-            Vector3 smoothPos = Vector3.Slerp(cam.transform.position, destinationPos, 0.2f);
+            Vector3 smoothPos = Vector3.Slerp(cam.transform.position, destinationPos, interpolationSpeed * Time.deltaTime);
 
             // Calculate the relative position on one axis only  (vector cam-target direction)
             Vector3 relativePos = new Vector3(0, target.position.y - cam.transform.position.y, 0);
@@ -85,7 +93,7 @@ public class CameraController : MonoBehaviour
             Quaternion toRotation = Quaternion.LookRotation(relativePos, target.transform.up);
 
             // Interpolate rotation to make it smooth
-            cam.transform.rotation = Quaternion.Lerp(cam.transform.rotation, toRotation, 0.2f);
+            cam.transform.rotation = Quaternion.Lerp(cam.transform.rotation, toRotation, interpolationSpeed * Time.deltaTime);
 
             // Move camera
             cam.transform.position = smoothPos;
@@ -110,7 +118,7 @@ public class CameraController : MonoBehaviour
                 Quaternion toRotation = Quaternion.LookRotation(relativePos);
 
                 // Interpolate rotation to make it smooth
-                cam.transform.rotation = Quaternion.Lerp(cam.transform.rotation, toRotation, 0.2f);
+                cam.transform.rotation = Quaternion.Lerp(cam.transform.rotation, toRotation, interpolationSpeed * Time.deltaTime);
 
                 // Set distanceToTarget to avoid flickering on mouse input
                 distanceToTarget = Vector3.Distance(cam.transform.position, target.position);
@@ -121,7 +129,7 @@ public class CameraController : MonoBehaviour
                 Vector3 destinationPos = new Vector3(target.position.x, cam.transform.position.y, target.position.z);
 
                 // Interpolate to that destination
-                Vector3 smoothPos = Vector3.Slerp(cam.transform.position, destinationPos, 0.2f);
+                Vector3 smoothPos = Vector3.Slerp(cam.transform.position, destinationPos, interpolationSpeed * Time.deltaTime);
 
                 // Move camera
                 cam.transform.position = smoothPos;
