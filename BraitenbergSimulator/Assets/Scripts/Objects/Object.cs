@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class Object : MonoBehaviour
 {
+    // Random object id
+    private int objectId;
+
+    // Name of the object
+    [SerializeField] private string objectName;
+
     // Boolean that stores if object is selected
     [SerializeField] private bool isSelected;
 
@@ -15,6 +21,11 @@ public class Object : MonoBehaviour
 
     // Material when object is selected
     [SerializeField] private Material materialOnSelect;
+
+    protected virtual void Start()
+    {
+        objectId = Random.Range(1, int.MaxValue);
+    }
 
     protected virtual void Update()
     {
@@ -28,6 +39,19 @@ public class Object : MonoBehaviour
             // Remove selection material else
             RemoveSelectionMaterial();
         }
+    }
+
+    // Getter for object id
+    public string GetObjectId()
+    {
+        return objectId.ToString();
+    }
+
+
+    // Getter for object name
+    public string GetObjectName()
+    {
+        return objectName;
     }
 
     // Getter and setters for isSelected

@@ -16,8 +16,9 @@ public class Vehicle : Object
     [SerializeField]
     private int rightMotorSpeed;
 
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         AttachMovementScript();
     }
 

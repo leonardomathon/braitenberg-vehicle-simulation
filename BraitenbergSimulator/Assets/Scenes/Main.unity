@@ -650,6 +650,7 @@ GameObject:
   - component: {fileID: 215973576}
   - component: {fileID: 215973577}
   - component: {fileID: 215973578}
+  - component: {fileID: 215973579}
   m_Layer: 0
   m_Name: UI Controller
   m_TagString: Untagged
@@ -706,6 +707,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvasRectTransform: {fileID: 1779314434}
   tooltip: {fileID: 1726018371}
+--- !u!114 &215973579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 215973575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2af8e1dfce8b0534a98c523c3ba3cc10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectionMenu: {fileID: 1204922161}
 --- !u!1 &223197219
 GameObject:
   m_ObjectHideFlags: 0
@@ -2743,7 +2757,7 @@ GameObject:
   - component: {fileID: 1204922164}
   - component: {fileID: 1204922163}
   m_Layer: 5
-  m_Name: SelectedObjectMenu
+  m_Name: SelectionMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

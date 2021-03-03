@@ -59,17 +59,19 @@ public class SelectionController : MonoBehaviour
 
     private void SetSelectedObject(GameObject obj)
     {
+        // Select all objects to make sure only one object is selected
+        DeselectAllObjects();
+
         // Update GUI
-        selectionMenuController.SetSelectedObjectText("Object selected");
+        selectionMenuController.SetSelectedObjectText(
+            obj.GetComponent<Object>().GetObjectName()
+        );
 
         // Play object select sound
         soundManager.PlaySelectObjectSound();
 
         // Set the selected object
         selectedObject = obj;
-
-        // Select all objects to make sure only one object is selected
-        DeselectAllObjects();
 
         // Select the object
         obj.GetComponent<Object>().Select();
@@ -131,6 +133,9 @@ public class SelectionController : MonoBehaviour
 
     private void DeselectAllObjects()
     {
+        // Update GUI
+        selectionMenuController.SetSelectedObjectText();
+
         foreach (GameObject obj in gameManager.vehicles)
         {
             obj.GetComponent<Vehicle>().Deselect();

@@ -27,6 +27,8 @@ public class GameManager : MonoBehaviour
     // Mask for the other objects
     public LayerMask variousMask;
 
+    private SelectionMenuController selectionMenuController;
+
     // Camera controller
     private CameraController cameraController;
 
@@ -52,7 +54,9 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        selectionMenuController = SelectionMenuController.Instance;
         cameraController = CameraController.Instance;
+
     }
 
     public bool AllowSpawnVehicle()
@@ -95,5 +99,8 @@ public class GameManager : MonoBehaviour
         vehicles.Clear();
         lights.Clear();
         various.Clear();
+
+        // Reset UI to default
+        selectionMenuController.SetSelectedObjectText();
     }
 }
