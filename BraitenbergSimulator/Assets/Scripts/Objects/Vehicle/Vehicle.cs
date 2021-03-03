@@ -8,6 +8,9 @@ using UnityEngine;
 
 	[SerializeField] private Vector3 position;
 
+	public GameObject axle;
+	public GameObject body;
+
 	public Rigidbody leftWheel;
 	
 	public int leftMotorSpeed;
@@ -23,6 +26,7 @@ using UnityEngine;
 	protected override void Update() {
 		// base.Update();
 		UpdateMovementScript();
+		UpdateBodyRotation();
 		
 		float motor = leftMotorSpeed * Input.GetAxis("Vertical");
 
@@ -70,6 +74,13 @@ using UnityEngine;
 			_type = type;
 			SetMovementType(type);
 		}
+	}
+
+	private void UpdateBodyRotation() {
+		var transformLocalRotation = body.transform.rotation;
+		transformLocalRotation.x = 0;
+		transformLocalRotation.z = 0;
+		body.transform.rotation = transformLocalRotation;
 	}
 
 	public void SetGameManager(GameManager gameManager) {
