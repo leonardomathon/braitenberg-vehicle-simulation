@@ -212,7 +212,7 @@ public class CameraController : MonoBehaviour
             // Only reset is moving variable if no invoke is called
             if (!resettingIsMoving)
             {
-                Invoke("ResetIsMoving", 1);
+                Invoke("ResetIsMoving", 2);
                 resettingIsMoving = true;
             }
         }
