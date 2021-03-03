@@ -129,6 +129,7 @@ public class SelectionController : MonoBehaviour
 
     private void MoveSelectedObject()
     {
+        cameraController.EnableOverviewCamera();
         selectedObjectMovable = true;
         selectedObject.GetComponent<Object>().Move();
         cameraController.UnfollowTarget();
@@ -153,11 +154,12 @@ public class SelectionController : MonoBehaviour
                 selectedObject.transform.position = newPos;
             }
         }
-
     }
 
     private void PlaceSelectedObject()
     {
+        cameraController.DisableOverviewCamera(selectedObject);
+
         // Set object to unmovable
         selectedObject.GetComponent<Object>().Place();
 

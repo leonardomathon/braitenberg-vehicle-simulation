@@ -34,6 +34,8 @@ public class CameraController : MonoBehaviour
 
     private bool resettingIsMoving;
 
+    [SerializeField] private bool overviewCameraEnabled;
+
     [SerializeField] private bool inputLocked = false;
 
     [SerializeField] private bool followTarget = true;
@@ -67,19 +69,65 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
+        if (overviewCameraEnabled)
+        {
+
+            // Get the destination in terms of x and z
+            Vector3 destinationPos = new Vector3(target.position.x, 20, target.position.z);
+
+            // Interpolate to that destination
+            Vector3 smoothPos = Vector3.Slerp(cam.transform.position, destinationPos, 0.2f);
+
+            // Calculate the relative position on one axis only  (vector cam-target direction)
+            Vector3 relativePos = new Vector3(0, target.position.y - cam.transform.position.y, 0);
+
+            // Calculate rotation
+            Quaternion toRotation = Quaternion.LookRotation(relativePos, target.transform.up);
+
+            // Interpolate rotation to make it smooth
+            cam.transform.rotation = Quaternion.Lerp(cam.transform.rotation, toRotation, 0.2f);
+
+            // Move camera
+            cam.transform.position = smoothPos;
+
+            // Set distanceToTarget to avoid flickering on mouse input
+            distanceToTarget = Vector3.Distance(cam.transform.position, target.position);
+
+        }
+
         // If target moves, move camera with it
         if (followTarget && target.transform.hasChanged)
         {
             // Set to true, since we are moving the camera
             cameraIsMoving = true;
 
-            // translate camera to target local origin
-            cam.transform.position = target.position;
+            if (cam.transform.rotation.eulerAngles.x < 85)
+            {
+                // Calculate the relative position (vector cam-target direction)
+                Vector3 relativePos = target.position - cam.transform.position;
 
-            // translate back 
-            cam.transform.Translate(new Vector3(0, 0, -distanceToTarget));
+                // Calculate rotation
+                Quaternion toRotation = Quaternion.LookRotation(relativePos);
 
-            target.transform.hasChanged = false;
+                // Interpolate rotation to make it smooth
+                cam.transform.rotation = Quaternion.Lerp(cam.transform.rotation, toRotation, 0.2f);
+
+                // Set distanceToTarget to avoid flickering on mouse input
+                distanceToTarget = Vector3.Distance(cam.transform.position, target.position);
+            }
+            else
+            {
+                // Get the destination in terms of x and z
+                Vector3 destinationPos = new Vector3(target.position.x, cam.transform.position.y, target.position.z);
+
+                // Interpolate to that destination
+                Vector3 smoothPos = Vector3.Slerp(cam.transform.position, destinationPos, 0.2f);
+
+                // Move camera
+                cam.transform.position = smoothPos;
+            }
+
+            if (cam.transform.position == target.position) target.transform.hasChanged = false;
         }
 
         if (!inputLocked)
@@ -156,7 +204,7 @@ public class CameraController : MonoBehaviour
             // Only reset is moving variable if no invoke is called
             if (!resettingIsMoving)
             {
-                Invoke("ResetIsMoving", 2);
+                Invoke("ResetIsMoving", 1);
                 resettingIsMoving = true;
             }
         }
@@ -165,6 +213,12 @@ public class CameraController : MonoBehaviour
     public void SetTarget(GameObject obj)
     {
         target = obj.transform;
+        target.transform.hasChanged = true;
+    }
+
+    public void SetTarget(Transform obj)
+    {
+        target = obj;
         target.transform.hasChanged = true;
     }
 
@@ -192,6 +246,20 @@ public class CameraController : MonoBehaviour
     public void UnfollowTarget()
     {
         followTarget = false;
+    }
+
+    public void EnableOverviewCamera()
+    {
+        overviewCameraEnabled = true;
+        SetTarget(defaultTarget);
+        LockCamera();
+    }
+
+    public void DisableOverviewCamera(GameObject target)
+    {
+        overviewCameraEnabled = false;
+        SetTarget(target);
+        UnlockCamera();
     }
 
     public bool CameraIsMoving()
