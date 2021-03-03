@@ -22,7 +22,7 @@ public class VehicleDefaultMovement : MonoBehaviour
         // If two seconds have passed, move cube and reset time
         if (time > 2f)
         {
-            rb.velocity = RandomVector(-2f, 2f);
+            // rb.velocity = RandomVector(-2f, 2f);
             time = 0f;
         }
     }

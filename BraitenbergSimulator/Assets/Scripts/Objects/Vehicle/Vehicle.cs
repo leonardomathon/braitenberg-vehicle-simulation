@@ -1,74 +1,78 @@
-﻿using UnityEngine;
+﻿using Objects.Vehicle;
+using UnityEngine;
 
-[System.Serializable]
-public class Vehicle : Object
-{
-    [SerializeField]
-    private VehicleType type;
+[System.Serializable] public class Vehicle : Object {
+	[SerializeField] private VehicleType type;
 
-    private VehicleType _type;
+	private VehicleType _type;
 
-    [SerializeField]
-    private Vector3 position;
-    [SerializeField]
-    private int leftMotorSpeed;
+	[SerializeField] private Vector3 position;
 
-    [SerializeField]
-    private int rightMotorSpeed;
+	public Rigidbody leftWheel;
+	
+	public int leftMotorSpeed;
+	public int rightMotorSpeed;
 
-    void Start()
-    {
-        AttachMovementScript();
-    }
+	private GameManager gameManager;
+	private VehicleMovement movement;
 
-    protected override void Update()
-    {
-        base.Update();
-        UpdateMovementScript();
-    }
+	private void Start() {
+		AttachMovementScript();
+	}
 
-    // Attach the rigt movementscript to the vehicle object based on VehicleType
-    private void AttachMovementScript()
-    {
-        _type = type;
-        if (type == VehicleType.Default) gameObject.AddComponent<VehicleDefaultMovement>();
-        if (type == VehicleType.Agression) gameObject.AddComponent<VehicleMovementAgression>();
-        if (type == VehicleType.Exploration) gameObject.AddComponent<VehicleMovementExploration>();
-        if (type == VehicleType.Fear) gameObject.AddComponent<VehicleMovementFear>();
-        if (type == VehicleType.Love) gameObject.AddComponent<VehicleMovementLove>();
-    }
+	protected override void Update() {
+		// base.Update();
+		UpdateMovementScript();
+		
+		float motor = leftMotorSpeed * Input.GetAxis("Vertical");
 
-    // Update movementscript if VehicleType has changed
-    private void UpdateMovementScript()
-    {
-        if (type != _type)
-        {
-            _type = type;
-            if (gameObject.GetComponent<VehicleDefaultMovement>() != null)
-            {
-                Destroy(gameObject.GetComponent<VehicleDefaultMovement>());
-                AttachMovementScript();
-            }
-            if (gameObject.GetComponent<VehicleMovementAgression>() != null)
-            {
-                Destroy(gameObject.GetComponent<VehicleMovementAgression>());
-                AttachMovementScript();
-            }
-            if (gameObject.GetComponent<VehicleMovementExploration>() != null)
-            {
-                Destroy(gameObject.GetComponent<VehicleMovementExploration>());
-                AttachMovementScript();
-            }
-            if (gameObject.GetComponent<VehicleMovementFear>() != null)
-            {
-                Destroy(gameObject.GetComponent<VehicleMovementFear>());
-                AttachMovementScript();
-            }
-            if (gameObject.GetComponent<VehicleMovementLove>() != null)
-            {
-                Destroy(gameObject.GetComponent<VehicleMovementLove>());
-                AttachMovementScript();
-            }
-        }
-    }
+		// if (axleInfo.steering) {
+		// 	axleInfo.leftWheel.steerAngle = steering;
+		// 	axleInfo.rightWheel.steerAngle = steering;
+		// }
+		// if (axleInfo.motor) {
+			leftWheel.AddRelativeTorque(motor, 0, 0);
+			// rightWheel.motorTorque = motor;
+		// }
+		// ApplyLocalPositionToVisuals(axleInfo.leftWheel);
+		// ApplyLocalPositionToVisuals(axleInfo.rightWheel);
+	}
+
+	// Attach the rigt movementscript to the vehicle object based on VehicleType
+	private void AttachMovementScript() {
+		_type = type;
+		SetMovementType(type);
+	}
+	private void SetMovementType(VehicleType type) {
+		switch (type) {
+			case VehicleType.Default:
+				gameObject.AddComponent<VehicleDefaultMovement>();
+				break;
+			case VehicleType.Agression:
+				movement = new VehicleMovementAgression();
+				break;
+			case VehicleType.Exploration:
+				gameObject.AddComponent<VehicleMovementExploration>();
+				break;
+			case VehicleType.Fear:
+				gameObject.AddComponent<VehicleMovementFear>();
+				break;
+			case VehicleType.Love:
+				gameObject.AddComponent<VehicleMovementLove>();
+				break;
+		}
+	}
+
+	// Update movementscript if VehicleType has changed
+	private void UpdateMovementScript() {
+		// TODO: This could and probably should be replaced with some event-like call when the type is actually changed
+		if (type != _type) {
+			_type = type;
+			SetMovementType(type);
+		}
+	}
+
+	public void SetGameManager(GameManager gameManager) {
+		this.gameManager = gameManager;
+	}
 }

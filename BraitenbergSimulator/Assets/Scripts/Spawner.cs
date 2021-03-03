@@ -64,6 +64,8 @@ public class Spawner : MonoBehaviour
             {
                 // Create object
                 GameObject instantiatedObject = Instantiate(selectedObjectToSpawn, pos, Quaternion.identity, parentObject.transform);
+                Vehicle vehicle = instantiatedObject.GetComponent<Vehicle>();
+                vehicle.SetGameManager(gameManager);
 
                 // Add to list
                 gameManager.vehicles.Add(instantiatedObject);
