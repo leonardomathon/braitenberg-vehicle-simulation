@@ -15,11 +15,14 @@ public class SelectionController : MonoBehaviour
 
     private GameManager gameManager;
 
+    private SoundManager soundManager;
+
     private CameraController cameraController;
 
     void Start()
     {
         gameManager = GameManager.Instance;
+        soundManager = SoundManager.Instance;
         cameraController = CameraController.Instance;
     }
 
@@ -53,6 +56,9 @@ public class SelectionController : MonoBehaviour
 
     private void SetSelectedObject(GameObject obj)
     {
+        // Play object select sound
+        soundManager.PlaySelectObjectSound();
+
         // Set the selected object
         selectedObject = obj;
 
@@ -68,6 +74,9 @@ public class SelectionController : MonoBehaviour
 
     private void ResetSelectedObject()
     {
+        // Play object deselect sound
+        soundManager.PlayDeselectObjectSound();
+
         // Reset the selected object
         selectedObject = null;
 
@@ -89,7 +98,7 @@ public class SelectionController : MonoBehaviour
         // Shoot a ray from main camera through screen point
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        // Check if ray hits something with the mask "Vehicle"
+        // Check if ray hits something with the mask
         if (Physics.Raycast(ray, out hit, 100, selectableAreaMasks))
         {
             GameObject hitObject = hit.transform.gameObject;
@@ -159,6 +168,10 @@ public class SelectionController : MonoBehaviour
 
     private void PlaceSelectedObject()
     {
+        // Play audiofile
+        soundManager.PlayPlaceObjectSound();
+
+        // Disable camera overview mode
         cameraController.DisableOverviewCamera(selectedObject);
 
         // Set object to unmovable
