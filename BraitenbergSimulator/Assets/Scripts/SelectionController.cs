@@ -17,12 +17,15 @@ public class SelectionController : MonoBehaviour
 
     private SoundManager soundManager;
 
+    private SelectionMenuController selectionMenuController;
+
     private CameraController cameraController;
 
     void Start()
     {
         gameManager = GameManager.Instance;
         soundManager = SoundManager.Instance;
+        selectionMenuController = SelectionMenuController.Instance;
         cameraController = CameraController.Instance;
     }
 
@@ -56,6 +59,9 @@ public class SelectionController : MonoBehaviour
 
     private void SetSelectedObject(GameObject obj)
     {
+        // Update GUI
+        selectionMenuController.SetSelectedObjectText("Object selected");
+
         // Play object select sound
         soundManager.PlaySelectObjectSound();
 
@@ -74,6 +80,9 @@ public class SelectionController : MonoBehaviour
 
     private void ResetSelectedObject()
     {
+        // Update GUI
+        selectionMenuController.SetSelectedObjectText();
+
         // Play object deselect sound
         soundManager.PlayDeselectObjectSound();
 
