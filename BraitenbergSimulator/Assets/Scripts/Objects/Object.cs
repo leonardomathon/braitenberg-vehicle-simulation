@@ -7,6 +7,9 @@ public class Object : MonoBehaviour
     // Boolean that stores if object is selected
     [SerializeField] private bool isSelected;
 
+    // Boolean that stores if object is currently movable
+    [SerializeField] private bool isMovable;
+
     // Standard material of object
     [SerializeField] private Material materialStandard;
 
@@ -42,6 +45,35 @@ public class Object : MonoBehaviour
     {
         isSelected = false;
     }
+
+    // Getter and setters for isMovable
+    public bool IsMovable()
+    {
+        return isMovable;
+    }
+
+    public void Move()
+    {
+        isMovable = true;
+
+        // Temporarily disable gravity for the object
+        gameObject.GetComponent<Rigidbody>().useGravity = false;
+
+        // Disable collisions
+        gameObject.GetComponent<BoxCollider>().enabled = false;
+    }
+
+    public void Place()
+    {
+        isMovable = false;
+
+        // Enable gravity for the object
+        gameObject.GetComponent<Rigidbody>().useGravity = true;
+
+        // Enable collisions
+        gameObject.GetComponent<BoxCollider>().enabled = true;
+    }
+
 
     // Applies selection material to this object
     private void ApplySelectionMaterial()
