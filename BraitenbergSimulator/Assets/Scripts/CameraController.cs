@@ -165,11 +165,13 @@ public class CameraController : MonoBehaviour
     public void SetTarget(GameObject obj)
     {
         target = obj.transform;
+        target.transform.hasChanged = true;
     }
 
     public void ResetTarget()
     {
         target = defaultTarget;
+        target.transform.hasChanged = true;
     }
 
     public void LockCamera()
@@ -204,7 +206,6 @@ public class CameraController : MonoBehaviour
 
     private void ResetIsMoving()
     {
-        // Only called every x seconds
         cameraIsMoving = false;
         resettingIsMoving = false;
     }
