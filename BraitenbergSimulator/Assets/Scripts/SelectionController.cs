@@ -59,6 +59,11 @@ public class SelectionController : MonoBehaviour
             MoveSelectedObject();
         }
 
+        if (selectedObject && Input.GetKeyDown(KeyCode.R))
+        {
+            RotateSelectedObject();
+        }
+
         if (selectedObjectMovable)
         {
             Move();
@@ -86,7 +91,30 @@ public class SelectionController : MonoBehaviour
         cameraController.ResetTarget();
     }
 
-    private void SetSelectedObject(GameObject obj)
+    public void DeleteSelectedObject(GameObject obj)
+    {
+        // Cleanup object list, brute force
+        foreach (GameObject vehicle in gameManager.vehicles)
+        {
+            if (vehicle == obj)
+                gameManager.vehicles.Remove(obj);
+        }
+        foreach (GameObject various in gameManager.various)
+        {
+            if (various == obj)
+                gameManager.vehicles.Remove(obj);
+        }
+        foreach (GameObject light in gameManager.lights)
+        {
+            if (light == obj)
+                gameManager.vehicles.Remove(obj);
+        }
+
+        // Destroy object
+        Destroy(obj);
+    }
+
+    public void SetSelectedObject(GameObject obj)
     {
         // Select all objects to make sure only one object is selected
         DeselectAllObjects();
@@ -104,7 +132,7 @@ public class SelectionController : MonoBehaviour
         cameraController.SetTarget(obj);
     }
 
-    private void ResetSelectedObject()
+    public void ResetSelectedObject()
     {
         // Play object deselect sound
         soundManager.PlayDeselectObjectSound();
@@ -168,7 +196,7 @@ public class SelectionController : MonoBehaviour
         }
     }
 
-    private void MoveSelectedObject()
+    public void MoveSelectedObject()
     {
         cameraController.EnableOverviewCamera();
         selectedObjectMovable = true;
@@ -196,6 +224,15 @@ public class SelectionController : MonoBehaviour
                 selectedObject.transform.position = destinationPos;
             }
         }
+    }
+
+    public void RotateSelectedObject()
+    {
+        // Get current rotation
+        Quaternion currentRotation = selectedObject.transform.rotation;
+
+        // Rotate 45 degrees around the y axis
+        selectedObject.transform.rotation = currentRotation * Quaternion.Euler(0, 45.0f, 0);
     }
 
     private void PlaceSelectedObject()
