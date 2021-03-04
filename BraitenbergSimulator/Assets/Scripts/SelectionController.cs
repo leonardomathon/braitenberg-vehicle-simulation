@@ -17,15 +17,33 @@ public class SelectionController : MonoBehaviour
 
     private SoundManager soundManager;
 
-    private SelectionMenuController selectionMenuController;
-
     private CameraController cameraController;
+
+    // Singleton pattern for SelectionController
+    #region singleton
+    private static SelectionController _instance;
+
+    public static SelectionController Instance { get { return _instance; } }
+
+
+    private void Awake()
+    {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
+    }
+
+    #endregion
 
     void Start()
     {
         gameManager = GameManager.Instance;
         soundManager = SoundManager.Instance;
-        selectionMenuController = SelectionMenuController.Instance;
         cameraController = CameraController.Instance;
     }
 
@@ -50,9 +68,20 @@ public class SelectionController : MonoBehaviour
         {
             PlaceSelectedObject();
         }
+
+        // Check if selected object still exists
+        if (selectedObject == null)
+        {
+            selectedObject = null;
+        }
     }
 
-    public void ResetSelection()
+    public GameObject GetSelectedObject()
+    {
+        return selectedObject;
+    }
+
+    private void ResetSelection()
     {
         cameraController.ResetTarget();
     }
@@ -61,11 +90,6 @@ public class SelectionController : MonoBehaviour
     {
         // Select all objects to make sure only one object is selected
         DeselectAllObjects();
-
-        // Update GUI
-        selectionMenuController.SetSelectedObjectText(
-            obj.GetComponent<Object>().GetObjectName()
-        );
 
         // Play object select sound
         soundManager.PlaySelectObjectSound();
@@ -82,9 +106,6 @@ public class SelectionController : MonoBehaviour
 
     private void ResetSelectedObject()
     {
-        // Update GUI
-        selectionMenuController.SetSelectedObjectText();
-
         // Play object deselect sound
         soundManager.PlayDeselectObjectSound();
 
@@ -133,9 +154,6 @@ public class SelectionController : MonoBehaviour
 
     private void DeselectAllObjects()
     {
-        // Update GUI
-        selectionMenuController.SetSelectedObjectText();
-
         foreach (GameObject obj in gameManager.vehicles)
         {
             obj.GetComponent<Vehicle>().Deselect();
