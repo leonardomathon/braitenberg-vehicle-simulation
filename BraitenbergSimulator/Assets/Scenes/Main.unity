@@ -1005,6 +1005,8 @@ MonoBehaviour:
   selectObjectSound: {fileID: 8300000, guid: 45206f677c1cd724189de3487bea225d, type: 3}
   deselectObjectSound: {fileID: 8300000, guid: 472a3d6b3b40f9745932971596433de4, type: 3}
   placeObjectSound: {fileID: 8300000, guid: 109567e1fde4b424eb65753ea0672968, type: 3}
+  deleteObjectSound: {fileID: 8300000, guid: 950218e39d257c34e9ba916ffbacda2b, type: 3}
+  rotateObjectSound: {fileID: 8300000, guid: 5186edef622a68e47a987573600413d8, type: 3}
 --- !u!1 &440438544
 GameObject:
   m_ObjectHideFlags: 0

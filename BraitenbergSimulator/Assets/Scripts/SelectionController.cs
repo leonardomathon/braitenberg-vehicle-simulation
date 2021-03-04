@@ -93,7 +93,7 @@ public class SelectionController : MonoBehaviour
 
     public void DeleteSelectedObject()
     {
-        // Play object select sound
+        // Play object delete sound
         soundManager.PlayDeleteObjectSound();
 
         // Deselect before destroying
@@ -243,6 +243,9 @@ public class SelectionController : MonoBehaviour
 
     public void RotateSelectedObject()
     {
+        // Play object rotate sound
+        soundManager.PlayRotateObjectSound();
+
         // Get current rotation
         Quaternion currentRotation = selectedObject.transform.rotation;
 
