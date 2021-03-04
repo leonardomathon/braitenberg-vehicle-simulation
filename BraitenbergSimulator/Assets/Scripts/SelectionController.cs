@@ -93,6 +93,9 @@ public class SelectionController : MonoBehaviour
 
     public void DeleteSelectedObject()
     {
+        // Play object select sound
+        soundManager.PlayDeleteObjectSound();
+
         // Deselect before destroying
         DeselectAllObjects();
 
