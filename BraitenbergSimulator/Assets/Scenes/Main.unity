@@ -1084,6 +1084,7 @@ GameObject:
   - component: {fileID: 469172352}
   - component: {fileID: 469172351}
   - component: {fileID: 469172350}
+  - component: {fileID: 469172354}
   m_Layer: 5
   m_Name: ButtonMove
   m_TagString: Untagged
@@ -1206,6 +1207,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 469172348}
   m_CullTransparentMesh: 0
+--- !u!114 &469172354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 469172348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54394c8b33c321b418d0c22179ab8e38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tooltipText: Move object
 --- !u!1 &477077632
 GameObject:
   m_ObjectHideFlags: 0
@@ -2249,6 +2263,7 @@ GameObject:
   - component: {fileID: 729852005}
   - component: {fileID: 729852004}
   - component: {fileID: 729852003}
+  - component: {fileID: 729852007}
   m_Layer: 5
   m_Name: ButtonDelete
   m_TagString: Untagged
@@ -2371,6 +2386,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 729852001}
   m_CullTransparentMesh: 0
+--- !u!114 &729852007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 729852001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54394c8b33c321b418d0c22179ab8e38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tooltipText: Delete object from scene
 --- !u!1 &796565953
 GameObject:
   m_ObjectHideFlags: 0
@@ -2903,8 +2931,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -3525,6 +3553,7 @@ GameObject:
   - component: {fileID: 1241174142}
   - component: {fileID: 1241174141}
   - component: {fileID: 1241174140}
+  - component: {fileID: 1241174144}
   m_Layer: 5
   m_Name: ButtonRotate
   m_TagString: Untagged
@@ -3647,6 +3676,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1241174138}
   m_CullTransparentMesh: 0
+--- !u!114 &1241174144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1241174138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54394c8b33c321b418d0c22179ab8e38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tooltipText: Rotate object
 --- !u!1 &1282780769
 GameObject:
   m_ObjectHideFlags: 0
@@ -6848,6 +6890,7 @@ GameObject:
   - component: {fileID: 1926190242}
   - component: {fileID: 1926190241}
   - component: {fileID: 1926190240}
+  - component: {fileID: 1926190244}
   m_Layer: 5
   m_Name: ButtonSelect
   m_TagString: Untagged
@@ -6970,6 +7013,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1926190238}
   m_CullTransparentMesh: 0
+--- !u!114 &1926190244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1926190238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54394c8b33c321b418d0c22179ab8e38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tooltipText: Deselect object
 --- !u!1 &1962395871
 GameObject:
   m_ObjectHideFlags: 0

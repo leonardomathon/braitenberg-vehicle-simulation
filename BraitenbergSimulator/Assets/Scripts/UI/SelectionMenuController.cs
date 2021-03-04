@@ -13,7 +13,6 @@ public class SelectionMenuController : MonoBehaviour
 
     private GameObject selectedObject;
 
-
     private Button[] toolMenuButtons = new Button[4];
 
     private SelectionController selectionController;
