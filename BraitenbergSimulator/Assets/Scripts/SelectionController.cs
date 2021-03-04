@@ -91,27 +91,39 @@ public class SelectionController : MonoBehaviour
         cameraController.ResetTarget();
     }
 
-    public void DeleteSelectedObject(GameObject obj)
+    public void DeleteSelectedObject()
     {
+        // Deselect before destroying
+        DeselectAllObjects();
+
         // Cleanup object list, brute force
         foreach (GameObject vehicle in gameManager.vehicles)
         {
-            if (vehicle == obj)
-                gameManager.vehicles.Remove(obj);
+            if (vehicle == selectedObject)
+            {
+                gameManager.vehicles.Remove(selectedObject);
+                Destroy(selectedObject);
+                return;
+            }
         }
         foreach (GameObject various in gameManager.various)
         {
-            if (various == obj)
-                gameManager.vehicles.Remove(obj);
+            if (various == selectedObject)
+            {
+                gameManager.various.Remove(selectedObject);
+                Destroy(selectedObject);
+                return;
+            }
         }
         foreach (GameObject light in gameManager.lights)
         {
-            if (light == obj)
-                gameManager.vehicles.Remove(obj);
+            if (light == selectedObject)
+            {
+                gameManager.lights.Remove(selectedObject);
+                Destroy(selectedObject);
+                return;
+            }
         }
-
-        // Destroy object
-        Destroy(obj);
     }
 
     public void SetSelectedObject(GameObject obj)
@@ -142,9 +154,6 @@ public class SelectionController : MonoBehaviour
 
         // Deselect all objects
         DeselectAllObjects();
-
-        // Let camera orbit the default target
-        cameraController.ResetTarget();
     }
 
     private void SelectObject()
@@ -194,6 +203,9 @@ public class SelectionController : MonoBehaviour
         {
             obj.GetComponent<Lightbulb>().Deselect();
         }
+
+        // Let camera orbit the default target
+        cameraController.ResetTarget();
     }
 
     public void MoveSelectedObject()

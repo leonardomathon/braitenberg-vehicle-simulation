@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class SelectionMenuController : MonoBehaviour
@@ -11,6 +12,8 @@ public class SelectionMenuController : MonoBehaviour
     private GameObject selectedObject;
 
     private GameObject selectedObjectToolMenu;
+
+    private Button[] toolMenuButtons = new Button[4];
 
     private SelectionController selectionController;
 
@@ -26,6 +29,9 @@ public class SelectionMenuController : MonoBehaviour
 
         // Set toolbar inactive
         selectedObjectToolMenu.SetActive(false);
+
+        // Setup tool buttons
+        SetupToolButtons();
     }
 
     void Update()
@@ -49,7 +55,43 @@ public class SelectionMenuController : MonoBehaviour
         }
     }
 
-    public void SetSelectedObjectText()
+    private void SetupToolButtons()
+    {
+        // Get all buttons
+        for (int i = 0; i < selectedObjectToolMenu.transform.childCount; i++)
+        {
+            toolMenuButtons[i] = selectedObjectToolMenu.transform.GetChild(i).GetComponent<Button>();
+        }
+
+        // Setup listeners
+        toolMenuButtons[0].onClick.AddListener(ClickSelectButton);
+        toolMenuButtons[1].onClick.AddListener(ClickDeleteButton);
+        toolMenuButtons[2].onClick.AddListener(ClickMoveButton);
+        toolMenuButtons[3].onClick.AddListener(ClickRotateButton);
+
+    }
+
+    private void ClickSelectButton()
+    {
+        selectionController.ResetSelectedObject();
+    }
+
+    private void ClickDeleteButton()
+    {
+        selectionController.DeleteSelectedObject();
+    }
+
+    private void ClickMoveButton()
+    {
+        selectionController.MoveSelectedObject();
+    }
+
+    private void ClickRotateButton()
+    {
+        selectionController.RotateSelectedObject();
+    }
+
+    private void SetSelectedObjectText()
     {
         // Set the text of the tooltip
         selectedObjectTag.SetText("No object selected");
@@ -61,7 +103,7 @@ public class SelectionMenuController : MonoBehaviour
         selectedObjectTag.ForceMeshUpdate();
     }
 
-    public void SetSelectedObjectText(string text)
+    private void SetSelectedObjectText(string text)
     {
         // Set the text of the tooltip
         selectedObjectTag.SetText(text);

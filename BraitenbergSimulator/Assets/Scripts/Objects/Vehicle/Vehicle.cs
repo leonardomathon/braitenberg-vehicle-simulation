@@ -37,6 +37,7 @@ public class Vehicle : Object
         if (type == VehicleType.Exploration) gameObject.AddComponent<VehicleMovementExploration>();
         if (type == VehicleType.Fear) gameObject.AddComponent<VehicleMovementFear>();
         if (type == VehicleType.Love) gameObject.AddComponent<VehicleMovementLove>();
+
     }
 
     // Update movementscript if VehicleType has changed
