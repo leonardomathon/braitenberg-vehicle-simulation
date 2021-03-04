@@ -7,11 +7,12 @@ public class SelectionMenuController : MonoBehaviour
 
     [SerializeField] private GameObject selectionMenu;
 
+    [SerializeField] private GameObject selectedObjectToolMenu;
+
     private TextMeshProUGUI selectedObjectTag;
 
     private GameObject selectedObject;
 
-    private GameObject selectedObjectToolMenu;
 
     private Button[] toolMenuButtons = new Button[4];
 
@@ -25,7 +26,6 @@ public class SelectionMenuController : MonoBehaviour
 
         // Get used components
         selectedObjectTag = selectionMenu.transform.Find("SelectedObjectTag").GetComponent<TextMeshProUGUI>();
-        selectedObjectToolMenu = selectionMenu.transform.Find("SelectedObjectToolMenu").gameObject;
 
         // Set toolbar inactive
         selectedObjectToolMenu.SetActive(false);
@@ -57,10 +57,13 @@ public class SelectionMenuController : MonoBehaviour
 
     private void SetupToolButtons()
     {
+        // Get the grid in which the buttons are situated
+        GameObject grid = selectedObjectToolMenu.transform.Find("Grid").gameObject;
+
         // Get all buttons
-        for (int i = 0; i < selectedObjectToolMenu.transform.childCount; i++)
+        for (int i = 0; i < grid.transform.childCount; i++)
         {
-            toolMenuButtons[i] = selectedObjectToolMenu.transform.GetChild(i).GetComponent<Button>();
+            toolMenuButtons[i] = grid.transform.GetChild(i).GetComponent<Button>();
         }
 
         // Setup listeners
@@ -68,7 +71,6 @@ public class SelectionMenuController : MonoBehaviour
         toolMenuButtons[1].onClick.AddListener(ClickDeleteButton);
         toolMenuButtons[2].onClick.AddListener(ClickMoveButton);
         toolMenuButtons[3].onClick.AddListener(ClickRotateButton);
-
     }
 
     private void ClickSelectButton()
