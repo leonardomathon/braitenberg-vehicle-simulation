@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
@@ -84,7 +85,7 @@ public class CameraController : MonoBehaviour
             Vector3 destinationPos = new Vector3(target.position.x, 20, target.position.z);
 
             // Interpolate to that destination
-            Vector3 smoothPos = Vector3.Slerp(cam.transform.position, destinationPos, interpolationSpeed * Time.deltaTime);
+            Vector3 smoothPos = Vector3.Slerp(cam.transform.position, destinationPos, interpolationSpeed * Time.unscaledDeltaTime);
 
             // Calculate the relative position on one axis only  (vector cam-target direction)
             Vector3 relativePos = new Vector3(0, target.position.y - cam.transform.position.y, 0);
@@ -93,7 +94,7 @@ public class CameraController : MonoBehaviour
             Quaternion toRotation = Quaternion.LookRotation(relativePos, target.transform.up);
 
             // Interpolate rotation to make it smooth
-            cam.transform.rotation = Quaternion.Lerp(cam.transform.rotation, toRotation, interpolationSpeed * Time.deltaTime);
+            cam.transform.rotation = Quaternion.Lerp(cam.transform.rotation, toRotation, interpolationSpeed * Time.unscaledDeltaTime);
 
             // Move camera
             cam.transform.position = smoothPos;
@@ -118,7 +119,7 @@ public class CameraController : MonoBehaviour
                 Quaternion toRotation = Quaternion.LookRotation(relativePos);
 
                 // Interpolate rotation to make it smooth
-                cam.transform.rotation = Quaternion.Lerp(cam.transform.rotation, toRotation, interpolationSpeed * Time.deltaTime);
+                cam.transform.rotation = Quaternion.Lerp(cam.transform.rotation, toRotation, interpolationSpeed * Time.unscaledDeltaTime);
 
                 // Set distanceToTarget to avoid flickering on mouse input
                 distanceToTarget = Vector3.Distance(cam.transform.position, target.position);
@@ -129,7 +130,7 @@ public class CameraController : MonoBehaviour
                 Vector3 destinationPos = new Vector3(target.position.x, cam.transform.position.y, target.position.z);
 
                 // Interpolate to that destination
-                Vector3 smoothPos = Vector3.Slerp(cam.transform.position, destinationPos, interpolationSpeed * Time.deltaTime);
+                Vector3 smoothPos = Vector3.Slerp(cam.transform.position, destinationPos, interpolationSpeed * Time.unscaledDeltaTime);
 
                 // Move camera
                 cam.transform.position = smoothPos;
@@ -212,7 +213,7 @@ public class CameraController : MonoBehaviour
             // Only reset is moving variable if no invoke is called
             if (!resettingIsMoving)
             {
-                Invoke("ResetIsMoving", 2);
+                StartCoroutine(ResetIsMoving(2f));
                 resettingIsMoving = true;
             }
         }
@@ -280,8 +281,9 @@ public class CameraController : MonoBehaviour
         return cam;
     }
 
-    private void ResetIsMoving()
+    private IEnumerator ResetIsMoving(float delay)
     {
+        yield return new WaitForSecondsRealtime(delay);
         cameraIsMoving = false;
         resettingIsMoving = false;
     }

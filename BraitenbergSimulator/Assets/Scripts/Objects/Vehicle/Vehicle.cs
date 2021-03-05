@@ -32,11 +32,17 @@ public class Vehicle : Object
     private void AttachMovementScript()
     {
         _type = type;
+        // if (type == VehicleType.Default) gameObject.AddComponent<VehicleDefaultMovement>();
+        // if (type == VehicleType.Agression) gameObject.AddComponent<VehicleMovementAgression>();
+        // if (type == VehicleType.Exploration) gameObject.AddComponent<VehicleMovementExploration>();
+        // if (type == VehicleType.Fear) gameObject.AddComponent<VehicleMovementFear>();
+        // if (type == VehicleType.Love) gameObject.AddComponent<VehicleMovementLove>();
+
         if (type == VehicleType.Default) gameObject.AddComponent<VehicleDefaultMovement>();
-        if (type == VehicleType.Agression) gameObject.AddComponent<VehicleMovementAgression>();
-        if (type == VehicleType.Exploration) gameObject.AddComponent<VehicleMovementExploration>();
-        if (type == VehicleType.Fear) gameObject.AddComponent<VehicleMovementFear>();
-        if (type == VehicleType.Love) gameObject.AddComponent<VehicleMovementLove>();
+        if (type == VehicleType.Agression) gameObject.AddComponent<VehicleDefaultMovement>();
+        if (type == VehicleType.Exploration) gameObject.AddComponent<VehicleDefaultMovement>();
+        if (type == VehicleType.Fear) gameObject.AddComponent<VehicleDefaultMovement>();
+        if (type == VehicleType.Love) gameObject.AddComponent<VehicleDefaultMovement>();
 
     }
 

@@ -18,7 +18,7 @@ public class VehicleDefaultMovement : MonoBehaviour
     void Update()
     {
         // Increase time
-        time = time + Time.deltaTime;
+        time = time + Time.unscaledDeltaTime;
         // If two seconds have passed, move cube and reset time
         if (time > 2f)
         {
