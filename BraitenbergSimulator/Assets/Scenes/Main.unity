@@ -858,6 +858,7 @@ GameObject:
   - component: {fileID: 215973577}
   - component: {fileID: 215973578}
   - component: {fileID: 215973579}
+  - component: {fileID: 215973580}
   m_Layer: 0
   m_Name: UI Controller
   m_TagString: Untagged
@@ -928,6 +929,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectionMenu: {fileID: 1204922161}
   selectedObjectToolMenu: {fileID: 1770384158}
+--- !u!114 &215973580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 215973575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bf1bcc020d9b1f4c8842f5be169ecdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeMenu: {fileID: 660048991}
+  timeMenuControls: {fileID: 1816645277}
+  pauseImage: {fileID: 21300000, guid: 8d71bb5733715da4895a10934ec67245, type: 3}
+  playImage: {fileID: 21300000, guid: 4a3f7f3b88664714e96d81d5f0f8f50b, type: 3}
 --- !u!1 &223197219
 GameObject:
   m_ObjectHideFlags: 0
@@ -1442,6 +1459,7 @@ GameObject:
   - component: {fileID: 474506184}
   - component: {fileID: 474506183}
   - component: {fileID: 474506182}
+  - component: {fileID: 474506181}
   m_Layer: 5
   m_Name: ButtonSpeedup
   m_TagString: Untagged
@@ -1469,6 +1487,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &474506181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 474506179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54394c8b33c321b418d0c22179ab8e38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tooltipText: Speed up
 --- !u!114 &474506182
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4673,6 +4704,7 @@ GameObject:
   - component: {fileID: 1328245916}
   - component: {fileID: 1328245915}
   - component: {fileID: 1328245914}
+  - component: {fileID: 1328245913}
   m_Layer: 5
   m_Name: ButtonPause
   m_TagString: Untagged
@@ -4700,6 +4732,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1328245913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1328245911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54394c8b33c321b418d0c22179ab8e38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tooltipText: Pause simulator
 --- !u!114 &1328245914
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7783,7 +7828,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh20764
+  m_Name: pb_Mesh18902
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -8542,6 +8587,7 @@ GameObject:
   - component: {fileID: 2030158391}
   - component: {fileID: 2030158390}
   - component: {fileID: 2030158389}
+  - component: {fileID: 2030158388}
   m_Layer: 5
   m_Name: ButtonSlowdown
   m_TagString: Untagged
@@ -8569,6 +8615,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2030158388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2030158386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54394c8b33c321b418d0c22179ab8e38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tooltipText: Slow down
 --- !u!114 &2030158389
 MonoBehaviour:
   m_ObjectHideFlags: 0
