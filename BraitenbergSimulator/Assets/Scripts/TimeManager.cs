@@ -13,6 +13,26 @@ public class TimeManager : MonoBehaviour
     private int speedControlPointer = 2;
     private bool paused;
 
+    #region singleton
+    private static TimeManager _instance;
+
+    public static TimeManager Instance { get { return _instance; } }
+
+
+    private void Awake()
+    {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
+    }
+
+    #endregion
+
     void Update()
     {
         if (!paused)
@@ -42,6 +62,12 @@ public class TimeManager : MonoBehaviour
 
     public float GetCurrentGameSpeed()
     {
+        // Return 0 when paused
+        if (paused)
+        {
+            return 0f;
+        }
+
         return speedControls[speedControlPointer];
     }
 
