@@ -123,10 +123,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4000317f41d5894408e0518addbbe107, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
+  objectName: Love vehicle
+  isSelected: 0
+  isMovable: 0
   materialStandard: {fileID: 2100000, guid: 25f83a387e9ad134c8ad35acb8289e73, type: 2}
   materialOnSelect: {fileID: 2100000, guid: 0e1035bb46a046d4c9bc3b53e5fb3050, type: 2}
-  isSelected: 0
+  type: 0
   position: {x: 0, y: 0, z: 0}
   leftMotorSpeed: 0
   rightMotorSpeed: 0

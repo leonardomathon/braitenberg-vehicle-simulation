@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class UIButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    private string tooltipText = "Default tooltip text";
+    [SerializeField] private string tooltipText = "Default tooltip text";
 
     private TooltipController tooltipController;
 
@@ -25,6 +25,11 @@ public class UIButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     }
 
     public void OnPointerExit(PointerEventData pointerEventData)
+    {
+        tooltipController.HideToolTip();
+    }
+
+    void OnDisable()
     {
         tooltipController.HideToolTip();
     }

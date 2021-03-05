@@ -7,6 +7,8 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip selectObjectSound;
     [SerializeField] private AudioClip deselectObjectSound;
     [SerializeField] private AudioClip placeObjectSound;
+    [SerializeField] private AudioClip deleteObjectSound;
+    [SerializeField] private AudioClip rotateObjectSound;
 
     // Singleton pattern for SoundManager
     #region singleton
@@ -40,6 +42,16 @@ public class SoundManager : MonoBehaviour
     public void PlayPlaceObjectSound()
     {
         PlaySound(placeObjectSound, 0.5f, 1f, 1.5f);
+    }
+
+    public void PlayDeleteObjectSound()
+    {
+        PlaySound(deleteObjectSound, 0.05f, 1f, 1.1f);
+    }
+
+    public void PlayRotateObjectSound()
+    {
+        PlaySound(rotateObjectSound, 0.3f, 1f, 1.1f);
     }
 
     private void PlaySound(AudioClip sound, float volume, float minPitch, float maxPitch)

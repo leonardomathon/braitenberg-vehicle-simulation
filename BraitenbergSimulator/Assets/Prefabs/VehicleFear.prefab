@@ -123,10 +123,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4000317f41d5894408e0518addbbe107, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
+  objectName: Fear vehicle
+  isSelected: 0
+  isMovable: 0
   materialStandard: {fileID: 2100000, guid: fda73926720116a49ae1931144153085, type: 2}
   materialOnSelect: {fileID: 2100000, guid: 69b12f194e960424581ed1b82641a527, type: 2}
-  isSelected: 0
+  type: 0
   position: {x: 0, y: 0, z: 0}
   leftMotorSpeed: 0
   rightMotorSpeed: 0

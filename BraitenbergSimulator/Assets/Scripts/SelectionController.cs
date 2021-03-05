@@ -19,6 +19,27 @@ public class SelectionController : MonoBehaviour
 
     private CameraController cameraController;
 
+    // Singleton pattern for SelectionController
+    #region singleton
+    private static SelectionController _instance;
+
+    public static SelectionController Instance { get { return _instance; } }
+
+
+    private void Awake()
+    {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
+    }
+
+    #endregion
+
     void Start()
     {
         gameManager = GameManager.Instance;
@@ -38,6 +59,11 @@ public class SelectionController : MonoBehaviour
             MoveSelectedObject();
         }
 
+        if (selectedObject && Input.GetKeyDown(KeyCode.R))
+        {
+            RotateSelectedObject();
+        }
+
         if (selectedObjectMovable)
         {
             Move();
@@ -47,23 +73,72 @@ public class SelectionController : MonoBehaviour
         {
             PlaceSelectedObject();
         }
+
+        // Check if selected object still exists
+        if (selectedObject == null)
+        {
+            selectedObject = null;
+        }
     }
 
-    public void ResetSelection()
+    public GameObject GetSelectedObject()
+    {
+        return selectedObject;
+    }
+
+    private void ResetSelection()
     {
         cameraController.ResetTarget();
     }
 
-    private void SetSelectedObject(GameObject obj)
+    public void DeleteSelectedObject()
     {
+        // Play object delete sound
+        soundManager.PlayDeleteObjectSound();
+
+        // Deselect before destroying
+        DeselectAllObjects();
+
+        // Cleanup object list, brute force
+        foreach (GameObject vehicle in gameManager.vehicles)
+        {
+            if (vehicle == selectedObject)
+            {
+                gameManager.vehicles.Remove(selectedObject);
+                Destroy(selectedObject);
+                return;
+            }
+        }
+        foreach (GameObject various in gameManager.various)
+        {
+            if (various == selectedObject)
+            {
+                gameManager.various.Remove(selectedObject);
+                Destroy(selectedObject);
+                return;
+            }
+        }
+        foreach (GameObject light in gameManager.lights)
+        {
+            if (light == selectedObject)
+            {
+                gameManager.lights.Remove(selectedObject);
+                Destroy(selectedObject);
+                return;
+            }
+        }
+    }
+
+    public void SetSelectedObject(GameObject obj)
+    {
+        // Select all objects to make sure only one object is selected
+        DeselectAllObjects();
+
         // Play object select sound
         soundManager.PlaySelectObjectSound();
 
         // Set the selected object
         selectedObject = obj;
-
-        // Select all objects to make sure only one object is selected
-        DeselectAllObjects();
 
         // Select the object
         obj.GetComponent<Object>().Select();
@@ -72,7 +147,7 @@ public class SelectionController : MonoBehaviour
         cameraController.SetTarget(obj);
     }
 
-    private void ResetSelectedObject()
+    public void ResetSelectedObject()
     {
         // Play object deselect sound
         soundManager.PlayDeselectObjectSound();
@@ -82,9 +157,6 @@ public class SelectionController : MonoBehaviour
 
         // Deselect all objects
         DeselectAllObjects();
-
-        // Let camera orbit the default target
-        cameraController.ResetTarget();
     }
 
     private void SelectObject()
@@ -134,9 +206,12 @@ public class SelectionController : MonoBehaviour
         {
             obj.GetComponent<Lightbulb>().Deselect();
         }
+
+        // Let camera orbit the default target
+        cameraController.ResetTarget();
     }
 
-    private void MoveSelectedObject()
+    public void MoveSelectedObject()
     {
         cameraController.EnableOverviewCamera();
         selectedObjectMovable = true;
@@ -164,6 +239,18 @@ public class SelectionController : MonoBehaviour
                 selectedObject.transform.position = destinationPos;
             }
         }
+    }
+
+    public void RotateSelectedObject()
+    {
+        // Play object rotate sound
+        soundManager.PlayRotateObjectSound();
+
+        // Get current rotation
+        Quaternion currentRotation = selectedObject.transform.rotation;
+
+        // Rotate 45 degrees around the y axis
+        selectedObject.transform.rotation = currentRotation * Quaternion.Euler(0, 45.0f, 0);
     }
 
     private void PlaceSelectedObject()

@@ -123,6 +123,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bc42fb005ae2154caff3e3a8457c242, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectName: Obstacle
+  isSelected: 0
+  isMovable: 0
   materialStandard: {fileID: 2100000, guid: 7c9398bb4ac141f4bad7fe476bddb791, type: 2}
   materialOnSelect: {fileID: 2100000, guid: 2ee36246034aedc4484946a0ab53deaa, type: 2}
-  isSelected: 0
