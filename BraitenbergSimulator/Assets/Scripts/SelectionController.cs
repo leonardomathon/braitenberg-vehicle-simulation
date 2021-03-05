@@ -221,6 +221,7 @@ public class SelectionController : MonoBehaviour
 
     private void Move()
     {
+        Debug.Log(cameraController.CameraIsMoving());
         if (!cameraController.CameraIsMoving())
         {
             // Shoot ray
@@ -230,6 +231,7 @@ public class SelectionController : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit, 100, moveableAreaMask))
             {
+                Debug.Log("Ray cast");
                 Vector3 destinationPos = new Vector3(
                         Mathf.Ceil(hit.point.x),
                         selectedObject.transform.position.y,
@@ -239,18 +241,6 @@ public class SelectionController : MonoBehaviour
                 selectedObject.transform.position = destinationPos;
             }
         }
-    }
-
-    public void RotateSelectedObject()
-    {
-        // Play object rotate sound
-        soundManager.PlayRotateObjectSound();
-
-        // Get current rotation
-        Quaternion currentRotation = selectedObject.transform.rotation;
-
-        // Rotate 45 degrees around the y axis
-        selectedObject.transform.rotation = currentRotation * Quaternion.Euler(0, 45.0f, 0);
     }
 
     private void PlaceSelectedObject()
@@ -270,4 +260,17 @@ public class SelectionController : MonoBehaviour
         // Follow the target again
         cameraController.FollowTarget();
     }
+
+    public void RotateSelectedObject()
+    {
+        // Play object rotate sound
+        soundManager.PlayRotateObjectSound();
+
+        // Get current rotation
+        Quaternion currentRotation = selectedObject.transform.rotation;
+
+        // Rotate 45 degrees around the y axis
+        selectedObject.transform.rotation = currentRotation * Quaternion.Euler(0, 45.0f, 0);
+    }
+
 }
