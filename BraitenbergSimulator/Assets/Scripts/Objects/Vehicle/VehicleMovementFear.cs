@@ -1,15 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class VehicleMovementFear : MonoBehaviour
-{
-    [SerializeField] private Transform target;
-    [SerializeField] private Rigidbody rb;
-
-    void Start()
-    {
-        target = gameObject.GetComponent<Transform>();
-        rb = gameObject.GetComponent<Rigidbody>();
-    }
+﻿namespace Objects.Vehicle {
+	public class VehicleMovementFear : VehicleMovement {
+		public float[] MotorActivation(float[] sensorMeasurements) {
+			// Sensor measurements map directly to motor outs in this case, no manipulation needed
+			return sensorMeasurements;
+		}
+	}
 }

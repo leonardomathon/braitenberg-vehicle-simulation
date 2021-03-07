@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fieldOfView: 80
-  sensitivity: 1
+  sensitivity: 100
 --- !u!1 &6352991185780497774
 GameObject:
   m_ObjectHideFlags: 0
