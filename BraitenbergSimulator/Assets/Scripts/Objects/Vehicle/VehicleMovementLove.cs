@@ -1,15 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class VehicleMovementLove : MonoBehaviour
-{
-    [SerializeField] private Transform target;
-    [SerializeField] private Rigidbody rb;
-
-    void Start()
-    {
-        target = gameObject.GetComponent<Transform>();
-        rb = gameObject.GetComponent<Rigidbody>();
-    }
+﻿namespace Objects.Vehicle {
+	public class VehicleMovementLove : VehicleMovement {
+		public float[] MotorActivation(float[] sensorMeasurements) {
+			// Sensor measurements only need to be inverted.
+			// Characteristic behaviour then emerges from a base motor speed, which is expected but not required.
+			var result = new float[sensorMeasurements.Length];
+			
+			for (var i = 0; i < result.Length; i++) {
+				result[i] = -sensorMeasurements[i];
+			}
+			
+			return result;
+		}
+	}
 }

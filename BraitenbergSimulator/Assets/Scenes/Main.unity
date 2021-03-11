@@ -3380,9 +3380,9 @@ MonoBehaviour:
   spawnableObjects:
   - {fileID: 652533365021952239, guid: 4222cda78a7aebc41b39cc18a0add142, type: 3}
   - {fileID: 8668955815142312266, guid: 9fe08b4114e487c4cb6c241e077c444c, type: 3}
-  - {fileID: 7514673926056168380, guid: deb3dd97cba993e41bf9ea2d009b3e14, type: 3}
+  - {fileID: 8124863526106501162, guid: b636b2f7ffac7ff458d75a328c2a743c, type: 3}
   - {fileID: 7942151798604423362, guid: 39ac1a9751e930342bdcb7043f3c301c, type: 3}
-  - {fileID: 7514673926056168380, guid: ddb3d6ad84aba45498a2c7f924a144b3, type: 3}
+  - {fileID: 4286357844129613811, guid: f3dc6dcd44b4321428d7ef16379c8aa5, type: 3}
   - {fileID: 3098897409627345611, guid: 2fad1f0b25755fc469c223c301b1dd3c, type: 3}
   selectedObjectToSpawn: {fileID: 0}
 --- !u!114 &1702787700

@@ -36,8 +36,8 @@ namespace Objects.Vehicle {
 
 			Debug.Log(activations.Aggregate("Motors: ", (current, activation) => current + (activation + ", ")));
 
-			leftWheel.SetForce(activations[0] * 10);
-			rightWheel.SetForce(activations[1] * 10);
+			leftWheel.SetForce(activations[0]);
+			rightWheel.SetForce(activations[1]);
 		}
 
 		// Attach the rigt movementscript to the vehicle object based on VehicleType
@@ -51,13 +51,13 @@ namespace Objects.Vehicle {
 					movement = new VehicleMovementAgression();
 					break;
 				case VehicleType.Exploration:
-					gameObject.AddComponent<VehicleMovementExploration>();
+					movement = new VehicleMovementExploration();
 					break;
 				case VehicleType.Fear:
 					movement = new VehicleMovementFear();
 					break;
 				case VehicleType.Love:
-					gameObject.AddComponent<VehicleMovementLove>();
+					movement = new VehicleMovementLove();
 					break;
 				default:
 					movement = new VehicleMovementDefault();
