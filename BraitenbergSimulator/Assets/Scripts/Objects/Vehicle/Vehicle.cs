@@ -31,10 +31,10 @@ namespace Objects.Vehicle {
 			UpdateBodyRotation();
 
 			var lights = gameManager.GetLights();
-			var measurements = new float[] {leftSensor.Measure(lights), rightSensor.Measure(lights)};
+			var measurements = new[] {leftSensor.Measure(lights), rightSensor.Measure(lights)};
 			var activations = movement.MotorActivation(measurements);
 
-			Debug.Log(activations.Aggregate("Motors: ", (current, activation) => current + (activation + ", ")));
+			// Debug.Log(activations.Aggregate("Motors: ", (current, activation) => current + (activation + ", ")));
 
 			leftWheel.SetForce(activations[0]);
 			rightWheel.SetForce(activations[1]);
