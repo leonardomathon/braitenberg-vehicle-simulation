@@ -312,10 +312,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 672a4712ab31bc84383acab3f3b0dd1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  materialDefault: {fileID: 0}
+  materialSelected: {fileID: 0}
+  children: []
   objectName: Lightbulb
-  isSelected: 0
   isMovable: 0
-  materialStandard: {fileID: 2100000, guid: 69bcb95d3ccf71a48b85c929b720bd7d, type: 2}
-  materialOnSelect: {fileID: 2100000, guid: e13dbe86110ad2b4d872953673933db4, type: 2}
-  lightIntensity: 0
-  lightColor: 0
+  intensity: 10
+  color: 0

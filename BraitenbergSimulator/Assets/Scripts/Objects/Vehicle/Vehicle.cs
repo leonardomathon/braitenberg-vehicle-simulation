@@ -20,7 +20,7 @@ namespace Objects.Vehicle {
 		private GameManager gameManager;
 		private VehicleMovement movement;
 
-		private void Start() {
+		private new void Start() {
 			AttachMovementScript();
 		}
 
@@ -39,7 +39,7 @@ namespace Objects.Vehicle {
 			rightWheel.SetForce(activations[1]);
 		}
 
-		// Attach the rigt movementscript to the vehicle object based on VehicleType
+		// Attach the right movement script to the vehicle object based on VehicleType
 		private void AttachMovementScript() {
 			_type = type;
 			SetMovementType(type);
