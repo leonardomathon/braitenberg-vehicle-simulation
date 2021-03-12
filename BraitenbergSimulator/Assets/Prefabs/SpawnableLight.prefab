@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 7248961185437603813}
   - component: {fileID: 7091336574025315729}
   - component: {fileID: 8989412219399590174}
+  - component: {fileID: -4396877000857011555}
+  - component: {fileID: 750860192660997415}
   - component: {fileID: 1331689666632302626}
   - component: {fileID: 8983276501910707350}
   - component: {fileID: 7202820679586415849}
@@ -97,6 +99,35 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &-4396877000857011555
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 652533365021952239}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.5, y: 0.5, z: 0.5}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &750860192660997415
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 652533365021952239}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!108 &1331689666632302626
 Light:
   m_ObjectHideFlags: 0
@@ -281,8 +312,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 672a4712ab31bc84383acab3f3b0dd1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectName: Lightbulb
   isSelected: 0
+  isMovable: 0
   materialStandard: {fileID: 2100000, guid: 69bcb95d3ccf71a48b85c929b720bd7d, type: 2}
   materialOnSelect: {fileID: 2100000, guid: e13dbe86110ad2b4d872953673933db4, type: 2}
-  intensity: 1
-  color: 0
+  lightIntensity: 0
+  lightColor: 0

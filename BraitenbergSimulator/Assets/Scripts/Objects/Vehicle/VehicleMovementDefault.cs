@@ -1,4 +1,4 @@
-﻿namespace Objects.Vehicle {
+namespace Objects.Vehicle {
 	public class VehicleMovementDefault : VehicleMovement {
 		public float[] MotorActivation(float[] sensorMeasurements) {
 			// Make the default behaviour simply be all motors at equal force
