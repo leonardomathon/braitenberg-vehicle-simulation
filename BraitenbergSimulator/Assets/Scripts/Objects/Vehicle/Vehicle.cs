@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Objects.Vehicle.Motors;
+﻿using Objects.Vehicle.Motors;
 using UnityEngine;
 
 namespace Objects.Vehicle {
@@ -25,7 +24,7 @@ namespace Objects.Vehicle {
 			AttachMovementScript();
 		}
 
-		protected override void Update() {
+		protected void Update() {
 			// base.Update();
 			// UpdateMovementScript();
 			UpdateBodyRotation();

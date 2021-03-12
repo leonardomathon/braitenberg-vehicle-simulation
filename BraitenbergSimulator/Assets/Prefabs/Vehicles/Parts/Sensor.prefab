@@ -44,6 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35d99c61de004031a4218a591e8d365d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  materialDefault: {fileID: 0}
+  materialSelected: {fileID: 0}
+  children:
+  - {fileID: 9150027938474521240}
   fieldOfView: 80
   sensitivity: 100
 --- !u!1 &6352991185780497774
@@ -59,6 +63,7 @@ GameObject:
   - component: {fileID: 4063675100798891725}
   - component: {fileID: 4864341117004204358}
   - component: {fileID: 4232393370751988413}
+  - component: {fileID: 9150027938474521240}
   m_Layer: 0
   m_Name: Sensor
   m_TagString: Untagged
@@ -157,3 +162,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 14
   m_CollisionDetection: 0
+--- !u!114 &9150027938474521240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6352991185780497774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a11aeee9798446c199c1059b41544c31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  materialDefault: {fileID: 2100000, guid: 7bc3bc0a1dbbc1f4b8f638ddadbff951, type: 2}
+  materialSelected: {fileID: 2100000, guid: fa579532c53a9a64e97854fa0fa0842c, type: 2}
+  children: []

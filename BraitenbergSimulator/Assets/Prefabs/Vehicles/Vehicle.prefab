@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 8808107510513081066}
   - component: {fileID: 5078876239069567616}
   - component: {fileID: 6355354401646035585}
+  - component: {fileID: 7915743158338378990}
   m_Layer: 10
   m_Name: Axle
   m_TagString: Untagged
@@ -111,6 +112,21 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &7915743158338378990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 700471834822642386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a11aeee9798446c199c1059b41544c31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  materialDefault: {fileID: 2100000, guid: 7bc3bc0a1dbbc1f4b8f638ddadbff951, type: 2}
+  materialSelected: {fileID: 2100000, guid: fa579532c53a9a64e97854fa0fa0842c, type: 2}
+  children: []
 --- !u!1 &3460207834403946518
 GameObject:
   m_ObjectHideFlags: 0
@@ -188,6 +204,7 @@ GameObject:
   - component: {fileID: 2961933530725217353}
   - component: {fileID: 4088009504521307407}
   - component: {fileID: 5565280971295358940}
+  - component: {fileID: 4691758220293377384}
   m_Layer: 10
   m_Name: Body
   m_TagString: Untagged
@@ -269,6 +286,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4691758220293377384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7169291098913447518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a11aeee9798446c199c1059b41544c31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  materialDefault: {fileID: 2100000, guid: 7bc3bc0a1dbbc1f4b8f638ddadbff951, type: 2}
+  materialSelected: {fileID: 2100000, guid: fa579532c53a9a64e97854fa0fa0842c, type: 2}
+  children: []
 --- !u!1 &7429789093598748827
 GameObject:
   m_ObjectHideFlags: 0
@@ -316,9 +348,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4000317f41d5894408e0518addbbe107, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isSelected: 0
-  materialStandard: {fileID: 0}
-  materialOnSelect: {fileID: 0}
+  materialDefault: {fileID: 0}
+  materialSelected: {fileID: 0}
+  children:
+  - {fileID: 4691758220293377384}
+  - {fileID: 6013341402039124445}
+  - {fileID: 3147922123888209539}
+  - {fileID: 7915743158338378990}
+  - {fileID: 6643458282918203745}
+  - {fileID: 8158513834311985715}
   type: 1
   position: {x: 0, y: 0, z: 0}
   body: {fileID: 278719088393822531}
@@ -926,12 +964,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7e581ac68195f1b4282f6157d03fbc88, type: 3}
---- !u!4 &1810286117067496423 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7296090603038763236, guid: 7e581ac68195f1b4282f6157d03fbc88,
-    type: 3}
-  m_PrefabInstance: {fileID: 8962029249423864579}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &3147922123888209539 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6336613470034910592, guid: 7e581ac68195f1b4282f6157d03fbc88,
@@ -944,3 +976,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35d99c61de004031a4218a591e8d365d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &1810286117067496423 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7296090603038763236, guid: 7e581ac68195f1b4282f6157d03fbc88,
+    type: 3}
+  m_PrefabInstance: {fileID: 8962029249423864579}
+  m_PrefabAsset: {fileID: 0}

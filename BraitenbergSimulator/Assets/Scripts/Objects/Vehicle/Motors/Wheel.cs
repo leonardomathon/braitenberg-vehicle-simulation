@@ -1,7 +1,7 @@
 using UnityEngine;
 
 namespace Objects.Vehicle.Motors {
-	public class Wheel : MonoBehaviour, Motor {
+	public class Wheel : Selectable, Motor {
 		public Rigidbody body;
 
 		public float baseSpeed;

@@ -3,7 +3,7 @@ using Objects.Light;
 using UnityEngine;
 
 namespace Objects.Vehicle {
-	public class Sensor : MonoBehaviour {
+	public class Sensor : Selectable {
 		private const int LAYER_MASK = ~(1 << 11);
 		
 		public float fieldOfView;
