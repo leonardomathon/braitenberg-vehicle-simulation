@@ -22,6 +22,11 @@ PrefabInstance:
       propertyPath: type
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4999079258368738322, guid: 108146d433917704c876495caebb300f,
+        type: 3}
+      propertyPath: objectName
+      value: Aggression vehicle
+      objectReference: {fileID: 0}
     - target: {fileID: 7429789093598748827, guid: 108146d433917704c876495caebb300f,
         type: 3}
       propertyPath: m_Name

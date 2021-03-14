@@ -22,6 +22,11 @@ PrefabInstance:
       propertyPath: type
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 4999079258368738322, guid: 108146d433917704c876495caebb300f,
+        type: 3}
+      propertyPath: objectName
+      value: Love vehicle
+      objectReference: {fileID: 0}
     - target: {fileID: 6006713224730928718, guid: 108146d433917704c876495caebb300f,
         type: 3}
       propertyPath: m_ConnectedAnchor.x

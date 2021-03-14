@@ -357,6 +357,8 @@ MonoBehaviour:
   - {fileID: 7915743158338378990}
   - {fileID: 6643458282918203745}
   - {fileID: 8158513834311985715}
+  objectName: Default vehicle
+  isMovable: 0
   type: 1
   position: {x: 0, y: 0, z: 0}
   body: {fileID: 278719088393822531}
