@@ -42,10 +42,16 @@ namespace Objects
             isMovable = true;
 
             // Temporarily disable gravity for the object
-            gameObject.GetComponent<Rigidbody>().useGravity = false;
+            foreach (Rigidbody r in GetComponents<Rigidbody>())
+            {
+                r.useGravity = false;
+            }
 
             // Disable collisions
-            gameObject.GetComponent<BoxCollider>().enabled = false;
+            foreach (Collider c in GetComponents<Collider>())
+            {
+                c.enabled = false;
+            }
         }
 
         public void Place()
@@ -53,10 +59,16 @@ namespace Objects
             isMovable = false;
 
             // Enable gravity for the object
-            gameObject.GetComponent<Rigidbody>().useGravity = true;
+            foreach (Rigidbody r in GetComponents<Rigidbody>())
+            {
+                r.useGravity = false;
+            }
 
             // Enable collisions
-            gameObject.GetComponent<BoxCollider>().enabled = true;
+            foreach (Collider c in GetComponents<Collider>())
+            {
+                c.enabled = true;
+            }
         }
     }
 }
