@@ -42,13 +42,13 @@ namespace Objects
             isMovable = true;
 
             // Temporarily disable gravity for the object
-            foreach (Rigidbody r in GetComponents<Rigidbody>())
+            foreach (Rigidbody r in GetComponentsInChildren<Rigidbody>())
             {
                 r.useGravity = false;
             }
 
             // Disable collisions
-            foreach (Collider c in GetComponents<Collider>())
+            foreach (Collider c in GetComponentsInChildren<Collider>())
             {
                 c.enabled = false;
             }
@@ -59,13 +59,13 @@ namespace Objects
             isMovable = false;
 
             // Enable gravity for the object
-            foreach (Rigidbody r in GetComponents<Rigidbody>())
+            foreach (Rigidbody r in GetComponentsInChildren<Rigidbody>())
             {
                 r.useGravity = false;
             }
 
             // Enable collisions
-            foreach (Collider c in GetComponents<Collider>())
+            foreach (Collider c in GetComponentsInChildren<Collider>())
             {
                 c.enabled = true;
             }
