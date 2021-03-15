@@ -1,0 +1,101 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &658608751985393753
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 835824868691075095, guid: 108146d433917704c876495caebb300f,
+        type: 3}
+      propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4691758220293377384, guid: 108146d433917704c876495caebb300f,
+        type: 3}
+      propertyPath: materialDefault
+      value: 
+      objectReference: {fileID: 2100000, guid: fda73926720116a49ae1931144153085, type: 2}
+    - target: {fileID: 4691758220293377384, guid: 108146d433917704c876495caebb300f,
+        type: 3}
+      propertyPath: materialSelected
+      value: 
+      objectReference: {fileID: 2100000, guid: 69b12f194e960424581ed1b82641a527, type: 2}
+    - target: {fileID: 4999079258368738322, guid: 108146d433917704c876495caebb300f,
+        type: 3}
+      propertyPath: type
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4999079258368738322, guid: 108146d433917704c876495caebb300f,
+        type: 3}
+      propertyPath: objectName
+      value: Fear vehicle
+      objectReference: {fileID: 0}
+    - target: {fileID: 6006713224730928718, guid: 108146d433917704c876495caebb300f,
+        type: 3}
+      propertyPath: m_ConnectedAnchor.x
+      value: -1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7429789093598748827, guid: 108146d433917704c876495caebb300f,
+        type: 3}
+      propertyPath: m_Name
+      value: VehicleFear
+      objectReference: {fileID: 0}
+    - target: {fileID: 9092468673556325975, guid: 108146d433917704c876495caebb300f,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9092468673556325975, guid: 108146d433917704c876495caebb300f,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9092468673556325975, guid: 108146d433917704c876495caebb300f,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9092468673556325975, guid: 108146d433917704c876495caebb300f,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9092468673556325975, guid: 108146d433917704c876495caebb300f,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9092468673556325975, guid: 108146d433917704c876495caebb300f,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9092468673556325975, guid: 108146d433917704c876495caebb300f,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9092468673556325975, guid: 108146d433917704c876495caebb300f,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9092468673556325975, guid: 108146d433917704c876495caebb300f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9092468673556325975, guid: 108146d433917704c876495caebb300f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9092468673556325975, guid: 108146d433917704c876495caebb300f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 108146d433917704c876495caebb300f, type: 3}
