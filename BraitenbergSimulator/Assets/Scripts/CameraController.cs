@@ -25,7 +25,7 @@ public class CameraController : MonoBehaviour
     [SerializeField] [Range(0, 90)] private int minZoomDistance = 5;
 
     // Maximum zoom distance
-    [SerializeField] [Range(0, 90)] private int maxZoomDistance = 15;
+    [SerializeField] [Range(0, 150)] private int maxZoomDistance = 120;
 
     // Speed to zoom
     [SerializeField] [Range(1, 10)] private float zoomSpeed = 8;
