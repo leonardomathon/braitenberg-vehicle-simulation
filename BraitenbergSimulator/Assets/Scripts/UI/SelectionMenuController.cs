@@ -37,7 +37,7 @@ public class SelectionMenuController : MonoBehaviour
 
     void Update()
     {
-        var _selectedObject = selectionController.GetSelectedObject();
+        Selectable _selectedObject = selectionController.GetSelectedObject();
 
         // Update UI accordingly
         // Inefficient, but does not affect performance
