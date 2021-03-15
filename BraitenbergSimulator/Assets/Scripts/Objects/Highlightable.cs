@@ -9,7 +9,7 @@ namespace Objects {
 		private bool isSelected;
 		private MeshRenderer mesh;
 
-		private void Start() {
+		protected void Start() {
 			mesh = GetComponent<MeshRenderer>();
 			Deselect();
 		}
