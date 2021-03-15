@@ -312,8 +312,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 672a4712ab31bc84383acab3f3b0dd1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  materialDefault: {fileID: 0}
-  materialSelected: {fileID: 0}
+  materialDefault: {fileID: 2100000, guid: 69bcb95d3ccf71a48b85c929b720bd7d, type: 2}
+  materialSelected: {fileID: 2100000, guid: e13dbe86110ad2b4d872953673933db4, type: 2}
   children: []
   objectName: Lightbulb
   isMovable: 0

@@ -11,7 +11,8 @@ namespace Objects {
 		// Boolean that stores if object is currently movable
 		public bool isMovable;
 
-		protected virtual void Start() {
+		protected new void Start() {
+			base.Start();
 			objectId = Random.Range(1, int.MaxValue);
 		}
 
