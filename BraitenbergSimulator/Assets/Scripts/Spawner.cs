@@ -55,7 +55,8 @@ public class Spawner : MonoBehaviour
     // Spawns the selected object to a certain position
     private void SpawnObject(GameObject selectedObjectToSpawn, Vector3 pos)
     {
-        pos.y += 1;
+        // Spawn objects 1 meter above surface
+        pos.y += 1f;
 
         // Check if selectedObjectToSpawn is a vehicle, else its a light or a various object
         if (selectedObjectToSpawn.GetComponent<Vehicle>() != null)
@@ -78,7 +79,7 @@ public class Spawner : MonoBehaviour
                 if (gameManager.AllowSpawnLights())
                 {
                     // Avoid clipping of the light by increasing y level
-                    pos.y += 0.1f;
+                    pos.y -= 0.9f;
 
                     // Create gameobject and store it temporarily in a variable
                     var instantiatedObject = Instantiate(selectedObjectToSpawn, pos, Quaternion.identity, parentObject.transform);
