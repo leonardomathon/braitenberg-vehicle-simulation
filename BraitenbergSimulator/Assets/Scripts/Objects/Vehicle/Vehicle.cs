@@ -1,4 +1,6 @@
-﻿using Objects.Vehicle.Motors;
+﻿using System.Collections.Generic;
+using Configurations;
+using Objects.Vehicle.Motors;
 using UnityEngine;
 
 namespace Objects.Vehicle {
@@ -67,8 +69,12 @@ namespace Objects.Vehicle {
 			}
 		}
 
+		private ConfigurationFloat configureSensorsPosition;
+
 		private new void Start() {
 			AttachMovementScript();
+			
+			configureSensorsPosition = new ConfigurationFloat("Sensor positions", "Forward/backwards offset of sensors", () => SensorsPosition, value => SensorsPosition = value);
 		}
 		protected void Update() {
 			// base.Update();
@@ -84,6 +90,10 @@ namespace Objects.Vehicle {
 			leftWheel.SetForce(activations[0]);
 			rightWheel.SetForce(activations[1]);
 		}
+		
+		public new List<Configuration> Configuration() {
+			return new List<Configuration> {configureSensorsPosition};
+		}
 
 		// Update movementscript if VehicleType has changed
 		private void UpdateMovementScript() {
@@ -93,6 +103,7 @@ namespace Objects.Vehicle {
 				SetMovementType(type);
 			}
 		}
+		
 		private void UpdateBodyRotation() {
 			var transformLocalRotation = body.transform.rotation;
 			transformLocalRotation.x = 0;
