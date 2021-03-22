@@ -9,6 +9,26 @@ namespace Objects.Vehicle {
 		public float fieldOfView;
 		public float sensitivity;
 
+		public float FieldOfView {
+			// TODO: Enforce value limits? 0-180
+			get => fieldOfView;
+			set => fieldOfView = value;
+		}
+		public float Sensitivity {
+			get => sensitivity;
+			set => sensitivity = value;
+		}
+		public float Rotation {
+			// TODO: Enforce value limits? 0-360
+			get => transform.localEulerAngles.y;
+			set {
+				Transform sensorTransform = transform;
+				Vector3 rotation = sensorTransform.localEulerAngles;
+				rotation.y = value;
+				sensorTransform.localEulerAngles = rotation;
+			}
+		}
+
 		public float Measure(IEnumerable<Lightbulb> lights) {
 			var sensorTransform = transform;
 			var sensorOrigin = sensorTransform.position + sensorTransform.forward * 0.5f;

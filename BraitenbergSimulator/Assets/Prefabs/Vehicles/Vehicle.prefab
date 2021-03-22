@@ -362,6 +362,7 @@ MonoBehaviour:
   type: 1
   position: {x: 0, y: 0, z: 0}
   body: {fileID: 278719088393822531}
+  sensors: {fileID: 4572344983414848718}
   leftWheel: {fileID: 6643458282918203745}
   rightWheel: {fileID: 8158513834311985715}
   leftSensor: {fileID: 6013341402039124445}
