@@ -126,5 +126,5 @@ MonoBehaviour:
   materialDefault: {fileID: 2100000, guid: 7c9398bb4ac141f4bad7fe476bddb791, type: 2}
   materialSelected: {fileID: 2100000, guid: 2ee36246034aedc4484946a0ab53deaa, type: 2}
   children: []
-  objectName: Obstacle
+  name: Obstacle
   isMovable: 0

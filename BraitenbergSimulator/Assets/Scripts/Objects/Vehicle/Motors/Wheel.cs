@@ -2,10 +2,10 @@ using UnityEngine;
 
 namespace Objects.Vehicle.Motors {
 	public class Wheel : Selectable, Motor {
-		public Rigidbody body;
-
 		public float baseSpeed;
 		public float strength = 10;
+
+		public Rigidbody body;
 		
 		public float BaseSpeed {
 			get => baseSpeed;

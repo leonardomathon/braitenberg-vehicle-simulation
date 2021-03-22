@@ -48,6 +48,7 @@ MonoBehaviour:
   materialSelected: {fileID: 0}
   children:
   - {fileID: 954918287053212859}
+  name: Sensor
   fieldOfView: 80
   sensitivity: 100
 --- !u!1 &5026825608982015043

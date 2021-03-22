@@ -1,120 +1,114 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
+﻿using System.Collections.Generic;
+using Configurations;
 using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
 using Object = Objects.Object;
 using Selectable = Objects.Selectable;
 
-public class SelectionMenuController : MonoBehaviour
-{
-
-    [SerializeField] private GameObject selectionMenu;
-
-    [SerializeField] private GameObject selectedObjectToolMenu;
-
-    private TextMeshProUGUI selectedObjectTag;
-
-    private Selectable selectedObject;
-
-    private Button[] toolMenuButtons = new Button[4];
-
-    private SelectionController selectionController;
-
-    void Start()
+namespace UI {
+    public class SelectionMenuController : MonoBehaviour
     {
-        // Get instance of selection controller
-        selectionController = SelectionController.Instance;
-        selectedObject = selectionController.GetSelectedObject();
 
-        // Get used components
-        selectedObjectTag = selectionMenu.transform.Find("SelectedObjectTag").GetComponent<TextMeshProUGUI>();
+        [SerializeField] private GameObject selectionMenu;
+        [SerializeField] private GameObject selectedObjectToolMenu;
 
-        // Set toolbar inactive
-        selectedObjectToolMenu.SetActive(false);
+        private TextMeshProUGUI selectedObjectTag;
 
-        // Setup tool buttons
-        SetupToolButtons();
-    }
+        private Selectable selectedObject;
 
-    void Update()
-    {
-        Selectable _selectedObject = selectionController.GetSelectedObject();
+        private Button[] toolMenuButtons = new Button[4];
 
-        // Update UI accordingly
-        // Inefficient, but does not affect performance
-        if (_selectedObject == null)
+        private SelectionController selectionController;
+
+        void Start()
         {
-            selectedObject = _selectedObject;
-            SetSelectedObjectText();
+            // Get instance of selection controller
+            selectionController = SelectionController.Instance;
+            selectedObject = selectionController.GetSelectedObject();
+
+            // Get used components
+            selectedObjectTag = selectionMenu.transform.Find("SelectedObjectTag").GetComponent<TextMeshProUGUI>();
+
+            // Set toolbar inactive
+            selectedObjectToolMenu.SetActive(false);
+
+            // Setup tool buttons
+            SetupToolButtons();
+
+            selectionController.ObjectSelected += ObjectSelected;
         }
-        else
-        {
-            if (selectedObject != _selectedObject)
-            {
-                selectedObject = _selectedObject;
-                SetSelectedObjectText(selectedObject.GetComponent<Object>().GetObjectName());
+
+        private void ObjectSelected(Selectable selected) {
+            selectedObject = selected;
+            if (selected == null) {
+                SetSelectedObjectText();
+            } else {
+                SetSelectedObjectText(selectedObject.Name());
+                // TODO: Here we would create and show the UI for the configurations
             }
         }
-    }
 
-    private void SetupToolButtons()
-    {
-        // Get the grid in which the buttons are situated
-        GameObject grid = selectedObjectToolMenu.transform.Find("Grid").gameObject;
-
-        // Get all buttons
-        for (int i = 0; i < grid.transform.childCount; i++)
+        private void SetupToolButtons()
         {
-            toolMenuButtons[i] = grid.transform.GetChild(i).GetComponent<Button>();
+            // Get the grid in which the buttons are situated
+            GameObject grid = selectedObjectToolMenu.transform.Find("Grid").gameObject;
+
+            // Get all buttons
+            for (int i = 0; i < grid.transform.childCount; i++)
+            {
+                toolMenuButtons[i] = grid.transform.GetChild(i).GetComponent<Button>();
+            }
+
+            // Setup listeners
+            toolMenuButtons[0].onClick.AddListener(ClickSelectButton);
+            toolMenuButtons[1].onClick.AddListener(ClickDeleteButton);
+            toolMenuButtons[2].onClick.AddListener(ClickMoveButton);
+            toolMenuButtons[3].onClick.AddListener(ClickRotateButton);
         }
 
-        // Setup listeners
-        toolMenuButtons[0].onClick.AddListener(ClickSelectButton);
-        toolMenuButtons[1].onClick.AddListener(ClickDeleteButton);
-        toolMenuButtons[2].onClick.AddListener(ClickMoveButton);
-        toolMenuButtons[3].onClick.AddListener(ClickRotateButton);
-    }
+        private void ClickSelectButton()
+        {
+            selectionController.ResetSelectedObject();
+        }
 
-    private void ClickSelectButton()
-    {
-        selectionController.ResetSelectedObject();
-    }
+        private void ClickDeleteButton()
+        {
+            selectionController.DeleteSelectedObject();
+        }
 
-    private void ClickDeleteButton()
-    {
-        selectionController.DeleteSelectedObject();
-    }
+        private void ClickMoveButton()
+        {
+            selectionController.MoveSelectedObject();
+        }
 
-    private void ClickMoveButton()
-    {
-        selectionController.MoveSelectedObject();
-    }
+        private void ClickRotateButton()
+        {
+            selectionController.RotateSelectedObject();
+        }
 
-    private void ClickRotateButton()
-    {
-        selectionController.RotateSelectedObject();
-    }
+        private void SetSelectedObjectText()
+        {
+            // Set the text of the tooltip
+            selectedObjectTag.SetText("No object selected");
 
-    private void SetSelectedObjectText()
-    {
-        // Set the text of the tooltip
-        selectedObjectTag.SetText("No object selected");
+            // Deactivate toolbar
+            selectedObjectToolMenu.SetActive(false);
 
-        // Deactivate toolbar
-        selectedObjectToolMenu.SetActive(false);
+            // Update text mesh to prevent bug
+            selectedObjectTag.ForceMeshUpdate();
+        }
 
-        // Update text mesh to prevent bug
-        selectedObjectTag.ForceMeshUpdate();
-    }
+        private void SetSelectedObjectText(string text)
+        {
+            // Set the text of the tooltip
+            selectedObjectTag.SetText(text);
 
-    private void SetSelectedObjectText(string text)
-    {
-        // Set the text of the tooltip
-        selectedObjectTag.SetText(text);
+            // Activate toolbar
+            selectedObjectToolMenu.SetActive(true);
 
-        // Activate toolbar
-        selectedObjectToolMenu.SetActive(true);
-
-        // Update text mesh to prevent bug
-        selectedObjectTag.ForceMeshUpdate();
+            // Update text mesh to prevent bug
+            selectedObjectTag.ForceMeshUpdate();
+        }
     }
 }

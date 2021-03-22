@@ -8,6 +8,8 @@ namespace Objects.Vehicle {
 		
 		public float fieldOfView;
 		public float sensitivity;
+		
+		public GameObject body;
 
 		public float FieldOfView {
 			// TODO: Enforce value limits? 0-180
@@ -20,17 +22,17 @@ namespace Objects.Vehicle {
 		}
 		public float Rotation {
 			// TODO: Enforce value limits? 0-360
-			get => transform.localEulerAngles.y;
+			get => body.transform.localEulerAngles.z;
 			set {
-				Transform sensorTransform = transform;
+				Transform sensorTransform = body.transform;
 				Vector3 rotation = sensorTransform.localEulerAngles;
-				rotation.y = value;
+				rotation.z = value;
 				sensorTransform.localEulerAngles = rotation;
 			}
 		}
 
 		public float Measure(IEnumerable<Lightbulb> lights) {
-			var sensorTransform = transform;
+			var sensorTransform = body.transform;
 			var sensorOrigin = sensorTransform.position + sensorTransform.forward * 0.5f;
 			
 			float total = 0;

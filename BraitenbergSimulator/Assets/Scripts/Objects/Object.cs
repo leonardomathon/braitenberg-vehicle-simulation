@@ -7,9 +7,6 @@ namespace Objects
         // Random object id
         private int objectId;
 
-        // Name of the object
-        public string objectName;
-
         // Boolean that stores if object is currently movable
         public bool isMovable;
 
@@ -23,13 +20,6 @@ namespace Objects
         public string GetObjectId()
         {
             return objectId.ToString();
-        }
-
-
-        // Getter for object name
-        public string GetObjectName()
-        {
-            return objectName;
         }
 
         // Getter and setters for isMovable

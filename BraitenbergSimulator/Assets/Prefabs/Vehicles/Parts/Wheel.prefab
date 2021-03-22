@@ -428,6 +428,7 @@ MonoBehaviour:
   - {fileID: 5974542757714909461}
   - {fileID: 4859057658891482651}
   - {fileID: 6584159820654212599}
+  name: Wheel
   body: {fileID: 7620650000600878599}
   baseSpeed: 0
   strength: 10

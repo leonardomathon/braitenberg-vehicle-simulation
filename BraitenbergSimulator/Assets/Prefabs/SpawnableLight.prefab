@@ -315,7 +315,7 @@ MonoBehaviour:
   materialDefault: {fileID: 2100000, guid: 69bcb95d3ccf71a48b85c929b720bd7d, type: 2}
   materialSelected: {fileID: 2100000, guid: e13dbe86110ad2b4d872953673933db4, type: 2}
   children: []
-  objectName: Lightbulb
+  name: Lightbulb
   isMovable: 0
   intensity: 10
   color: 0

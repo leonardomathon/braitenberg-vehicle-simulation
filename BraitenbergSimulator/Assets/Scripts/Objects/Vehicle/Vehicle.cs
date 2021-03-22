@@ -71,11 +71,13 @@ namespace Objects.Vehicle {
 		}
 
 		private ConfigurationFloat configureSensorsPosition;
+		private ConfigurationFloat configureSensorsRotation;
 
 		private new void Start() {
 			AttachMovementScript();
 
 			configureSensorsPosition = new ConfigurationFloat("Sensor positions", "Forward/backwards offset of sensors", () => SensorsPosition, value => SensorsPosition = value);
+			configureSensorsRotation = new ConfigurationFloat("Sensor rotations", "Rotation of both sensors", () => SensorsRotation, value => SensorsRotation = value);
 		}
 		protected void Update() {
 			// base.Update();
@@ -92,8 +94,11 @@ namespace Objects.Vehicle {
 			rightWheel.SetForce(activations[1]);
 		}
 
-		public new List<Configuration> Configuration() {
-			return new List<Configuration> {configureSensorsPosition};
+		public override List<Configuration> Configuration() {
+			return new List<Configuration> {
+				configureSensorsPosition,
+				configureSensorsRotation
+			};
 		}
 
 		// Update movementscript if VehicleType has changed

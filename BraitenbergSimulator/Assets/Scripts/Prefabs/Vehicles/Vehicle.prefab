@@ -310,9 +310,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9092468673556325975}
-  - component: {fileID: 4999079258368738322}
   - component: {fileID: 835824868691075095}
   - component: {fileID: 7790121973072425608}
+  - component: {fileID: 4999079258368738322}
   m_Layer: 10
   m_Name: Vehicle
   m_TagString: Untagged
@@ -336,36 +336,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4999079258368738322
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7429789093598748827}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4000317f41d5894408e0518addbbe107, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  materialDefault: {fileID: 0}
-  materialSelected: {fileID: 0}
-  children:
-  - {fileID: 4691758220293377384}
-  - {fileID: 6013341402039124445}
-  - {fileID: 3147922123888209539}
-  - {fileID: 7915743158338378990}
-  - {fileID: 6643458282918203745}
-  - {fileID: 8158513834311985715}
-  objectName: 
-  isMovable: 0
-  type: 1
-  position: {x: 0, y: 0, z: 0}
-  body: {fileID: 278719088393822531}
-  leftWheel: {fileID: 6643458282918203745}
-  rightWheel: {fileID: 8158513834311985715}
-  leftSensor: {fileID: 6013341402039124445}
-  rightSensor: {fileID: 3147922123888209539}
 --- !u!54 &835824868691075095
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -396,6 +366,37 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 0
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4999079258368738322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7429789093598748827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4000317f41d5894408e0518addbbe107, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  materialDefault: {fileID: 0}
+  materialSelected: {fileID: 0}
+  children:
+  - {fileID: 4691758220293377384}
+  - {fileID: 6013341402039124445}
+  - {fileID: 3147922123888209539}
+  - {fileID: 7915743158338378990}
+  - {fileID: 6643458282918203745}
+  - {fileID: 8158513834311985715}
+  objectName: Vehicle
+  isMovable: 0
+  type: 1
+  position: {x: 0, y: 0, z: 0}
+  body: {fileID: 278719088393822531}
+  sensors: {fileID: 4572344983414848718}
+  leftWheel: {fileID: 6643458282918203745}
+  rightWheel: {fileID: 8158513834311985715}
+  leftSensor: {fileID: 6013341402039124445}
+  rightSensor: {fileID: 3147922123888209539}
 --- !u!1001 &325246835089464413
 PrefabInstance:
   m_ObjectHideFlags: 0
