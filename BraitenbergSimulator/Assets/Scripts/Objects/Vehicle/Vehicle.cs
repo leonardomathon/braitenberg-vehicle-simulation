@@ -3,7 +3,6 @@ using Configurations;
 using Objects.Vehicle.Motors;
 using Objects.Light;
 using UnityEngine;
-using System.Collections.Generic;
 
 namespace Objects.Vehicle {
 	[System.Serializable] public class Vehicle : Object {
@@ -21,7 +20,7 @@ namespace Objects.Vehicle {
 
 		public Sensor leftSensor;
 		public Sensor rightSensor;
-	
+
 		private GameManager gameManager;
 		private VehicleMovement movement;
 
@@ -75,7 +74,7 @@ namespace Objects.Vehicle {
 
 		private new void Start() {
 			AttachMovementScript();
-			
+
 			configureSensorsPosition = new ConfigurationFloat("Sensor positions", "Forward/backwards offset of sensors", () => SensorsPosition, value => SensorsPosition = value);
 		}
 		protected void Update() {
@@ -83,16 +82,16 @@ namespace Objects.Vehicle {
 			// UpdateMovementScript();
 			UpdateBodyRotation();
 
-            List<Lightbulb> lights = gameManager.GetLights();
-            float[] measurements = new float[] { leftSensor.Measure(lights), rightSensor.Measure(lights) };
-            float[] activations = movement.MotorActivation(measurements);
+			List<Lightbulb> lights = gameManager.GetLights();
+			float[] measurements = new float[] {leftSensor.Measure(lights), rightSensor.Measure(lights)};
+			float[] activations = movement.MotorActivation(measurements);
 
-            // Debug.Log(activations.Aggregate("Motors: ", (current, activation) => current + (activation + ", ")));
+			// Debug.Log(activations.Aggregate("Motors: ", (current, activation) => current + (activation + ", ")));
 
 			leftWheel.SetForce(activations[0]);
 			rightWheel.SetForce(activations[1]);
 		}
-		
+
 		public new List<Configuration> Configuration() {
 			return new List<Configuration> {configureSensorsPosition};
 		}
@@ -105,14 +104,14 @@ namespace Objects.Vehicle {
 				SetMovementType(type);
 			}
 		}
-		
+
 		private void UpdateBodyRotation() {
 			var transformLocalRotation = body.transform.rotation;
 			transformLocalRotation.x = 0;
 			transformLocalRotation.z = 0;
 			body.transform.rotation = transformLocalRotation;
 		}
-		
+
 		// Attach the right movement script to the vehicle object based on VehicleType
 		private void AttachMovementScript() {
 			_type = type;
