@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Configurations;
 using Objects.Vehicle.Motors;
+using Objects.Light;
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace Objects.Vehicle {
 	[System.Serializable] public class Vehicle : Object {
@@ -81,11 +83,11 @@ namespace Objects.Vehicle {
 			// UpdateMovementScript();
 			UpdateBodyRotation();
 
-			var lights = gameManager.GetLights();
-			var measurements = new[] {leftSensor.Measure(lights), rightSensor.Measure(lights)};
-			var activations = movement.MotorActivation(measurements);
+            List<Lightbulb> lights = gameManager.GetLights();
+            float[] measurements = new float[] { leftSensor.Measure(lights), rightSensor.Measure(lights) };
+            float[] activations = movement.MotorActivation(measurements);
 
-			// Debug.Log(activations.Aggregate("Motors: ", (current, activation) => current + (activation + ", ")));
+            // Debug.Log(activations.Aggregate("Motors: ", (current, activation) => current + (activation + ", ")));
 
 			leftWheel.SetForce(activations[0]);
 			rightWheel.SetForce(activations[1]);
