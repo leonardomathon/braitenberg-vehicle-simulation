@@ -46,7 +46,7 @@ public class Spawner : MonoBehaviour
         var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         // Check if ray hits something with the mask "SpawnableArea"
-        if ((Physics.Raycast(ray, out var hit, 100, spawnableAreaMask)) && (selectedObjectToSpawn != null))
+        if ((Physics.Raycast(ray, out var hit, 500, spawnableAreaMask)) && (selectedObjectToSpawn != null))
         {
             SpawnObject(selectedObjectToSpawn, hit.point);
         }
