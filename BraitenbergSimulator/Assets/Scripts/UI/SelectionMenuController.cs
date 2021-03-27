@@ -100,6 +100,7 @@ namespace UI {
 			selectedObjectTag.ForceMeshUpdate();
 		}
 		private void SetSelectedConfigurations(IEnumerable<Configuration> selectedConfigurations) {
+			ResetSelectedConfigurations();
 			foreach (var configuration in selectedConfigurations) {
 				// For each configuration, find the highest 'priority' input element that accepts it
 				foreach (var ui in configurationUI) {

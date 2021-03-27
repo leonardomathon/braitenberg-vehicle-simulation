@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Configurations;
 using Objects.Light;
 using UnityEngine;
 
@@ -10,6 +11,10 @@ namespace Objects.Vehicle {
 		public float sensitivity;
 		
 		public GameObject body;
+
+		private ConfigurationRange configureRotation;
+		private ConfigurationFloat configureSensitivity;
+		private ConfigurationRange configureFieldOfView;
 
 		public float FieldOfView {
 			// TODO: Enforce value limits? 0-180
@@ -29,6 +34,12 @@ namespace Objects.Vehicle {
 				rotation.z = value;
 				sensorTransform.localEulerAngles = rotation;
 			}
+		}
+		
+		private new void Start() {
+			configureRotation = new ConfigurationRange("Rotation", "Direction of this sensor", 0, 360, () => Rotation, value => Rotation = value);
+			configureSensitivity = new ConfigurationFloat("Sensitivity", "Sensitivity to light", () => Sensitivity, value => Sensitivity = value);
+			configureFieldOfView = new ConfigurationRange("Field of view", "Viewing angle width of this sensor", 0, 180, () => FieldOfView, value => FieldOfView = value);
 		}
 
 		public float Measure(IEnumerable<Lightbulb> lights) {
@@ -51,9 +62,16 @@ namespace Objects.Vehicle {
 			
 			return total;
 		}
-		
 		private float Intensity(float angle, float distance, float sourceIntensity, float sourceColor) {
 			return sensitivity * (sourceIntensity / distance / angle); // TODO: This is a terrible formula
+		}
+		
+		public override List<Configuration> Configuration() {
+			return new List<Configuration> {
+				configureRotation,
+				configureSensitivity,
+				configureFieldOfView
+			};
 		}
 	}
 }

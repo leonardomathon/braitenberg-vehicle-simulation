@@ -24,6 +24,14 @@ namespace Objects.Vehicle {
 		private GameManager gameManager;
 		private VehicleMovement movement;
 
+		private ConfigurationRange configureSensorsPosition;
+		private ConfigurationRange configureSensorsRotation;
+		private ConfigurationFloat configureSensorsSensitivity;
+		private ConfigurationRange configureSensorsFieldOfView;
+
+		private ConfigurationFloat configureWheelsBaseSpeed;
+		private ConfigurationFloat configureWheelsStrength;
+
 		// TODO: Maybe not return the average for get, but some indication that the individual values are unique
 		public float WheelsBaseSpeed {
 			get => (leftWheel.BaseSpeed + rightWheel.BaseSpeed) / 2;
@@ -70,16 +78,15 @@ namespace Objects.Vehicle {
 			}
 		}
 
-		private ConfigurationRange configureSensorsRange;
-		private ConfigurationFloat configureSensorsPosition;
-		private ConfigurationRange configureSensorsRotation;
-
 		private new void Start() {
 			AttachMovementScript();
 
-			configureSensorsRange = new ConfigurationRange("Sensor positions", "Forward/backwards offset of sensors", -1, 1, () => SensorsPosition, value => SensorsPosition = value);
-			configureSensorsPosition = new ConfigurationFloat("Sensor positions", "Forward/backwards offset of sensors", () => SensorsPosition, value => SensorsPosition = value);
+			configureSensorsPosition = new ConfigurationRange("Sensor positions", "Forward/backwards offset of sensors", -1, 1, () => SensorsPosition, value => SensorsPosition = value);
 			configureSensorsRotation = new ConfigurationRange("Sensor rotations", "Rotation of both sensors", 0, 360, () => SensorsRotation, value => SensorsRotation = value);
+			configureSensorsSensitivity = new ConfigurationFloat("Sensor sensitivities", "Sensitivity to light of both sensors", () => SensorsSensitivity, value => SensorsSensitivity = value);
+			configureSensorsFieldOfView = new ConfigurationRange("Sensor fields of view", "Viewing angle width of both sensors", 0, 180, () => SensorsFieldOfView, value => SensorsFieldOfView = value);
+			configureWheelsBaseSpeed = new ConfigurationFloat("Motor base speeds", "Base speed of both motors", () => WheelsBaseSpeed, value => WheelsBaseSpeed = value);
+			configureWheelsStrength = new ConfigurationFloat("Motor strengths", "Power output of both motors", () => WheelsStrength, value => WheelsStrength = value);
 		}
 		protected void Update() {
 			// base.Update();
@@ -94,14 +101,6 @@ namespace Objects.Vehicle {
 
 			leftWheel.SetForce(activations[0]);
 			rightWheel.SetForce(activations[1]);
-		}
-
-		public override List<Configuration> Configuration() {
-			return new List<Configuration> {
-				configureSensorsRange,
-				configureSensorsPosition,
-				configureSensorsRotation
-			};
 		}
 
 		// Update movementscript if VehicleType has changed
@@ -146,6 +145,17 @@ namespace Objects.Vehicle {
 		}
 		public void SetGameManager(GameManager gameManager) {
 			this.gameManager = gameManager;
+		}
+
+		public override List<Configuration> Configuration() {
+			return new List<Configuration> {
+				configureSensorsPosition,
+				configureSensorsRotation,
+				configureSensorsSensitivity,
+				configureSensorsFieldOfView,
+				configureWheelsBaseSpeed,
+				configureWheelsStrength
+			};
 		}
 	}
 }
