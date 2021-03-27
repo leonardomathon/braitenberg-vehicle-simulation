@@ -14,11 +14,11 @@ namespace UI {
 		public override void SetConfiguration(Configuration configuration) {
 			this.configuration = configuration;
 			SetTitle(configuration.Name());
-			SetValue(configuration.Get());
 			if (configuration is ConfigurationRange range) {
 				SetMinimum(range.Minimum());
 				SetMaximum(range.Maximum());
 			}
+			SetValue(configuration.Get());
 		}
 		public override bool AcceptsConfiguration(Configuration configuration) {
 			return configuration is ConfigurationRange;

@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Configurations;
 using TMPro;
 using UnityEngine;
@@ -8,83 +10,55 @@ using Selectable = Objects.Selectable;
 
 namespace UI {
 	public class SelectionMenuController : MonoBehaviour {
-		public GameObject selectionMenu;
-		public GameObject selectedObjectToolMenu;
+		public TextMeshProUGUI selectedObjectTag;
 		public GameObject configurations;
+		public GameObject actionsContainer;
+		public GameObject actions;
+
+		public UIButton[] actionUI = new UIButton[4];
 		public ConfigurationInput[] configurationUI;
 
-		private TextMeshProUGUI selectedObjectTag;
-
-		private Selectable selectedObject;
-
-		private Button[] toolMenuButtons = new Button[4];
-
+		private Dictionary<SelectableButton, UIButton> actionButtons;
+		
 		private SelectionController selectionController;
 
-		void Start() {
+		private void Start() {
 			// Get instance of selection controller
 			selectionController = SelectionController.Instance;
-			selectedObject = selectionController.GetSelectedObject();
 
-			// Get used components
-			selectedObjectTag = selectionMenu.transform.Find("SelectedObjectTag").GetComponent<TextMeshProUGUI>();
-
-			// Set toolbar inactive
-			selectedObjectToolMenu.SetActive(false);
-
-			// Setup tool buttons
-			SetupToolButtons();
+			actionButtons = new Dictionary<SelectableButton, UIButton> {
+				{SelectableButton.Deselect, actionUI[0]}, 
+				{SelectableButton.Delete, actionUI[1]}, 
+				{SelectableButton.Move, actionUI[2]}, 
+				{SelectableButton.Rotate, actionUI[3]}
+			};
 
 			selectionController.ObjectSelected += ObjectSelected;
 			selectionController.ObjectDeselected += ObjectDeselected;
 		}
 
 		private void ObjectSelected(Selectable selected) {
-			selectedObject = selected;
 			SetSelectedObjectText(selected.Name());
 			SetSelectedConfigurations(selected.Configuration());
+			SetSelectedActions(AppendDeselectButton(selected.Actions()));
 		}
 		private void ObjectDeselected(Selectable deselected) {
-			selectedObject = null;
 			ResetSelectedObjectText();
 			ResetSelectedConfigurations();
+			ResetSelectedActions();
 		}
 
-		private void SetupToolButtons() {
-			// Get the grid in which the buttons are situated
-			GameObject grid = selectedObjectToolMenu.transform.Find("Grid").gameObject;
-
-			// Get all buttons
-			for (int i = 0; i < grid.transform.childCount; i++) {
-				toolMenuButtons[i] = grid.transform.GetChild(i).GetComponent<Button>();
-			}
-
-			// Setup listeners
-			toolMenuButtons[0].onClick.AddListener(ClickSelectButton);
-			toolMenuButtons[1].onClick.AddListener(ClickDeleteButton);
-			toolMenuButtons[2].onClick.AddListener(ClickMoveButton);
-			toolMenuButtons[3].onClick.AddListener(ClickRotateButton);
+		private List<Tuple<Action, SelectableButton>> AppendDeselectButton(List<Tuple<Action, SelectableButton>> actions) {
+			actions.Insert(0, new Tuple<Action, SelectableButton>(ClickDeselectButton, SelectableButton.Deselect));
+			return actions;
 		}
-
-		private void ClickSelectButton() {
+		private void ClickDeselectButton() {
 			selectionController.ResetSelectedObject();
-		}
-		private void ClickDeleteButton() {
-			selectionController.DeleteSelectedObject();
-		}
-		private void ClickMoveButton() {
-			selectionController.MoveSelectedObject();
-		}
-		private void ClickRotateButton() {
-			selectionController.RotateSelectedObject();
 		}
 
 		private void SetSelectedObjectText(string text) {
 			// Set the text of the tooltip
 			selectedObjectTag.SetText(text);
-
-			// Activate toolbar
-			selectedObjectToolMenu.SetActive(true);
 
 			// Update text mesh to prevent bug
 			selectedObjectTag.ForceMeshUpdate();
@@ -93,14 +67,15 @@ namespace UI {
 			// Set the text of the tooltip
 			selectedObjectTag.SetText("No object selected");
 
-			// Deactivate toolbar
-			selectedObjectToolMenu.SetActive(false);
-
 			// Update text mesh to prevent bug
 			selectedObjectTag.ForceMeshUpdate();
 		}
-		private void SetSelectedConfigurations(IEnumerable<Configuration> selectedConfigurations) {
+		
+		private void SetSelectedConfigurations(IReadOnlyCollection<Configuration> selectedConfigurations) {
 			ResetSelectedConfigurations();
+			if (selectedConfigurations.Count > 0) {
+				configurations.SetActive(true);
+			}
 			foreach (var configuration in selectedConfigurations) {
 				// For each configuration, find the highest 'priority' input element that accepts it
 				foreach (var ui in configurationUI) {
@@ -114,7 +89,25 @@ namespace UI {
 			}
 		}
 		private void ResetSelectedConfigurations() {
+			configurations.SetActive(false);
 			foreach (Transform child in configurations.transform) {
+				Destroy(child.gameObject);
+			}
+		}
+		
+		private void SetSelectedActions(IReadOnlyCollection<Tuple<Action, SelectableButton>> selectedActions) {
+			ResetSelectedActions();
+			if (selectedActions.Count > 0) {
+				actionsContainer.SetActive(true);
+			}
+			foreach (var (action, button) in selectedActions) {
+				UIButton element = Instantiate(actionButtons[button], Vector3.zero, Quaternion.identity, actions.transform);
+				element.SetAction(action);
+			}
+		}
+		private void ResetSelectedActions() {
+			actionsContainer.SetActive(false);
+			foreach (Transform child in actions.transform) {
 				Destroy(child.gameObject);
 			}
 		}

@@ -389,6 +389,9 @@ MonoBehaviour:
   - {fileID: 8158513834311985715}
   objectName: Vehicle
   isMovable: 0
+  moveableAreaMask:
+    serializedVersion: 2
+    m_Bits: 512
   type: 1
   position: {x: 0, y: 0, z: 0}
   body: {fileID: 278719088393822531}

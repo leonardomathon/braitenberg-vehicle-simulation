@@ -21,7 +21,6 @@ namespace Objects.Vehicle {
 		public Sensor leftSensor;
 		public Sensor rightSensor;
 
-		private GameManager gameManager;
 		private VehicleMovement movement;
 
 		private ConfigurationRange configureSensorsPosition;
@@ -79,6 +78,7 @@ namespace Objects.Vehicle {
 		}
 
 		private new void Start() {
+			base.Start();
 			AttachMovementScript();
 
 			configureSensorsPosition = new ConfigurationRange("Sensor positions", "Forward/backwards offset of sensors", -1, 1, () => SensorsPosition, value => SensorsPosition = value);
@@ -88,13 +88,13 @@ namespace Objects.Vehicle {
 			configureWheelsBaseSpeed = new ConfigurationFloat("Motor base speeds", "Base speed of both motors", () => WheelsBaseSpeed, value => WheelsBaseSpeed = value);
 			configureWheelsStrength = new ConfigurationFloat("Motor strengths", "Power output of both motors", () => WheelsStrength, value => WheelsStrength = value);
 		}
-		protected void Update() {
-			// base.Update();
+		protected new void Update() {
+			base.Update();
 			// UpdateMovementScript();
 			UpdateBodyRotation();
 
 			List<Lightbulb> lights = gameManager.GetLights();
-			float[] measurements = new float[] {leftSensor.Measure(lights), rightSensor.Measure(lights)};
+			float[] measurements = {leftSensor.Measure(lights), rightSensor.Measure(lights)};
 			float[] activations = movement.MotorActivation(measurements);
 
 			// Debug.Log(activations.Aggregate("Motors: ", (current, activation) => current + (activation + ", ")));
@@ -126,7 +126,7 @@ namespace Objects.Vehicle {
 		}
 		private void SetMovementType(VehicleType type) {
 			switch (type) {
-				case VehicleType.Agression:
+				case VehicleType.Aggression:
 					movement = new VehicleMovementAgression();
 					break;
 				case VehicleType.Exploration:

@@ -1,7 +1,6 @@
+using System;
 using System.Collections.Generic;
 using Configurations;
-using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Objects {
 	public class Selectable : Highlightable {
@@ -15,6 +14,9 @@ namespace Objects {
 		}
 		public virtual List<Configuration> Configuration() {
 			return new List<Configuration>();
+		}
+		public virtual List<Tuple<Action, SelectableButton>> Actions() {
+			return new List<Tuple<Action, SelectableButton>>();
 		}
 
 		public new bool IsSelected() {

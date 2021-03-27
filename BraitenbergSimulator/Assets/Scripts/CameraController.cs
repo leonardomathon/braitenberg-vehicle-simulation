@@ -233,6 +233,7 @@ public class CameraController : MonoBehaviour
 
     public void ResetTarget()
     {
+        UnfollowTarget();
         target = defaultTarget;
         target.transform.hasChanged = true;
     }
