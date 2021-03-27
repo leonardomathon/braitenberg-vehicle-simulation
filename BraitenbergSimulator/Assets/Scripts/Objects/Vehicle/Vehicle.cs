@@ -70,14 +70,16 @@ namespace Objects.Vehicle {
 			}
 		}
 
+		private ConfigurationRange configureSensorsRange;
 		private ConfigurationFloat configureSensorsPosition;
-		private ConfigurationFloat configureSensorsRotation;
+		private ConfigurationRange configureSensorsRotation;
 
 		private new void Start() {
 			AttachMovementScript();
 
+			configureSensorsRange = new ConfigurationRange("Sensor positions", "Forward/backwards offset of sensors", -1, 1, () => SensorsPosition, value => SensorsPosition = value);
 			configureSensorsPosition = new ConfigurationFloat("Sensor positions", "Forward/backwards offset of sensors", () => SensorsPosition, value => SensorsPosition = value);
-			configureSensorsRotation = new ConfigurationFloat("Sensor rotations", "Rotation of both sensors", () => SensorsRotation, value => SensorsRotation = value);
+			configureSensorsRotation = new ConfigurationRange("Sensor rotations", "Rotation of both sensors", 0, 360, () => SensorsRotation, value => SensorsRotation = value);
 		}
 		protected void Update() {
 			// base.Update();
@@ -96,6 +98,7 @@ namespace Objects.Vehicle {
 
 		public override List<Configuration> Configuration() {
 			return new List<Configuration> {
+				configureSensorsRange,
 				configureSensorsPosition,
 				configureSensorsRotation
 			};

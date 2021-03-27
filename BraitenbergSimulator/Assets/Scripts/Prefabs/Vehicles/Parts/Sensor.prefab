@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2457297544906583377}
   - component: {fileID: 6336613470034910592}
   - component: {fileID: 7423037985207046647}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Sensor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 3916648022762588659}
   - component: {fileID: 4189674016311726140}
   - component: {fileID: 954918287053212859}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -201,7 +201,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7987092226846886064}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Rotation
   m_TagString: Untagged
   m_Icon: {fileID: 0}

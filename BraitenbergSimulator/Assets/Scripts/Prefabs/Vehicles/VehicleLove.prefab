@@ -7,11 +7,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 835824868691075095, guid: 108146d433917704c876495caebb300f,
-        type: 3}
-      propertyPath: m_Interpolate
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4691758220293377384, guid: 108146d433917704c876495caebb300f,
         type: 3}
       propertyPath: materialDefault
@@ -35,7 +30,7 @@ PrefabInstance:
     - target: {fileID: 6006713224730928718, guid: 108146d433917704c876495caebb300f,
         type: 3}
       propertyPath: m_ConnectedAnchor.x
-      value: -1.1999998
+      value: -1.2
       objectReference: {fileID: 0}
     - target: {fileID: 6643458282918203745, guid: 108146d433917704c876495caebb300f,
         type: 3}
