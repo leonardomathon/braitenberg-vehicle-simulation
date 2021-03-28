@@ -44,6 +44,9 @@ namespace Objects {
 				PlaceObject();
 			}
 		}
+		
+		// TODO: Clean up this mess
+		// TODO: There is some issue with re-activating vehicles after moving
 
 		// Getter for object id
 		public string GetObjectId() {
