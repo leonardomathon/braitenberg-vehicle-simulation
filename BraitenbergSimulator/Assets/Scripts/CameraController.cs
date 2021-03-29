@@ -25,7 +25,7 @@ public class CameraController : MonoBehaviour
     [SerializeField] [Range(0, 90)] private int minZoomDistance = 5;
 
     // Maximum zoom distance
-    [SerializeField] [Range(0, 90)] private int maxZoomDistance = 15;
+    [SerializeField] [Range(0, 150)] private int maxZoomDistance = 120;
 
     // Speed to zoom
     [SerializeField] [Range(1, 10)] private float zoomSpeed = 8;
@@ -82,7 +82,7 @@ public class CameraController : MonoBehaviour
         {
 
             // Get the destination in terms of x and z
-            Vector3 destinationPos = new Vector3(target.position.x, 20, target.position.z);
+            Vector3 destinationPos = new Vector3(target.position.x, 100, target.position.z);
 
             // Interpolate to that destination
             Vector3 smoothPos = Vector3.Slerp(cam.transform.position, destinationPos, interpolationSpeed * Time.unscaledDeltaTime);
