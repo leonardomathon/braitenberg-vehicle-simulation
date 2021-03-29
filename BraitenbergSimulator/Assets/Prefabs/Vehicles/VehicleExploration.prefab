@@ -7,6 +7,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 783401454154156796, guid: d55666c939e38014c8b347a5123f7a0e,
+        type: 3}
+      propertyPath: baseSpeed
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4088009504521307407, guid: d55666c939e38014c8b347a5123f7a0e,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -36,6 +41,11 @@ PrefabInstance:
         type: 3}
       propertyPath: objectName
       value: Exploring vehicle
+      objectReference: {fileID: 0}
+    - target: {fileID: 5733396007495301394, guid: d55666c939e38014c8b347a5123f7a0e,
+        type: 3}
+      propertyPath: baseSpeed
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6611238424317727026, guid: d55666c939e38014c8b347a5123f7a0e,
         type: 3}
