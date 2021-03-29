@@ -14,6 +14,7 @@ namespace Objects.Vehicle {
 
 		public GameObject body;
 		public GameObject sensors;
+		public Rigidbody rigidBody;
 
 		public Wheel leftWheel;
 		public Wheel rightWheel;
@@ -23,6 +24,8 @@ namespace Objects.Vehicle {
 
 		private VehicleMovement movement;
 
+		private ConfigurationFloat configureMass;
+		
 		private ConfigurationRange configureSensorsPosition;
 		private ConfigurationRange configureSensorsRotation;
 		private ConfigurationFloat configureSensorsSensitivity;
@@ -30,21 +33,14 @@ namespace Objects.Vehicle {
 
 		private ConfigurationFloat configureWheelsBaseSpeed;
 		private ConfigurationFloat configureWheelsStrength;
+		private ConfigurationFloat configureWheelsMass;
+		private ConfigurationFloat configureWheelsDrag;
+		private ConfigurationFloat configureWheelsAngularDrag;
 
 		// TODO: Maybe not return the average for get, but some indication that the individual values are unique
-		public float WheelsBaseSpeed {
-			get => (leftWheel.BaseSpeed + rightWheel.BaseSpeed) / 2;
-			set {
-				leftWheel.BaseSpeed = value;
-				rightWheel.BaseSpeed = value;
-			}
-		}
-		public float WheelsStrength {
-			get => (leftWheel.Strength + rightWheel.Strength) / 2;
-			set {
-				leftWheel.Strength = value;
-				rightWheel.Strength = value;
-			}
+		public float Mass {
+			get => rigidBody.mass;
+			set => rigidBody.mass = value;
 		}
 		public float SensorsFieldOfView {
 			get => (leftSensor.FieldOfView + rightSensor.FieldOfView) / 2;
@@ -76,21 +72,60 @@ namespace Objects.Vehicle {
 				rightSensor.Rotation = value;
 			}
 		}
+		
+		public float WheelsBaseSpeed {
+			get => (leftWheel.BaseSpeed + rightWheel.BaseSpeed) / 2;
+			set {
+				leftWheel.BaseSpeed = value;
+				rightWheel.BaseSpeed = value;
+			}
+		}
+		public float WheelsStrength {
+			get => (leftWheel.Strength + rightWheel.Strength) / 2;
+			set {
+				leftWheel.Strength = value;
+				rightWheel.Strength = value;
+			}
+		}
+		public float WheelsMass {
+			get => (leftWheel.Mass + rightWheel.Mass) / 2;
+			set {
+				leftWheel.Mass = value;
+				rightWheel.Mass = value;
+			}
+		}
+		public float WheelsDrag {
+			get => (leftWheel.Drag + rightWheel.Drag) / 2;
+			set {
+				leftWheel.Drag = value;
+				rightWheel.Drag = value;
+			}
+		}
+		public float WheelsAngularDrag {
+			get => (leftWheel.AngularDrag + rightWheel.AngularDrag) / 2;
+			set {
+				leftWheel.AngularDrag = value;
+				rightWheel.AngularDrag = value;
+			}
+		}
 
 		private new void Start() {
 			base.Start();
 			AttachMovementScript();
 
+			configureMass = new ConfigurationFloat("Vehicle mass", "Physical mass of the vehicle", () => Mass, value => Mass = value);
 			configureSensorsPosition = new ConfigurationRange("Sensor positions", "Forward/backwards offset of sensors", -1, 1, () => SensorsPosition, value => SensorsPosition = value);
 			configureSensorsRotation = new ConfigurationRange("Sensor rotations", "Rotation of both sensors", 0, 360, () => SensorsRotation, value => SensorsRotation = value);
 			configureSensorsSensitivity = new ConfigurationFloat("Sensor sensitivities", "Sensitivity to light of both sensors", () => SensorsSensitivity, value => SensorsSensitivity = value);
 			configureSensorsFieldOfView = new ConfigurationRange("Sensor fields of view", "Viewing angle width of both sensors", 0, 180, () => SensorsFieldOfView, value => SensorsFieldOfView = value);
 			configureWheelsBaseSpeed = new ConfigurationFloat("Motor base speeds", "Base speed of both motors", () => WheelsBaseSpeed, value => WheelsBaseSpeed = value);
 			configureWheelsStrength = new ConfigurationFloat("Motor strengths", "Power output of both motors", () => WheelsStrength, value => WheelsStrength = value);
+			configureWheelsMass = new ConfigurationFloat("Wheel mass", "Physical mass of both wheels", () => WheelsMass, value => WheelsMass = value);
+			configureWheelsDrag = new ConfigurationFloat("Wheel drag", "Drag of both wheels", () => WheelsDrag, value => WheelsDrag = value);
+			configureWheelsAngularDrag = new ConfigurationFloat("Wheel angular drag", "Angular drag of both wheels", () => WheelsAngularDrag, value => WheelsAngularDrag = value);
 		}
 		protected new void Update() {
 			base.Update();
-			// UpdateMovementScript();
 			UpdateBodyRotation();
 
 			List<Lightbulb> lights = gameManager.GetLights();
@@ -113,10 +148,14 @@ namespace Objects.Vehicle {
 		}
 
 		private void UpdateBodyRotation() {
-			var transformLocalRotation = body.transform.rotation;
-			transformLocalRotation.x = 0;
-			transformLocalRotation.z = 0;
-			body.transform.rotation = transformLocalRotation;
+			var transformRotation = body.transform.rotation;
+			transformRotation.x = 0;
+			transformRotation.z = 0;
+			body.transform.rotation = transformRotation;
+			
+			var transformLocalRotation = body.transform.localRotation;
+			transformLocalRotation.y = 0;
+			body.transform.localRotation = transformLocalRotation;
 		}
 
 		// Attach the right movement script to the vehicle object based on VehicleType
@@ -149,12 +188,16 @@ namespace Objects.Vehicle {
 
 		public override List<Configuration> Configuration() {
 			return new List<Configuration> {
+				configureMass,
 				configureSensorsPosition,
 				configureSensorsRotation,
 				configureSensorsSensitivity,
 				configureSensorsFieldOfView,
 				configureWheelsBaseSpeed,
-				configureWheelsStrength
+				configureWheelsStrength,
+				configureWheelsMass,
+				configureWheelsDrag,
+				configureWheelsAngularDrag
 			};
 		}
 	}

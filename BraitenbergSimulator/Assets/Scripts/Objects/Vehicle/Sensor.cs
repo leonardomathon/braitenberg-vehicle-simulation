@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Configurations;
 using Objects.Light;
@@ -11,6 +12,7 @@ namespace Objects.Vehicle {
 		public float sensitivity;
 		
 		public GameObject body;
+		public SensorMesh sensorMesh;
 
 		private ConfigurationRange configureRotation;
 		private ConfigurationFloat configureSensitivity;
@@ -19,7 +21,10 @@ namespace Objects.Vehicle {
 		public float FieldOfView {
 			// TODO: Enforce value limits? 0-180
 			get => fieldOfView;
-			set => fieldOfView = value;
+			set {
+				fieldOfView = value;
+				sensorMesh.SetAngle(value * 2);
+			}
 		}
 		public float Sensitivity {
 			get => sensitivity;
@@ -27,16 +32,17 @@ namespace Objects.Vehicle {
 		}
 		public float Rotation {
 			// TODO: Enforce value limits? 0-360
-			get => body.transform.localEulerAngles.z;
+			get => body.transform.localEulerAngles.y;
 			set {
 				Transform sensorTransform = body.transform;
 				Vector3 rotation = sensorTransform.localEulerAngles;
-				rotation.z = value;
+				rotation.y = value;
 				sensorTransform.localEulerAngles = rotation;
 			}
 		}
 		
 		private new void Start() {
+			sensorMesh.SetAngle(fieldOfView * 2);
 			configureRotation = new ConfigurationRange("Rotation", "Direction of this sensor", 0, 360, () => Rotation, value => Rotation = value);
 			configureSensitivity = new ConfigurationFloat("Sensitivity", "Sensitivity to light", () => Sensitivity, value => Sensitivity = value);
 			configureFieldOfView = new ConfigurationRange("Field of view", "Viewing angle width of this sensor", 0, 180, () => FieldOfView, value => FieldOfView = value);
@@ -44,14 +50,14 @@ namespace Objects.Vehicle {
 
 		public float Measure(IEnumerable<Lightbulb> lights) {
 			var sensorTransform = body.transform;
-			var sensorOrigin = sensorTransform.position + sensorTransform.forward * 0.5f;
+			var sensorOrigin = sensorTransform.position;
 			
 			float total = 0;
 
 			foreach (var bulb in lights) {
 				var vector = bulb.transform.position - sensorOrigin;
 				var distance = vector.magnitude;
-				var angle = Vector3.Angle(transform.forward, vector);
+				var angle = Vector3.Angle(sensorTransform.right, vector); // For some reason with the custom mesh we need .right and not .forward here
 				var obstructed = Physics.Raycast(sensorOrigin, vector, distance, LAYER_MASK); 
 				// TODO: It's clean, but not optimal, raycast if done even if it's out of the field of view
 				

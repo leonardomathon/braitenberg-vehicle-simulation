@@ -46,7 +46,6 @@ namespace Objects {
 		}
 		
 		// TODO: Clean up this mess
-		// TODO: There is some issue with re-activating vehicles after moving
 
 		// Getter for object id
 		public string GetObjectId() {
@@ -115,7 +114,7 @@ namespace Objects {
 
 			// Enable gravity for the object
 			foreach (Rigidbody r in GetComponentsInChildren<Rigidbody>()) {
-				r.useGravity = false;
+				r.useGravity = true;
 			}
 
 			// Enable collisions

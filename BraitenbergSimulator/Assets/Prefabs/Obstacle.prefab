@@ -126,5 +126,8 @@ MonoBehaviour:
   materialDefault: {fileID: 2100000, guid: 7c9398bb4ac141f4bad7fe476bddb791, type: 2}
   materialSelected: {fileID: 2100000, guid: 2ee36246034aedc4484946a0ab53deaa, type: 2}
   children: []
-  name: Obstacle
+  objectName: Obstacle
   isMovable: 0
+  moveableAreaMask:
+    serializedVersion: 2
+    m_Bits: 4608
