@@ -7,10 +7,7 @@ using UnityEngine;
 namespace Objects.Vehicle {
 	[System.Serializable] public class Vehicle : Object {
 		[SerializeField] private VehicleType type;
-
 		private VehicleType _type;
-
-		[SerializeField] private Vector3 position;
 
 		public GameObject body;
 		public GameObject sensors;
@@ -21,6 +18,8 @@ namespace Objects.Vehicle {
 
 		public Sensor leftSensor;
 		public Sensor rightSensor;
+
+		public float initialSensorSensorRotation;
 
 		private VehicleMovement movement;
 
@@ -113,9 +112,11 @@ namespace Objects.Vehicle {
 			base.Start();
 			AttachMovementScript();
 
+			SensorsRotation = initialSensorSensorRotation;
+
 			configureMass = new ConfigurationFloat("Vehicle mass", "Physical mass of the vehicle", () => Mass, value => Mass = value);
 			configureSensorsPosition = new ConfigurationRange("Sensor positions", "Forward/backwards offset of sensors", -1, 1, () => SensorsPosition, value => SensorsPosition = value);
-			configureSensorsRotation = new ConfigurationRange("Sensor rotations", "Rotation of both sensors", 0, 360, () => SensorsRotation, value => SensorsRotation = value);
+			configureSensorsRotation = new ConfigurationRange("Sensor rotations", "Rotation of both sensors", 0, 359.999f, () => SensorsRotation, value => SensorsRotation = value);
 			configureSensorsSensitivity = new ConfigurationFloat("Sensor sensitivities", "Sensitivity to light of both sensors", () => SensorsSensitivity, value => SensorsSensitivity = value);
 			configureSensorsFieldOfView = new ConfigurationRange("Sensor fields of view", "Viewing angle width of both sensors", 0, 180, () => SensorsFieldOfView, value => SensorsFieldOfView = value);
 			configureWheelsBaseSpeed = new ConfigurationFloat("Motor base speeds", "Base speed of both motors", () => WheelsBaseSpeed, value => WheelsBaseSpeed = value);

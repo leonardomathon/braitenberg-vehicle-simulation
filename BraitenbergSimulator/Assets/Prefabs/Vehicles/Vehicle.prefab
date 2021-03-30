@@ -654,7 +654,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   type: 1
-  position: {x: 0, y: 0, z: 0}
   body: {fileID: 278719088393822531}
   sensors: {fileID: 4572344983414848718}
   rigidBody: {fileID: 835824868691075095}
@@ -662,6 +661,7 @@ MonoBehaviour:
   rightWheel: {fileID: 5733396007495301394}
   leftSensor: {fileID: 5402832034190417971}
   rightSensor: {fileID: 3378761593264488090}
+  initialSensorSensorRotation: 70
 --- !u!54 &835824868691075095
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -703,6 +703,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Left
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336613470034910592, guid: 1f07920f4061d2040b2ab1eaacc8adb9,
+        type: 3}
+      propertyPath: invertRotation
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7296090603038763236, guid: 1f07920f4061d2040b2ab1eaacc8adb9,
         type: 3}

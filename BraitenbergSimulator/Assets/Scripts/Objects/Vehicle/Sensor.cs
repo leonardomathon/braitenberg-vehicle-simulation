@@ -10,6 +10,7 @@ namespace Objects.Vehicle {
 		
 		public float fieldOfView;
 		public float sensitivity;
+		public bool invertRotation;
 		
 		public GameObject body;
 		public SensorMesh sensorMesh;
@@ -32,18 +33,31 @@ namespace Objects.Vehicle {
 		}
 		public float Rotation {
 			// TODO: Enforce value limits? 0-360
-			get => body.transform.localEulerAngles.y;
+			get {
+				if (invertRotation) {
+					float result = 360 - body.transform.localEulerAngles.y;
+					if (result % 360 == 0) {
+						return 0;
+					}
+					return result;
+				}
+				return body.transform.localEulerAngles.y;
+			}
 			set {
 				Transform sensorTransform = body.transform;
 				Vector3 rotation = sensorTransform.localEulerAngles;
-				rotation.y = value;
+				if (invertRotation) {
+					rotation.y = 360 - value;
+				} else {
+					rotation.y = value;
+				}
 				sensorTransform.localEulerAngles = rotation;
 			}
 		}
-		
+
 		private new void Start() {
 			sensorMesh.SetAngle(fieldOfView * 2);
-			configureRotation = new ConfigurationRange("Rotation", "Direction of this sensor", 0, 360, () => Rotation, value => Rotation = value);
+			configureRotation = new ConfigurationRange("Rotation", "Direction of this sensor", 0, 359.999f, () => Rotation, value => Rotation = value);
 			configureSensitivity = new ConfigurationFloat("Sensitivity", "Sensitivity to light", () => Sensitivity, value => Sensitivity = value);
 			configureFieldOfView = new ConfigurationRange("Field of view", "Viewing angle width of this sensor", 0, 180, () => FieldOfView, value => FieldOfView = value);
 		}
