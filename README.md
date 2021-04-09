@@ -5,12 +5,10 @@ This is an educational and interactive virtual environment in which Braitenberg 
 The following instructions walks you through the installation process. This can be done in two ways. You can download the lastest build project via [Github Releases](https://github.com/leonardomathon/braitenberg-vehicle-simulation/releases) or you can download the source code and open it in Unity.
 
 ## Install via releases
-Installing the application is as simple as downloading your preferred version from the [latest release](https://github.com/leonardomathon/braitenberg-vehicle-simulation/releases). There are several version to choose from:
+Installing the application is as simple as downloading your preferred version from the [latest release](https://github.com/leonardomathon/braitenberg-vehicle-simulation/releases). Currently, only Windows is supported. If you want to build the application yourself, you have to follow the steps in _install unity project_. On the releases page there are two version to choose from:
 
 - **Windows portable executable** - portable app that does not need to be installed
 - **Windows Installer** - installs the simulator at a place of preference.
-- **Mac** - app file for MacOS _not tested_
-- **Linux** - linux app file _not tested_
 
 ## Install Unity project
 For this installation process, it is assumed you have basic experience setting up Unity Hub and Unity. Note that in order for the project to open correctly, you need to install Unity version `2019.4.19f1`. Newer version might result in bugs.
