@@ -1,5 +1,8 @@
 # 🏎️ Braitenberg vehicle simulation
+![](./.github/log.svg)
 This is an educational and interactive virtual environment in which Braitenberg vehicles live and do their thing. Inside a 3D scene, a user can place lights, obstacles and Braitenberg vehicles. All objects in the scene are interactable. Various object properties, such light intensity for lights or motor strenght for vehicles, are also configurable. Furthermore, a user can slowdown, speedup and pause the simulator.
+
+![](./.github/demo.gif "A demo of the simulator")
 
 # :wrench: Installation
 The following instructions walks you through the installation process. This can be done in two ways. You can download the lastest build project via [Github Releases](https://github.com/leonardomathon/braitenberg-vehicle-simulation/releases) or you can download the source code and open it in Unity.
